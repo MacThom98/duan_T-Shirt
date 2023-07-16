@@ -1,24 +1,28 @@
 <div class="container-xxl flex-grow-1 container-p-y">
     <!-- Hiển thị danh sách sản phẩm -->
-<table>
-  <thead>
-    <tr>
-      <th>ID</th>
-      <th>Tên sản phẩm</th>
-      <th>Giá</th>
-      <th>Thao tác</th>
+    <h1>Danh sách sản phẩm</h1>
+
+<a href="index.php?action=add">Thêm sản phẩm mới</a>
+
+<table class="table">
+    <tr >
+        <th>ID</th>
+        <th>Tên sản phẩm</th>
+        <th>Giá</th>
+        <th>Mô tả</th>
+        <th>Hành động</th>
     </tr>
-  </thead>
-  <tbody>
-    <h1>This is Product Index.php</h1>
-
-  </tbody>
+    <?php foreach ($products as $product): ?>
+        <tr>
+            <td><?php echo $product['id']; ?></td>
+            <td><?php echo $product['name']; ?></td>
+            <td><?php echo $product['price']; ?></td>
+            <td><?php echo $product['description']; ?></td>
+            <td>
+                <a href="index.php?action=edit&id=<?php echo $product['id']; ?>">Sửa</a>
+                <a href="index.php?action=delete&id=<?php echo $product['id']; ?>">Xóa</a>
+            </td>
+        </tr>
+    <?php endforeach; ?>
 </table>
-
-<!-- Các nút chức năng -->
-<div>
-  <a href="index.php?action=add">Thêm sản phẩm</a>
-  <a href="index.php?action=search">Tìm kiếm sản phẩm</a>
-  <a href="index.php?action=statistics">Thống kê sản phẩm</a>
-</div>
 </div>
