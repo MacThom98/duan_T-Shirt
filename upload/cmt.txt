@@ -1,0 +1,1 @@
+Folder này chứa các hình ảnh hoặc tệp tin được gửi lên database
