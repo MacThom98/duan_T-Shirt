@@ -1,4 +1,4 @@
-Các thao tác admin có thể thực hiện với product như:
+<!-- Các thao tác admin có thể thực hiện với product như: -->
 <?php
 
 require_once 'pdo.php';
