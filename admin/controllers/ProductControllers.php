@@ -1,12 +1,10 @@
 <?php
 
 // require_once 'core/Database.php';
-// require_once 'dao/ProductDAO.php';
+require_once '../dao/pdo.php';
+require_once '../dao/product.php';
 
-// $database = new Database();
-// $pdo = $database->connect();
-
-// $productDAO = new ProductDAO($pdo);
+$products = new Product();
 
 $action = isset($_GET['action']) ? $_GET['action'] : '';
 
