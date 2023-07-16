@@ -1,7 +1,7 @@
 <?php
 // phương thức kết nối dữ liệu bằng PDO
 function pdo_get_connection(){
-    $dburl = "mysql:host=localhost;dbname=tshop;charset=utf8";
+    $dburl = "mysql:host=localhost;dbname=t-shirt;charset=utf8";
     $username = 'root';
     $password = '';
 

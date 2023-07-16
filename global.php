@@ -2,14 +2,15 @@
 session_start();
 
 // Định nghĩa các url cần thiết được sử dụng trong website
-$ROOT_URL = "/tshop"; //đường dẫn gốc của website
-$CONTENT_URL = "$ROOT_URL/content"; //đường dẫn chứa tài nguyên tĩnh (img, css, js)
+$ROOT_URL = "/t-shirt"; //đường dẫn gốc của website
+$CONTENT_ADMIN_URL = "$ROOT_URL/public/admin"; //đường dẫn chứa tài nguyên tĩnh của admin(img, css, js)
+$CONTENT_SITE_URL = "$ROOT_URL/public/site"; //đường dẫn chứa tài nguyên tĩnh của site(img, css, js)
 $ADMIN_URL = "$ROOT_URL/admin"; //đường dẫn vào phần quản trị
 $SITE_URL = "$ROOT_URL/site"; //đường dẫn vào phần site
 $PER_PAGE = 10; //số lượng hàng hóa mỗi trang
 
 // đường dẫn chứa hình khi upload
-$IMAGE_DIR = $_SERVER["DOCUMENT_ROOT"] . "$CONTENT_URL/images";
+$IMAGE_DIR = $_SERVER["DOCUMENT_ROOT"] . "$CONTENT_ADMIN_URL/images";
 
 // 2 biến toàn cục để chia sẻ giữa controller và view
 $VIEW_NAME = "index.php";
