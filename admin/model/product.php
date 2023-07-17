@@ -5,7 +5,7 @@ require_once 'pdo.php';
 
 class Product {
     public function getAllProducts() {
-        $sql = "SELECT * FROM products";
+        $sql = "SELECT * FROM product";
         $products = pdo_query($sql);
         return $products;
     }

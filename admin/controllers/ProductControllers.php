@@ -4,6 +4,7 @@
 require_once '../../model/product.php';
 require_once '../../../global.php';
 
+$allProducts = new Product();
 // $productsDAO = new Product();
 if(isset($_GET["action"])==true){
     $action = $_GET["action"];
@@ -36,6 +37,7 @@ if(isset($_GET["action"])==true){
     }
 }else{
     $VIEW_NAME = 'view/product/default.php';
+    $products = $allProducts->getAllProducts();
     include "../../layout.php";
 };
 
