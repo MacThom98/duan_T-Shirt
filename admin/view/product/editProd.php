@@ -7,7 +7,7 @@
         };
       
       ?>
-<h2 class="mt-4">Thêm sản phẩm</h2>
+<h2 class="mt-4">Sửa sản phẩm</h2>
 
 <form action="" method="POST" enctype="multipart/form-data">
   <div class="form-group">
@@ -67,7 +67,7 @@
   </div>
 
 
-  <button name="btn_add" class="btn btn-primary">Thêm sản phẩm</button> 
+  <button name="btn_add" class="btn btn-primary">Sửa sản phẩm</button> 
   
   <!-- giá trị name="btn_add" dùng để kiểm tra xem người dùng đã thực hiện thêm chưa. Sử dụng exist_param() để kiểm tra ở ControllerProduct -->
 </form>
