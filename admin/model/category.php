@@ -4,9 +4,8 @@ require_once 'pdo.php';
 
 class Category{
     public function getAllCategories() {
-        $sql = "SELECT * FROM Category";
-        $categories = pdo_query($sql);
-        return $categories;
+        $sql = "SELECT * FROM category";
+        return pdo_query($sql);
     }
 
     public function getCategoryById($categoryId) {
