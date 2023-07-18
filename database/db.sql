@@ -71,6 +71,13 @@ CREATE TABLE user (
   FOREIGN KEY (roleId) REFERENCES role(roleId)
 );
 
+CREATE TABLE comment (
+  commentId INT AUTO_INCREMENT PRIMARY KEY,
+  userId INT NOT NULL,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  FOREIGN KEY (userId) REFERENCES user(userId)
+);
+
 -- Bảng Phương thức thanh toán
 CREATE TABLE payment (
   paymentId INT AUTO_INCREMENT PRIMARY KEY,
@@ -82,7 +89,6 @@ CREATE TABLE payment (
 CREATE TABLE delivery (
   deliveryId INT AUTO_INCREMENT PRIMARY KEY,
   deliveryName VARCHAR(50) NOT NULL,
-  deliveryAddress TEXT,
   deliveryStatus TINYINT NOT NULL
 );
 
@@ -93,17 +99,15 @@ CREATE TABLE orders (
   fullname VARCHAR(50) NOT NULL,
   email VARCHAR(150) NOT NULL,
   phoneNumber VARCHAR(20) NOT NULL,
-  address VARCHAR(200) NOT NULL,
+  addressDelivery VARCHAR(200) NOT NULL,
   note VARCHAR(1000),
   orderDate DATETIME DEFAULT CURRENT_TIMESTAMP,
   paymentId INT NOT NULL,
   deliveryId INT NOT NULL,
-  discountId INT,
   totalMoney INT,
   FOREIGN KEY (userId) REFERENCES user(userId),
   FOREIGN KEY (paymentId) REFERENCES payment(paymentId),
   FOREIGN KEY (deliveryId) REFERENCES delivery(deliveryId),
-  FOREIGN KEY (discountId) REFERENCES discount(discountId)
 );
 
 -- Bảng Chi tiết đơn hàng
@@ -119,12 +123,7 @@ CREATE TABLE orderDetails (
 );
 
 -- Bảng Bình luận
-CREATE TABLE comment (
-  commentId INT AUTO_INCREMENT PRIMARY KEY,
-  userId INT NOT NULL,
-  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-  FOREIGN KEY (userId) REFERENCES user(userId)
-);
+
 
 
 -- Thêm dữ liệu
