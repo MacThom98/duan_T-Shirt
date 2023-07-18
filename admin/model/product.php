@@ -5,12 +5,15 @@
 
     class Product {
         public function getAllProducts() {
+
+
             $sql = "SELECT p.productId, p.productName, p.price, p.description, p.created_at, p.updated_at, p.categoryId, c.categoryName, p.discountId, p.branchId, p.stock, p.image, b.branchName, d.discountName, d.discountValue
             FROM product p  
             LEFT JOIN branch b ON p.branchId = b.branchId
             LEFT JOIN discount d ON p.discountId = d.discountId
             LEFT JOIN category c ON p.categoryId = c.categoryId;
             ";
+
             $products = pdo_query($sql);
             return $products;
         }
