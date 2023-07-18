@@ -41,21 +41,33 @@
               </div>
             </div>
             <div class="row mb-5">
-
-               <?php foreach ($products as $product): ?>
+            
+               <?php if(isset($searchs)){ foreach ($searchs as $search): ?>
                 <div class="col-sm-6 col-lg-4 mb-4" data-aos="fade-up">
                 <div class="block-4 text-center border">
                   <figure class="block-4-image">
-                    <a href="shop-single.html"><img src="<?=$IMAGE_DIR ?>/<?php echo $product['galleryURL']; ?>" alt="Image placeholder" class="img-fluid"></a>
+                    <a href="shop-single.html"><img src="<?=$IMAGE_DIR ?>/<?php echo $search['imageUrl']; ?>" alt="Image placeholder" class="img-fluid"></a>
                   </figure>
                   <div class="block-4-text p-4">
-                    <h3><a href="shop-single.html"><?php echo $product['productName']; ?></a></h3>
-                    <p class="mb-0"><?php echo $product['description']; ?></p>
-                    <p class="text-primary font-weight-bold"><?php echo $product['price']; ?></p>
+                    <h3><a href="shop-single.html"><?php echo $search['prodName']; ?></a></h3>
+                    <p class="text-primary font-weight-bold"><?php echo $search['price']; ?></p>
                   </div>
                 </div>
               </div>
-                <?php endforeach; ?>
+                <?php endforeach; }?>
+                <?php if(isset($cates)){ foreach ($cates as $cate): ?>
+                <div class="col-sm-6 col-lg-4 mb-4" data-aos="fade-up">
+                <div class="block-4 text-center border">
+                  <figure class="block-4-image">
+                    <a href="shop-single.html"><img src="<?=$IMAGE_DIR ?>/<?php echo $cate['imageUrl']; ?>" alt="Image placeholder" class="img-fluid"></a>
+                  </figure>
+                  <div class="block-4-text p-4">
+                    <h3><a href="shop-single.html"><?php echo $cate['prodName']; ?></a></h3>
+                    <p class="text-primary font-weight-bold"><?php echo $cate['price']; ?></p>
+                  </div>
+                </div>
+              </div>
+                <?php endforeach; }?>
 
             </div>
             <div class="row" data-aos="fade-up">

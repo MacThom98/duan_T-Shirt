@@ -5,7 +5,7 @@
 
     class Product {
         public function getAllProducts() {
-            $sql = "SELECT * FROM product prod inner join category cat on prod.category_id = cat.id";
+            $sql = "SELECT * FROM product as prod inner join category as cat on prod.categoryId = cat.categoryId";
             $products = pdo_query($sql);
             return $products;
         }
