@@ -18,8 +18,8 @@ CREATE TABLE discount (
   discountId INT AUTO_INCREMENT PRIMARY KEY,
   discountName VARCHAR(50) NOT NULL,
   discountValue FLOAT NOT NULL,
-  discountFromDate DATE NOT NULL,
-  discountToDate DATE NOT NULL
+  discountFromDate DATE NULL,
+  discountToDate DATE NULL
 );
 
 
@@ -30,6 +30,7 @@ CREATE TABLE product (
   productName VARCHAR(250) NOT NULL,
   price INT NOT NULL,
   description LONGTEXT,
+  image text,
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   categoryId INT NOT NULL,
@@ -159,13 +160,13 @@ VALUES
   ('Giảm giá Sinh nhật', 0.25, '2023-07-01', '2023-07-31');
 
 -- Thêm dữ liệu vào bảng Sản phẩm (product)
-INSERT INTO product (productName, price, description, categoryId, discountId, branchId, stock)
+INSERT INTO product (productName, price, description, categoryId, discountId, branchId, stock,image)
 VALUES
-('Áo thun nam 1', 200000, 'Áo thun nam phong cách trẻ trung và năng động', 1, 1, 1, 50),
-('Áo thun nữ 1', 250000, 'Áo thun nữ thoải mái và phong cách', 2, 2, 2, 30),
-('Áo thể thao', 300000, 'Áo thể thao chất liệu co dãn và thấm hút mồ hôi', 4, 3, 3, 20),
-('Áo thun trẻ em', 150000, 'Áo thun trẻ em dễ thương và màu sắc tươi sáng', 3, 4, 4, 10),
-('Áo thun phụ kiện', 180000, 'Áo thun với thiết kế phụ kiện độc đáo', 5, 5, 5, 15);
+('Áo thun nam 1', 200000, 'Áo thun nam phong cách trẻ trung và năng động', 1, 1, 1, 50,'/duan_T-Shirt/upload/images/cloth_1.jpg'),
+('Áo thun nữ 1', 250000, 'Áo thun nữ thoải mái và phong cách', 2, 2, 2, 30,'/duan_T-Shirt/upload/images/cloth_2.jpg'),
+('Áo thể thao', 300000, 'Áo thể thao chất liệu co dãn và thấm hút mồ hôi', 4, 3, 3, 20, '/duan_T-Shirt/upload/images/cloth_3.jpg'),
+('Áo thun trẻ em', 150000, 'Áo thun trẻ em dễ thương và màu sắc tươi sáng', 3, 4, 4, 10, '/duan_T-Shirt/upload/images/hero_1.jpg'),
+('Áo thun phụ kiện', 180000, 'Áo thun với thiết kế phụ kiện độc đáo', 5, 5, 5, 15, '/duan_T-Shirt/upload/images/person_1.jpg');
 
   -- Thêm dữ liệu vào bảng Thư viện ảnh (gallery)
 INSERT INTO gallery (productId, galleryURL)

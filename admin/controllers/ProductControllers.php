@@ -3,11 +3,14 @@
 // require_once 'core/Database.php';
 require_once '../../model/product.php';
 require_once '../../model/category.php';
+require_once '../../model/discount.php';
+require_once '../../model/branch.php';
 require_once '../../../global.php';
 
 $ProductModel = new Product();
 $CategoryModel = new Category();
-
+$DiscountModel = new Discount();
+$BranchModel = new Branch();
 extract($_REQUEST); //Bắt buộc phải extract các dữ liệu trong form được POST lên để thực hiện CRUD
 
 // $productsDAO = new Product();
@@ -17,11 +20,17 @@ if(isset($_GET["action"])==true){
         case 'add':
             $VIEW_NAME = 'view/product/addProd.php';    
             $listCategory = $CategoryModel->getAllCategories();        
+            $listDiscount = $DiscountModel->getAllDiscounts();        
+            $listBranch = $BranchModel->getAllBranches();        
             // require '../../layout.php';
             if(exist_param("btn_add")){
+                $productName = convert_name($product_name);
+                $file_name = uploadImage("imageToUpload");
+                $img = $file_name ? $file_name : "";
+                $categoryId = $_POST['category'];
                 try {
-                    $ProductModel->addProduct($product_name, $price, $description, $discount, $img, $category_id);
-                    unset($product_name, $price, $description, $discount, $img, $category_id);
+                    $ProductModel->addProduct($productName, $price, $description, $discount, $branch, $img, $categoryId,$stock);
+                    unset($productName, $price, $description, $discount, $branch, $img, $categoryId,$stock);
                     $MESSAGE = "Thêm mới thành công!";
                 } catch (Exception $exc) {
                     $MESSAGE = "Thêm mới thất bại!";
@@ -32,12 +41,15 @@ if(isset($_GET["action"])==true){
             // require '../../layout.php';
             break;
         case 'edit':
-            // Xử lý sửa sản phẩm
+            $VIEW_NAME = 'view/product/editProd.php';
+            $products = $ProductModel->getAllProducts();
             echo "đã sửa";
             break;
         case 'delete':
-            
-            echo "đã xóa";
+            $ProductModel->deleteProduct($id);
+            $VIEW_NAME = 'view/product/default.php';
+            $products = $ProductModel->getAllProducts();
+            $MESSAGE = "Xóa thành công";
             break;
         case 'view':
             // Xử lý xem chi tiết sản phẩm
