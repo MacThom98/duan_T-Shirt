@@ -107,7 +107,7 @@ CREATE TABLE orders (
   totalMoney INT,
   FOREIGN KEY (userId) REFERENCES user(userId),
   FOREIGN KEY (paymentId) REFERENCES payment(paymentId),
-  FOREIGN KEY (deliveryId) REFERENCES delivery(deliveryId),
+  FOREIGN KEY (deliveryId) REFERENCES delivery(deliveryId)
 );
 
 -- Bảng Chi tiết đơn hàng
@@ -202,22 +202,22 @@ VALUES
   ('Thanh toán qua điện thoại di động', 1);
 
 -- Thêm dữ liệu vào bảng Địa chỉ giao hàng (delivery)
-INSERT INTO delivery (deliveryName, deliveryAddress, deliveryStatus)
+INSERT INTO delivery (deliveryName, deliveryStatus)
 VALUES
-  ('Giao hàng tiêu chuẩn', 'Số 1 Đường X, Quận Y, Thành phố Z', 1),
-  ('Giao hàng nhanh', 'Số 2 Đường X, Quận Y, Thành phố Z', 1),
-  ('Tự lấy hàng tại cửa hàng', 'Số 3 Đường X, Quận Y, Thành phố Z', 1),
-  ('Giao hàng trong ngày', 'Số 4 Đường X, Quận Y, Thành phố Z', 1),
-  ('Giao hàng quốc tế', 'Số 5 Đường X, Quận Y, Thành phố Z', 1);
+  ('Giao hàng tiêu chuẩn',  1),
+  ('Giao hàng nhanh', 1),
+  ('Tự lấy hàng tại cửa hàng',  1),
+  ('Giao hàng trong ngày',  1),
+  ('Giao hàng quốc tế',  1);
 
 -- Thêm dữ liệu vào bảng Đơn hàng (orders)
-INSERT INTO orders (userId, fullname, email, phoneNumber, address, note, orderDate, paymentId, deliveryId, discountId, totalMoney)
+INSERT INTO orders (userId, fullname, email, phoneNumber, addressDelivery, note, orderDate, paymentId, deliveryId,totalMoney)
 VALUES
-  (1, 'Nguyễn Văn A', 'nguyenvana@example.com', '123456789', 'Số 1 Đường X, Quận Y, Thành phố Z', 'Vui lòng giao hàng trong ngày làm việc', '2023-07-15 10:00:00', 1, 1, 1, 200000),
-  (2, 'Trần Thị B', 'tranthib@example.com', '987654321', 'Số 2 Đường X, Quận Y, Thành phố Z', 'Không có yêu cầu đặc biệt', '2023-07-16 15:30:00', 2, 2, NULL, 150000),
-  (3, 'Admin User', 'admin@example.com', '555555555', 'Số 3 Đường X, Quận Y, Thành phố Z', 'Yêu cầu giao hàng gấp', '2023-07-17 12:45:00', 3, 3, 3, 300000),
-  (4, 'Guest User', 'guest@example.com', '111111111', 'Số 4 Đường X, Quận Y, Thành phố Z', 'Giao hàng tại lễ tân', '2023-07-18 09:30:00', 4, 4, NULL, 500000),
-  (5, 'VIP User', 'vip@example.com', '999999999', 'Số 5 Đường X, Quận Y, Thành phố Z', 'Thời gian giao hàng 17h-19h', '2023-07-19 18:00:00', 5, 5, 2, 250000);
+  (1, 'Nguyễn Văn A', 'nguyenvana@example.com', '123456789', 'Số 1 Đường X, Quận Y, Thành phố Z', 'Vui lòng giao hàng trong ngày làm việc', '2023-07-15 10:00:00', 1, 1, 200000),
+  (2, 'Trần Thị B', 'tranthib@example.com', '987654321', 'Số 2 Đường X, Quận Y, Thành phố Z', 'Không có yêu cầu đặc biệt', '2023-07-16 15:30:00', 2, 2, 150000),
+  (3, 'Admin User', 'admin@example.com', '555555555', 'Số 3 Đường X, Quận Y, Thành phố Z', 'Yêu cầu giao hàng gấp', '2023-07-17 12:45:00', 3, 3, 300000),
+  (4, 'Guest User', 'guest@example.com', '111111111', 'Số 4 Đường X, Quận Y, Thành phố Z', 'Giao hàng tại lễ tân', '2023-07-18 09:30:00', 4, 4, 500000),
+  (5, 'VIP User', 'vip@example.com', '999999999', 'Số 5 Đường X, Quận Y, Thành phố Z', 'Thời gian giao hàng 17h-19h', '2023-07-19 18:00:00', 5, 5, 250000);
 
 -- Thêm dữ liệu vào bảng Chi tiết đơn hàng (orderDetails)
 INSERT INTO orderDetails (orderId, productId, price, quantity, totalMoney)
