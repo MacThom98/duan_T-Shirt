@@ -146,14 +146,7 @@ VALUES
   ('Chi nhánh Nha Trang'),
   ('Chi nhánh Hải Phòng');
 
--- Thêm dữ liệu vào bảng Thư viện ảnh (gallery)
-INSERT INTO gallery (productId, galleryURL)
-VALUES
-  (1, 'https://example.com/image1.jpg'),
-  (1, 'https://example.com/image2.jpg'),
-  (2, 'https://example.com/image3.jpg'),
-  (2, 'https://example.com/image4.jpg'),
-  (3, 'https://example.com/image5.jpg');
+
 
 -- Thêm dữ liệu vào bảng Khuyến mãi (discount)
 INSERT INTO discount (discountName, discountValue, discountFromDate, discountToDate)
@@ -172,6 +165,15 @@ VALUES
   ('Áo thể thao', 300000, 'Áo thể thao chất liệu co dãn và thấm hút mồ hôi', 4, 3, 20),
   ('Áo thun trẻ em', 150000, 'Áo thun trẻ em dễ thương và màu sắc tươi sáng', 3, 4, 10),
   ('Áo thun phụ kiện', 180000, 'Áo thun với thiết kế phụ kiện độc đáo', 5, 5, 15);
+
+  -- Thêm dữ liệu vào bảng Thư viện ảnh (gallery)
+INSERT INTO gallery (productId, galleryURL)
+VALUES
+  (1, 'https://example.com/image1.jpg'),
+  (1, 'https://example.com/image2.jpg'),
+  (2, 'https://example.com/image3.jpg'),
+  (2, 'https://example.com/image4.jpg'),
+  (3, 'https://example.com/image5.jpg');
 
 -- Thêm dữ liệu vào bảng Vai trò (role)
 INSERT INTO role (roleType, description)
