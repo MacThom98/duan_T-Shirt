@@ -16,14 +16,14 @@
     </tr>
     <?php foreach ($products as $product): ?>
         <tr>
-            <td><?php echo $product['id']; ?></td>
-            <td><?php echo $product['title']; ?></td>
-            <td><?php echo $product['name']?></td>
+            <td><?php echo $product['productId']; ?></td>
+            <td><?php echo $product['productName']; ?></td>
+            <td><?php echo $product['categoryName']?></td>
             <td><?php echo $product['price']; ?></td>
             <td><?php echo $product['description']; ?></td>
             <td>
-                <a href="index.php?action=edit&id=<?php echo $product['id'];?>" class="btn btn-success mx-2">Sửa</a>
-                <a href="index.php?action=delete&id=<?php echo $product['id']; ?>" class="btn btn-danger mx-2">Xóa</a>
+                <a href="index.php?action=edit&id=<?php echo $product['productId'];?>" class="btn btn-success mx-2">Sửa</a>
+                <a href="index.php?action=delete&id=<?php echo $product['productId']; ?>" class="btn btn-danger mx-2">Xóa</a>
             </td>
         </tr>
     <?php endforeach; ?>
