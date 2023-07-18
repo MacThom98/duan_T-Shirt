@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>T-Shirt</title>
+    <title>Shoppers &mdash; Colorlib e-Commerce Template</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
@@ -29,10 +29,9 @@
           <div class="row align-items-center">
 
             <div class="col-6 col-md-4 order-2 order-md-1 site-search-icon text-left">
-              <form method="post" name="submit" action="?action=search" class="site-block-top-search">
+              <form action="" class="site-block-top-search">
                 <span class="icon icon-search2"></span>
-                <input type="text" name="searchValue" class="form-control border-0" placeholder="Search">
-                <a href="index.php?action=search" class="icon icon-search2"></a>
+                <input type="text" class="form-control border-0" placeholder="Search">
               </form>
             </div>
 

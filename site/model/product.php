@@ -5,15 +5,7 @@ require_once 'pdo.php';
 
 class Product {
     public function getAllProducts() {
-        $sql = "SELECT * FROM product as prod inner join gallery as gal on prod.productId = gal.productId";
-        $products = pdo_query($sql);
-        return $products;
-    }
-
-    public function getTotalProductbyCate() {
-        $sql = "SELECT *, COUNT(prod.productId) as total, cat.categoryName as cateName, cat.categoryId as cateId
-                        FROM product as prod INNER join category as cat on cat.categoryId = prod.categoryId  
-                        GROUP BY cat.categoryId";
+        $sql = "SELECT * FROM product";
         $products = pdo_query($sql);
         return $products;
     }
@@ -23,33 +15,6 @@ class Product {
         $product = pdo_query_one($sql);
         return $product;
     }
-
-    public function getProductbyCate($value, $id) {
-        $sql = "SELECT prod.productId as prodId, prod.productName as prodName,
-        prod.price as price, gallery.galleryURL as imageUrl
-        FROM gallery RIGHT JOIN product AS prod 
-        ON gallery.productId = prod.productId  ";
-        if($value != ""){
-            $sql .= " and prodName LIKE '%' . $value . '%'";
-        }
-        if($id != ""){
-            $sql .= " right join category as cat on cat.categoryId = prod.categoryId  
-                WHERE cat.categoryId =  $id";
-        }
-        $result = pdo_query($sql);
-        return $result;
-    }
-
-    // public function getProductbyCate($cateId) {
-    //     $sql = "SELECT prod.productId as prodId, prod.productName as prodName, 
-    //     prod.price as price, gallery.galleryURL as imageUrl
-    //     FROM gallery RIGHT JOIN product AS prod ON gallery.productId = prod.productId 
-    //     right join category as cat on cat.categoryId = prod.categoryId  
-    //     WHERE cat.categoryId =  $cateId";
-    //     $product = pdo_query_one($sql);
-    //     return $product;
-    // }
-
 
     public function addProduct($name, $price, $description) {
         $sql = "INSERT INTO product (name, price, description) VALUES (?, ?, ?)";
@@ -67,18 +32,10 @@ class Product {
     }
 
     public function searchProducts($keyword) {
-        $sql = "SELECT prod.productId as prodId, prod.productName as prodName,
-        prod.price as price, gallery.galleryURL as imageUrl
-        FROM product as prod JOIN gallery 
-        ON prod.productId = gallery.productId 
-        WHERE productName LIKE ?";
+        $sql = "SELECT * FROM product WHERE name LIKE ?";
         $products = pdo_query($sql, '%' . $keyword . '%');
         return $products;
     }
-
-  
-
-    
 }
 
 ?>
