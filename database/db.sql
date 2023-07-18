@@ -12,13 +12,6 @@ CREATE TABLE branch (
   branchName VARCHAR(50) NOT NULL
 );
 
--- Bảng Thư viện ảnh
-CREATE TABLE gallery (
-  galleryId INT AUTO_INCREMENT PRIMARY KEY,
-  productId INT NOT NULL,
-  galleryURL TEXT NOT NULL,
-  FOREIGN KEY (productId) REFERENCES product(productId)
-);
 
 -- Bảng Khuyến mãi
 CREATE TABLE discount (
@@ -46,6 +39,13 @@ CREATE TABLE product (
   FOREIGN KEY (branchId) REFERENCES branch(branchId)
 );
 
+-- Bảng Thư viện ảnh
+CREATE TABLE gallery (
+  galleryId INT AUTO_INCREMENT PRIMARY KEY,
+  productId INT NOT NULL,
+  galleryURL TEXT NOT NULL,
+  FOREIGN KEY (productId) REFERENCES product(productId)
+);
 
 -- Cụm quản lý khách hàng --
 
