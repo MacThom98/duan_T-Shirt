@@ -10,7 +10,9 @@ $SITE_URL = "$ROOT_URL/site"; //đường dẫn vào phần site
 $PER_PAGE = 10; //số lượng hàng hóa mỗi trang
 
 // đường dẫn chứa hình khi upload
-$IMAGE_DIR = "$ROOT_URL/upload/images";
+
+$IMAGE_DIR = "$ROOT_URL/upload/images/";
+
 
 // 2 biến toàn cục để chia sẻ giữa controller và view
 $VIEW_NAME = "index.php";
@@ -25,19 +27,33 @@ function exist_param($fieldname)
  * $fieldname là tên field trong form, $target_dir là folder lưu file
  * trả về tên file đã upload là ngày giờ hệ thống
  */
-function save_file($fieldname, $target_dir)
+function uploadImage($fieldname)
 {
-    $file_uploaded = $_FILES[$fieldname];
-    $file_name = basename($file_uploaded["name"]);
-    if ($file_name) {
-        $file_type = strstr($file_name, ".");
-        date_default_timezone_set('Asia/Ho_Chi_Minh');
-        $file_name = date_format(date_create(), 'Y_m_d_H_i_s') . $file_type;
+    // Đường dẫn chứa hình khi upload
+    global $IMAGE_DIR;
+    // Kiểm tra xem có file được upload không
+    if (isset($_FILES[$fieldname]) && $_FILES[$fieldname]['error'] === UPLOAD_ERR_OK) {
+        $file_uploaded = $_FILES[$fieldname];
+        $img = $file_uploaded["name"];
+
+        // Tạo đường dẫn đầy đủ cho tệp tải lên
+        $target_path = $IMAGE_DIR . $img;
+
+        // Di chuyển tệp tải lên đến đường dẫn đích
+        if (move_uploaded_file($file_uploaded["tmp"], $target_path)) {
+            return $target_path;
+        } else {
+            // Lỗi khi di chuyển tệp tải lên
+            echo "Upload không thành công";
+            return false;
+        }
+    } else {
+        echo "Upload không thành công";
+        // Không có file được upload hoặc có lỗi khi upload
+        return false;
     }
-    $target_path = $target_dir . $file_name;
-    move_uploaded_file($file_uploaded["tmp_name"], $target_path);
-    return $file_name;
 }
+
 /* Tạo cookie
  * $name là tên cookie, $value là giá trị cookie
  * $day là số ngày tồn tại cookie
