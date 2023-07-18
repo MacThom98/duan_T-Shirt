@@ -1,2 +1,2 @@
-<?php require_once '../../controllers/AboutControllers.php' ?>
+<?php require_once '../../controllers/ThankControllers.php' ?>
 
