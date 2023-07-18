@@ -22,6 +22,8 @@ CREATE TABLE discount (
   discountToDate DATE NOT NULL
 );
 
+
+
 -- Bảng Sản phẩm
 CREATE TABLE product (
   productId INT AUTO_INCREMENT PRIMARY KEY,
@@ -31,7 +33,7 @@ CREATE TABLE product (
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   categoryId INT NOT NULL,
-  discountId INT,
+  discountId INT NOT NULL,
   branchId INT NOT NULL,
   stock INT,
   FOREIGN KEY (categoryId) REFERENCES category(categoryId),
@@ -44,8 +46,8 @@ CREATE TABLE gallery (
   galleryId INT AUTO_INCREMENT PRIMARY KEY,
   productId INT NOT NULL,
   galleryURL TEXT NOT NULL,
-  FOREIGN KEY (productId) REFERENCES product(productId)
-);
+  FOREIGN KEY (productId) REFERENCES product(productId) 
+  );
 
 -- Cụm quản lý khách hàng --
 
@@ -157,13 +159,13 @@ VALUES
   ('Giảm giá Sinh nhật', 0.25, '2023-07-01', '2023-07-31');
 
 -- Thêm dữ liệu vào bảng Sản phẩm (product)
-INSERT INTO product (productName, price, description, categoryId, branchId, stock)
+INSERT INTO product (productName, price, description, categoryId, discountId, branchId, stock)
 VALUES
-  ('Áo thun nam 1', 200000, 'Áo thun nam phong cách trẻ trung và năng động', 1, 1, 50),
-  ('Áo thun nữ 1', 250000, 'Áo thun nữ thoải mái và phong cách', 2, 2, 30),
-  ('Áo thể thao', 300000, 'Áo thể thao chất liệu co dãn và thấm hút mồ hôi', 4, 3, 20),
-  ('Áo thun trẻ em', 150000, 'Áo thun trẻ em dễ thương và màu sắc tươi sáng', 3, 4, 10),
-  ('Áo thun phụ kiện', 180000, 'Áo thun với thiết kế phụ kiện độc đáo', 5, 5, 15);
+('Áo thun nam 1', 200000, 'Áo thun nam phong cách trẻ trung và năng động', 1, 1, 1, 50),
+('Áo thun nữ 1', 250000, 'Áo thun nữ thoải mái và phong cách', 2, 2, 2, 30),
+('Áo thể thao', 300000, 'Áo thể thao chất liệu co dãn và thấm hút mồ hôi', 4, 3, 3, 20),
+('Áo thun trẻ em', 150000, 'Áo thun trẻ em dễ thương và màu sắc tươi sáng', 3, 4, 4, 10),
+('Áo thun phụ kiện', 180000, 'Áo thun với thiết kế phụ kiện độc đáo', 5, 5, 5, 15);
 
   -- Thêm dữ liệu vào bảng Thư viện ảnh (gallery)
 INSERT INTO gallery (productId, galleryURL)

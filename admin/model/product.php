@@ -5,7 +5,10 @@
 
     class Product {
         public function getAllProducts() {
-            $sql = "SELECT * FROM product prod inner join category cat on prod.categoryId = cat.categoryId";
+            $sql = "SELECT * FROM product prod 
+            inner join category cat on prod.categoryId = cat.categoryId
+            inner join branch on branch.branchId = prod.branchId
+            inner join gallery img on prod.productId = img.productId  ";
             $products = pdo_query($sql);
             return $products;
         }
@@ -16,9 +19,9 @@
             return $product;
         }
 
-        public function addProduct($name, $price, $description, $discount, $img, $category_id) {
-            $sql = "INSERT INTO product (productName, price, description, discount, thumbnail, category_id ) VALUES (?, ?, ?, ?, ?, ?)";
-            pdo_execute($sql, $name, $price, $description, $discount, $img, $category_id);
+        public function addProduct($name, $price, $description, $discount, $img, $categoryId) {
+            $sql = "INSERT INTO product (productName, price, description, discount, thumbnail, categoryId ) VALUES (?, ?, ?, ?, ?, ?)";
+            pdo_execute($sql, $name, $price, $description, $discount, $img, $categoryId);
         }
 
         public function updateProduct($productId, $name, $price, $description) {
