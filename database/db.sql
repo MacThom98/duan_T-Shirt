@@ -1,419 +1,239 @@
--- phpMyAdmin SQL Dump
--- version 5.2.0
--- https://www.phpmyadmin.net/
---
--- Host: 127.0.0.1
--- Generation Time: Jul 17, 2023 at 05:21 AM
--- Server version: 10.4.27-MariaDB
--- PHP Version: 8.2.0
-
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-START TRANSACTION;
-SET time_zone = "+00:00";
-
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
-
---
--- Database: `t-shirt`
---
-
--- --------------------------------------------------------
-
---
--- Table structure for table `category`
---
-
-CREATE TABLE `category` (
-  `id` int(11) NOT NULL,
-  `name` varchar(100) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `category`
---
-
-INSERT INTO `category` (`id`, `name`) VALUES
-(1, 'Women'),
-(2, 'Man'),
-(3, 'Children');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `comment`
---
-
-CREATE TABLE `comment` (
-  `id` int(11) NOT NULL,
-  `firstname` varchar(30) DEFAULT NULL,
-  `lastname` varchar(30) DEFAULT NULL,
-  `email` varchar(250) DEFAULT NULL,
-  `phone_number` varchar(20) DEFAULT NULL,
-  `subject_name` varchar(350) DEFAULT NULL,
-  `note` varchar(1000) DEFAULT NULL,
-  `status` int(11) DEFAULT 0,
-  `created_at` datetime DEFAULT NULL,
-  `updated_at` datetime DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `delivery`
---
-
-CREATE TABLE `delivery` (
-  `id` int(11) NOT NULL,
-  `name_delivery` varchar(50) DEFAULT NULL,
-  `status_delivery` tinyint(4) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `discounts`
---
-
-CREATE TABLE `discounts` (
-  `id` int(11) NOT NULL,
-  `discount_name` varchar(50) DEFAULT NULL,
-  `value` float DEFAULT NULL,
-  `expiry_date` date DEFAULT NULL,
-  `max_uses` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `galery`
---
-
-CREATE TABLE `galery` (
-  `id` int(11) NOT NULL,
-  `product_id` int(11) DEFAULT NULL,
-  `thumbnail` varchar(500) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `orders`
---
-
-CREATE TABLE `orders` (
-  `id` int(11) NOT NULL,
-  `user_id` int(11) DEFAULT NULL,
-  `fullname` varchar(50) DEFAULT NULL,
-  `email` varchar(150) DEFAULT NULL,
-  `phone_number` varchar(20) DEFAULT NULL,
-  `address` varchar(200) DEFAULT NULL,
-  `note` varchar(1000) DEFAULT NULL,
-  `order_date` datetime DEFAULT NULL,
-  `id_pay` int(11) DEFAULT NULL,
-  `id_delivery` int(11) DEFAULT NULL,
-  `id_discount` int(11) DEFAULT NULL,
-  `total_money` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `order_details`
---
-
-CREATE TABLE `order_details` (
-  `id` int(11) NOT NULL,
-  `order_id` int(11) DEFAULT NULL,
-  `product_id` int(11) DEFAULT NULL,
-  `price` int(11) DEFAULT NULL,
-  `num` int(11) DEFAULT NULL,
-  `total_money` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `pay`
---
-
-CREATE TABLE `pay` (
-  `id` int(11) NOT NULL,
-  `name_pay` varchar(50) DEFAULT NULL,
-  `status_pay` tinyint(4) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `product`
---
-
-CREATE TABLE `product` (
-  `id` int(11) NOT NULL,
-  `category_id` int(11) DEFAULT NULL,
-  `title` varchar(250) DEFAULT NULL,
-  `price` int(11) DEFAULT NULL,
-  `discount` int(11) DEFAULT NULL,
-  `thumbnail` varchar(500) DEFAULT NULL,
-  `description` longtext DEFAULT NULL,
-  `created_at` datetime DEFAULT NULL,
-  `updated_at` datetime DEFAULT NULL,
-  `deleted` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `product`
---
-
-INSERT INTO `product` (`id`, `category_id`, `title`, `price`, `discount`, `thumbnail`, `description`, `created_at`, `updated_at`, `deleted`) VALUES
-(1, 1, 'Áo khoác nữ', 500000, 0, '/images/cloth_1.jpg', 'Áo khoác nữ thời trang', '2023-07-17 00:16:46', '2023-07-17 00:16:46', 0),
-(2, 1, 'Áo len nữ', 300000, 0, '/images/cloth_2.jpg', 'Áo len nữ đẹp', '2023-07-17 00:16:46', '2023-07-17 00:16:46', 0),
-(3, 1, 'Giày cao gót nữ', 800000, 0, '/images/cloth_3.jpg', 'Giày cao gót nữ đẹp', '2023-07-17 00:16:46', '2023-07-17 00:16:46', 0),
-(4, 2, 'Áo sơ mi nam', 400000, 0, '/images/cloth_1.jpg', 'Áo sơ mi nam trắng', '2023-07-17 00:16:46', '2023-07-17 00:16:46', 0),
-(5, 2, 'Quần tây nam', 600000, 0, '/images/cloth_2.jpg', 'Quần tây nam đẹp', '2023-07-17 00:16:46', '2023-07-17 00:16:46', 0),
-(6, 2, 'Giày da nam', 900000, 0, '/images/shoe_1.jpg', 'Giày da nam cao cấp', '2023-07-17 00:16:46', '2023-07-17 00:16:46', 0),
-(7, 3, 'Áo khoác trẻ em', 250000, 0, '/images/cloth_1.jpg', 'Áo khoác trẻ em thời trang', '2023-07-17 00:16:46', '2023-07-17 00:16:46', 0),
-(8, 3, 'Quần jean trẻ em', 200000, 0, '/images/cloth_3.jpg', 'Quần jean trẻ em đẹp', '2023-07-17 00:16:46', '2023-07-17 00:16:46', 0),
-(9, 3, 'Giày thể thao trẻ em', 350000, 0, '/images/shoe.png', 'Giày thể thao trẻ em', '2023-07-17 00:16:46', '2023-07-17 00:16:46', 0),
-(10, 1, 'Áo khoác nữ', 500000, 0, '/images/cloth_1.jpg', 'Áo khoác nữ thời trang', '2023-07-17 00:16:46', '2023-07-17 00:16:46', 0),
-(11, 1, 'Áo khoác nữ', 500000, 0, '/images/cloth_1.jpg', 'Áo khoác nữ thời trang', '2023-07-17 00:16:46', '2023-07-17 00:16:46', 0),
-(12, 1, 'Áo len nữ', 300000, 0, '/images/cloth_2.jpg', 'Áo len nữ đẹp', '2023-07-17 00:16:46', '2023-07-17 00:16:46', 0),
-(13, 1, 'Giày cao gót nữ', 800000, 0, '/images/cloth_3.jpg', 'Giày cao gót nữ đẹp', '2023-07-17 00:16:46', '2023-07-17 00:16:46', 0),
-(14, 2, 'Áo sơ mi nam', 400000, 0, '/images/cloth_1.jpg', 'Áo sơ mi nam trắng', '2023-07-17 00:16:46', '2023-07-17 00:16:46', 0),
-(15, 2, 'Quần tây nam', 600000, 0, '/images/cloth_2.jpg', 'Quần tây nam đẹp', '2023-07-17 00:16:46', '2023-07-17 00:16:46', 0),
-(16, 2, 'Giày da nam', 900000, 0, '/images/shoe_1.jpg', 'Giày da nam cao cấp', '2023-07-17 00:16:46', '2023-07-17 00:16:46', 0),
-(17, 3, 'Áo khoác trẻ em', 250000, 0, '/images/cloth_1.jpg', 'Áo khoác trẻ em thời trang', '2023-07-17 00:16:46', '2023-07-17 00:16:46', 0),
-(18, 3, 'Quần jean trẻ em', 200000, 0, '/images/cloth_3.jpg', 'Quần jean trẻ em đẹp', '2023-07-17 00:16:46', '2023-07-17 00:16:46', 0),
-(19, 3, 'Giày thể thao trẻ em', 350000, 0, '/images/shoe.png', 'Giày thể thao trẻ em', '2023-07-17 00:16:46', '2023-07-17 00:16:46', 0);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `role`
---
-
-CREATE TABLE `role` (
-  `id` int(11) NOT NULL,
-  `name` varchar(20) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `user`
---
-
-CREATE TABLE `user` (
-  `id` int(11) NOT NULL,
-  `fullname` varchar(50) DEFAULT NULL,
-  `email` varchar(150) DEFAULT NULL,
-  `phone_number` varchar(20) DEFAULT NULL,
-  `address` varchar(200) DEFAULT NULL,
-  `password` varchar(32) DEFAULT NULL,
-  `role_id` int(11) DEFAULT NULL,
-  `created_at` datetime DEFAULT NULL,
-  `updated_at` datetime DEFAULT NULL,
-  `deleted` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Indexes for dumped tables
---
-
---
--- Indexes for table `category`
---
-ALTER TABLE `category`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `comment`
---
-ALTER TABLE `comment`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `delivery`
---
-ALTER TABLE `delivery`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `discounts`
---
-ALTER TABLE `discounts`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `galery`
---
-ALTER TABLE `galery`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `product_id` (`product_id`);
-
---
--- Indexes for table `orders`
---
-ALTER TABLE `orders`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `user_id` (`user_id`),
-  ADD KEY `id_pay` (`id_pay`),
-  ADD KEY `id_delivery` (`id_delivery`),
-  ADD KEY `id_discount` (`id_discount`);
-
---
--- Indexes for table `order_details`
---
-ALTER TABLE `order_details`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `product_id` (`product_id`),
-  ADD KEY `order_id` (`order_id`);
-
---
--- Indexes for table `pay`
---
-ALTER TABLE `pay`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `product`
---
-ALTER TABLE `product`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `category_id` (`category_id`);
-
---
--- Indexes for table `role`
---
-ALTER TABLE `role`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `user`
---
-ALTER TABLE `user`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `role_id` (`role_id`);
-
---
--- AUTO_INCREMENT for dumped tables
---
-
---
--- AUTO_INCREMENT for table `category`
---
-ALTER TABLE `category`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
---
--- AUTO_INCREMENT for table `comment`
---
-ALTER TABLE `comment`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `delivery`
---
-ALTER TABLE `delivery`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `discounts`
---
-ALTER TABLE `discounts`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `galery`
---
-ALTER TABLE `galery`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `orders`
---
-ALTER TABLE `orders`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `order_details`
---
-ALTER TABLE `order_details`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `pay`
---
-ALTER TABLE `pay`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `product`
---
-ALTER TABLE `product`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
-
---
--- AUTO_INCREMENT for table `role`
---
-ALTER TABLE `role`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `user`
---
-ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- Constraints for dumped tables
---
-
---
--- Constraints for table `comment`
---
-ALTER TABLE `comment`
-  ADD CONSTRAINT `comment_ibfk_1` FOREIGN KEY (`id`) REFERENCES `user` (`id`);
-
---
--- Constraints for table `galery`
---
-ALTER TABLE `galery`
-  ADD CONSTRAINT `galery_ibfk_1` FOREIGN KEY (`product_id`) REFERENCES `product` (`id`);
-
---
--- Constraints for table `orders`
---
-ALTER TABLE `orders`
-  ADD CONSTRAINT `orders_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`),
-  ADD CONSTRAINT `orders_ibfk_2` FOREIGN KEY (`id_pay`) REFERENCES `pay` (`id`),
-  ADD CONSTRAINT `orders_ibfk_3` FOREIGN KEY (`id_delivery`) REFERENCES `delivery` (`id`),
-  ADD CONSTRAINT `orders_ibfk_4` FOREIGN KEY (`id_discount`) REFERENCES `discounts` (`id`);
-
---
--- Constraints for table `order_details`
---
-ALTER TABLE `order_details`
-  ADD CONSTRAINT `order_details_ibfk_1` FOREIGN KEY (`product_id`) REFERENCES `product` (`id`),
-  ADD CONSTRAINT `order_details_ibfk_2` FOREIGN KEY (`order_id`) REFERENCES `orders` (`id`);
-
---
--- Constraints for table `product`
---
-ALTER TABLE `product`
-  ADD CONSTRAINT `product_ibfk_1` FOREIGN KEY (`category_id`) REFERENCES `category` (`id`);
-
---
--- Constraints for table `user`
---
-ALTER TABLE `user`
-  ADD CONSTRAINT `user_ibfk_1` FOREIGN KEY (`role_id`) REFERENCES `role` (`id`);
-COMMIT;
-
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+-- Cụm sản phẩm --
+
+-- Bảng Loại hàng (liên kết 1 - nhiều với bảng sản phẩm)
+CREATE TABLE category (
+  categoryId INT AUTO_INCREMENT PRIMARY KEY,
+  categoryName VARCHAR(100) NOT NULL
+);
+
+-- Bảng Chi nhánh
+CREATE TABLE branch (
+  branchId INT AUTO_INCREMENT PRIMARY KEY,
+  branchName VARCHAR(50) NOT NULL
+);
+
+
+-- Bảng Khuyến mãi
+CREATE TABLE discount (
+  discountId INT AUTO_INCREMENT PRIMARY KEY,
+  discountName VARCHAR(50) NOT NULL,
+  discountValue FLOAT NOT NULL,
+  discountFromDate DATE NOT NULL,
+  discountToDate DATE NOT NULL
+);
+
+-- Bảng Sản phẩm
+CREATE TABLE product (
+  productId INT AUTO_INCREMENT PRIMARY KEY,
+  productName VARCHAR(250) NOT NULL,
+  price INT NOT NULL,
+  description LONGTEXT,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  categoryId INT NOT NULL,
+  discountId INT,
+  branchId INT NOT NULL,
+  stock INT,
+  FOREIGN KEY (categoryId) REFERENCES category(categoryId),
+  FOREIGN KEY (discountId) REFERENCES discount(discountId),
+  FOREIGN KEY (branchId) REFERENCES branch(branchId)
+);
+
+-- Bảng Thư viện ảnh
+CREATE TABLE gallery (
+  galleryId INT AUTO_INCREMENT PRIMARY KEY,
+  productId INT NOT NULL,
+  galleryURL TEXT NOT NULL,
+  FOREIGN KEY (productId) REFERENCES product(productId)
+);
+
+-- Cụm quản lý khách hàng --
+
+
+-- Bảng Vai trò (Roles)
+CREATE TABLE role (
+  roleId INT AUTO_INCREMENT PRIMARY KEY,
+  roleType ENUM('customer', 'admin') NOT NULL,
+  description VARCHAR(255)
+);
+
+-- Bảng Người dùng (Users)
+CREATE TABLE user (
+  userId INT AUTO_INCREMENT PRIMARY KEY,
+  userFullname VARCHAR(50) NOT NULL,
+  userEmail VARCHAR(150) NOT NULL,
+  phoneNumber VARCHAR(20) NOT NULL,
+  address VARCHAR(200),
+  password VARCHAR(32) NOT NULL,
+  roleId INT NOT NULL,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  FOREIGN KEY (roleId) REFERENCES role(roleId)
+);
+
+-- Bảng Phương thức thanh toán
+CREATE TABLE payment (
+  paymentId INT AUTO_INCREMENT PRIMARY KEY,
+  paymentName VARCHAR(50) NOT NULL,
+  paymentStatus TINYINT NOT NULL
+);
+
+-- Bảng Địa chỉ giao hàng
+CREATE TABLE delivery (
+  deliveryId INT AUTO_INCREMENT PRIMARY KEY,
+  deliveryName VARCHAR(50) NOT NULL,
+  deliveryAddress TEXT,
+  deliveryStatus TINYINT NOT NULL
+);
+
+-- Bảng Đơn hàng
+CREATE TABLE orders (
+  orderId INT AUTO_INCREMENT PRIMARY KEY,
+  userId INT NOT NULL,
+  fullname VARCHAR(50) NOT NULL,
+  email VARCHAR(150) NOT NULL,
+  phoneNumber VARCHAR(20) NOT NULL,
+  address VARCHAR(200) NOT NULL,
+  note VARCHAR(1000),
+  orderDate DATETIME DEFAULT CURRENT_TIMESTAMP,
+  paymentId INT NOT NULL,
+  deliveryId INT NOT NULL,
+  discountId INT,
+  totalMoney INT,
+  FOREIGN KEY (userId) REFERENCES user(userId),
+  FOREIGN KEY (paymentId) REFERENCES payment(paymentId),
+  FOREIGN KEY (deliveryId) REFERENCES delivery(deliveryId),
+  FOREIGN KEY (discountId) REFERENCES discount(discountId)
+);
+
+-- Bảng Chi tiết đơn hàng
+CREATE TABLE orderDetails (
+  orderDetailId INT AUTO_INCREMENT PRIMARY KEY,
+  orderId INT NOT NULL,
+  productId INT NOT NULL,
+  price INT NOT NULL,
+  quantity INT NOT NULL,
+  totalMoney INT NOT NULL,
+  FOREIGN KEY (orderId) REFERENCES orders(orderId),
+  FOREIGN KEY (productId) REFERENCES product(productId)
+);
+
+-- Bảng Bình luận
+CREATE TABLE comment (
+  commentId INT AUTO_INCREMENT PRIMARY KEY,
+  userId INT NOT NULL,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  FOREIGN KEY (userId) REFERENCES user(userId)
+);
+
+
+-- Thêm dữ liệu
+-- Thêm dữ liệu vào bảng Loại hàng (category)
+INSERT INTO category (categoryName)
+VALUES
+  ('Nam'),
+  ('Nữ'),
+  ('Trẻ em'),
+  ('Thể thao'),
+  ('Phụ kiện');
+
+-- Thêm dữ liệu vào bảng Chi nhánh (branch)
+INSERT INTO branch (branchName)
+VALUES
+  ('Chi nhánh Hà Nội'),
+  ('Chi nhánh Hồ Chí Minh'),
+  ('Chi nhánh Đà Nẵng'),
+  ('Chi nhánh Nha Trang'),
+  ('Chi nhánh Hải Phòng');
+
+
+
+-- Thêm dữ liệu vào bảng Khuyến mãi (discount)
+INSERT INTO discount (discountName, discountValue, discountFromDate, discountToDate)
+VALUES
+  ('Giảm giá Mùa hè', 0.2, '2023-07-01', '2023-07-31'),
+  ('Khuyến mãi Đặc biệt', 0.15, '2023-08-15', '2023-08-16'),
+  ('Giảm giá Cuối mùa', 0.3, '2023-09-01', '2023-09-30'),
+  ('Khuyến mãi Lễ hội', 0.1, '2023-12-01', '2024-01-02'),
+  ('Giảm giá Sinh nhật', 0.25, '2023-07-01', '2023-07-31');
+
+-- Thêm dữ liệu vào bảng Sản phẩm (product)
+INSERT INTO product (productName, price, description, categoryId, branchId, stock)
+VALUES
+  ('Áo thun nam 1', 200000, 'Áo thun nam phong cách trẻ trung và năng động', 1, 1, 50),
+  ('Áo thun nữ 1', 250000, 'Áo thun nữ thoải mái và phong cách', 2, 2, 30),
+  ('Áo thể thao', 300000, 'Áo thể thao chất liệu co dãn và thấm hút mồ hôi', 4, 3, 20),
+  ('Áo thun trẻ em', 150000, 'Áo thun trẻ em dễ thương và màu sắc tươi sáng', 3, 4, 10),
+  ('Áo thun phụ kiện', 180000, 'Áo thun với thiết kế phụ kiện độc đáo', 5, 5, 15);
+
+  -- Thêm dữ liệu vào bảng Thư viện ảnh (gallery)
+INSERT INTO gallery (productId, galleryURL)
+VALUES
+  (1, 'https://example.com/image1.jpg'),
+  (1, 'https://example.com/image2.jpg'),
+  (2, 'https://example.com/image3.jpg'),
+  (2, 'https://example.com/image4.jpg'),
+  (3, 'https://example.com/image5.jpg');
+
+-- Thêm dữ liệu vào bảng Vai trò (role)
+INSERT INTO role (roleType, description)
+VALUES
+  ('customer', 'Vai trò khách hàng thông thường'),
+  ('admin', 'Vai trò quản trị viên'),
+  ('guest', 'Vai trò khách'),
+  ('vip', 'Vai trò khách hàng VIP'),
+  ('sales', 'Vai trò nhân viên bán hàng');
+
+-- Thêm dữ liệu vào bảng Người dùng (user)
+INSERT INTO user (userFullname, userEmail, phoneNumber, address, password, roleId)
+VALUES
+  ('Nguyễn Văn A', 'nguyenvana@example.com', '123456789', 'Số 1 Đường X, Quận Y, Thành phố Z', 'password123', 1),
+  ('Trần Thị B', 'tranthib@example.com', '987654321', 'Số 2 Đường X, Quận Y, Thành phố Z', 'password456', 1),
+  ('Admin User', 'admin@example.com', '555555555', 'Số 3 Đường X, Quận Y, Thành phố Z', 'adminpassword', 2),
+  ('Guest User', 'guest@example.com', '111111111', 'Số 4 Đường X, Quận Y, Thành phố Z', 'guestpassword', 3),
+  ('VIP User', 'vip@example.com', '999999999', 'Số 5 Đường X, Quận Y, Thành phố Z', 'vippassword', 4);
+
+-- Thêm dữ liệu vào bảng Phương thức thanh toán (payment)
+INSERT INTO payment (paymentName, paymentStatus)
+VALUES
+  ('Thẻ tín dụng', 1),
+  ('PayPal', 1),
+  ('Tiền mặt khi nhận hàng', 1),
+  ('Chuyển khoản ngân hàng', 1),
+  ('Thanh toán qua điện thoại di động', 1);
+
+-- Thêm dữ liệu vào bảng Địa chỉ giao hàng (delivery)
+INSERT INTO delivery (deliveryName, deliveryAddress, deliveryStatus)
+VALUES
+  ('Giao hàng tiêu chuẩn', 'Số 1 Đường X, Quận Y, Thành phố Z', 1),
+  ('Giao hàng nhanh', 'Số 2 Đường X, Quận Y, Thành phố Z', 1),
+  ('Tự lấy hàng tại cửa hàng', 'Số 3 Đường X, Quận Y, Thành phố Z', 1),
+  ('Giao hàng trong ngày', 'Số 4 Đường X, Quận Y, Thành phố Z', 1),
+  ('Giao hàng quốc tế', 'Số 5 Đường X, Quận Y, Thành phố Z', 1);
+
+-- Thêm dữ liệu vào bảng Đơn hàng (orders)
+INSERT INTO orders (userId, fullname, email, phoneNumber, address, note, orderDate, paymentId, deliveryId, discountId, totalMoney)
+VALUES
+  (1, 'Nguyễn Văn A', 'nguyenvana@example.com', '123456789', 'Số 1 Đường X, Quận Y, Thành phố Z', 'Vui lòng giao hàng trong ngày làm việc', '2023-07-15 10:00:00', 1, 1, 1, 200000),
+  (2, 'Trần Thị B', 'tranthib@example.com', '987654321', 'Số 2 Đường X, Quận Y, Thành phố Z', 'Không có yêu cầu đặc biệt', '2023-07-16 15:30:00', 2, 2, NULL, 150000),
+  (3, 'Admin User', 'admin@example.com', '555555555', 'Số 3 Đường X, Quận Y, Thành phố Z', 'Yêu cầu giao hàng gấp', '2023-07-17 12:45:00', 3, 3, 3, 300000),
+  (4, 'Guest User', 'guest@example.com', '111111111', 'Số 4 Đường X, Quận Y, Thành phố Z', 'Giao hàng tại lễ tân', '2023-07-18 09:30:00', 4, 4, NULL, 500000),
+  (5, 'VIP User', 'vip@example.com', '999999999', 'Số 5 Đường X, Quận Y, Thành phố Z', 'Thời gian giao hàng 17h-19h', '2023-07-19 18:00:00', 5, 5, 2, 250000);
+
+-- Thêm dữ liệu vào bảng Chi tiết đơn hàng (orderDetails)
+INSERT INTO orderDetails (orderId, productId, price, quantity, totalMoney)
+VALUES
+  (1, 1, 200000, 2, 400000),
+  (1, 2, 250000, 1, 250000),
+  (2, 3, 300000, 1, 300000),
+  (3, 4, 150000, 3, 450000),
+  (4, 5, 180000, 5, 900000);
+
+-- Thêm dữ liệu vào bảng Bình luận (comment)
+INSERT INTO comment (userId, created_at)
+VALUES
+  (1, '2023-07-15 10:15:00'),
+  (2, '2023-07-16 16:00:00'),
+  (3, '2023-07-17 13:30:00'),
+  (4, '2023-07-18 10:00:00'),
+  (5, '2023-07-19 19:30:00');

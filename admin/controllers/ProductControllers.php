@@ -2,22 +2,42 @@
 
 // require_once 'core/Database.php';
 require_once '../../model/product.php';
+require_once '../../model/category.php';
 require_once '../../../global.php';
 
-$allProducts = new Product();
+$ProductModel = new Product();
+$CategoryModel = new Category();
+
+extract($_REQUEST); //Bắt buộc phải extract các dữ liệu trong form được POST lên để thực hiện CRUD
+
 // $productsDAO = new Product();
 if(isset($_GET["action"])==true){
     $action = $_GET["action"];
     switch ($action) {
         case 'add':
-            echo "đã thêm";
-            // require '../layout.php';
+            $VIEW_NAME = 'view/product/addProd.php';    
+            $listCategory = $CategoryModel->getAllCategories();        
+            // require '../../layout.php';
+            if(exist_param("btn_add")){
+                try {
+                    $ProductModel->addProduct($product_name, $price, $description, $discount, $img, $category_id);
+                    unset($product_name, $price, $description, $discount, $img, $category_id);
+                    $MESSAGE = "Thêm mới thành công!";
+                } catch (Exception $exc) {
+                    $MESSAGE = "Thêm mới thất bại!";
+                }
+            }
+            
+            // $VIEW_NAME= $ADMIN_URL.'/view/product/';
+            // require '../../layout.php';
             break;
         case 'edit':
             // Xử lý sửa sản phẩm
+            echo "đã sửa";
             break;
         case 'delete':
-            // Xử lý xóa sản phẩm
+            
+            echo "đã xóa";
             break;
         case 'view':
             // Xử lý xem chi tiết sản phẩm
@@ -30,14 +50,16 @@ if(isset($_GET["action"])==true){
             break;
         default:
             // Mặc định hiển thị danh sách sản phẩm
-            // $products = $productsDAO->getAllProducts();
-            // $VIEW_NAME = $ADMIN_URL.'/view/product/index2.php';
-            // require '../layout.php';
+            $VIEW_NAME = 'view/product/default.php';
+            $products = $ProductModel->getAllProducts();
+            $category = $CategoryModel->getAllCategories();
+            include "../../layout.php";
             break;
     }
+    require '../../layout.php';
 }else{
     $VIEW_NAME = 'view/product/default.php';
-    $products = $allProducts->getAllProducts();
+    $products = $ProductModel->getAllProducts();
     include "../../layout.php";
 };
 
