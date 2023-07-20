@@ -11,7 +11,7 @@ $PER_PAGE = 10; //số lượng hàng hóa mỗi trang
 
 // đường dẫn chứa hình khi upload
 
-$IMAGE_DIR = "$ROOT_URL/upload/images/";
+$IMAGE_DIR = $ROOT_URL."/uploads/images/";
 
 
 // 2 biến toàn cục để chia sẻ giữa controller và view

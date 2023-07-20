@@ -45,6 +45,9 @@
 
     <!-- Core JS -->
     <!-- build:js assets/vendor/js/core.js -->
+    
+   
+    <script src="<?=$CONTENT_ADMIN_URL?>/assets/js/checked.js"></script>
     <script src="<?=$CONTENT_ADMIN_URL?>/assets/vendor/libs/jquery/jquery.js"></script>
     <script src="<?=$CONTENT_ADMIN_URL?>/assets/vendor/libs/popper/popper.js"></script>
     <script src="<?=$CONTENT_ADMIN_URL?>/assets/vendor/js/bootstrap.js"></script>
