@@ -40,8 +40,8 @@ function uploadImage($fieldname)
         $target_path = $IMAGE_DIR . $img;
 
         // Di chuyển tệp tải lên đến đường dẫn đích
-        if (move_uploaded_file($file_uploaded["tmp"], $target_path)) {
-            return $target_path;
+        if (move_uploaded_file($file_uploaded["tmp_name"], $target_path)) {
+            return $img;
         } else {
             // Lỗi khi di chuyển tệp tải lên
             echo "Upload không thành công";
