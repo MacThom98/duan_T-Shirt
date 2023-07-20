@@ -41,8 +41,8 @@
               </div>
             </div>
             <div class="row mb-5">
-
-            <?php foreach ($searchs as $search): ?>
+            
+               <?php foreach ($searchs as $search): ?>
                 <div class="col-sm-6 col-lg-4 mb-4" data-aos="fade-up">
                 <div class="block-4 text-center border">
                   <figure class="block-4-image">
@@ -77,6 +77,7 @@
           <div class="col-md-3 order-1 mb-5 mb-md-0">
             <div class="border p-4 rounded mb-4">
               <h3 class="mb-3 h6 text-uppercase text-black d-block">Categories</h3>
+              <ul class="list-unstyled mb-0">
               <ul class="list-unstyled mb-0">
               <?php foreach ($productbyCates as $productbyCate): ?>
                 <li class="mb-1"><a href="<?=$SITE_URL?>/view/category?id=<?=$productbyCate['cateId']?>" class="d-flex"><span><?php echo $productbyCate['cateName']; ?></span> <span class="text-black ml-auto">(<?php echo $productbyCate['total']; ?>)</span></a></li>
@@ -136,7 +137,7 @@
                   <div class="col-sm-6 col-md-6 col-lg-4 mb-4 mb-lg-0" data-aos="fade" data-aos-delay="">
                     <a class="block-2-item" href="#">
                       <figure class="image">
-                        <img src="<?=$IMAGE_DIR ?>/women.jpg" alt="" class="img-fluid">
+                        <img src="<?=$IMAGE_DIR ?>/images/women.jpg" alt="" class="img-fluid">
                       </figure>
                       <div class="text">
                         <span class="text-uppercase">Collections</span>
@@ -147,7 +148,7 @@
                   <div class="col-sm-6 col-md-6 col-lg-4 mb-5 mb-lg-0" data-aos="fade" data-aos-delay="100">
                     <a class="block-2-item" href="#">
                       <figure class="image">
-                        <img src="<?=$IMAGE_DIR ?>/children.jpg" alt="" class="img-fluid">
+                        <img src="<?=$IMAGE_DIR ?>/images/children.jpg" alt="" class="img-fluid">
                       </figure>
                       <div class="text">
                         <span class="text-uppercase">Collections</span>
@@ -158,7 +159,7 @@
                   <div class="col-sm-6 col-md-6 col-lg-4 mb-5 mb-lg-0" data-aos="fade" data-aos-delay="200">
                     <a class="block-2-item" href="#">
                       <figure class="image">
-                        <img src="<?=$IMAGE_DIR ?>/men.jpg" alt="" class="img-fluid">
+                        <img src="<?=$IMAGE_DIR ?>/images/men.jpg" alt="" class="img-fluid">
                       </figure>
                       <div class="text">
                         <span class="text-uppercase">Collections</span>
