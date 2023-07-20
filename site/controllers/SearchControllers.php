@@ -1,13 +1,13 @@
 <?php
 
 // require_once 'core/Database.php';
-require_once './model/product.php';
-require_once './../global.php';
+require_once '../../model/product.php';
+require_once '../../../global.php';
 
 $productsDAO = new Product();
 if (isset($_GET["action"]) == true) {
-    $action = $_GET["action"];
-    switch ($action) {
+    $action = $_GET["action"];    
+    switch ($action) {        
         case 'search':
             // Xử lý tìm kiếm
             break;
@@ -25,15 +25,9 @@ if (isset($_GET["action"]) == true) {
         $MESSAGE = "Không có sản phẩm nào";
         $value = "";
     }
-
-    if ($value != "") {
-        $searchs = $productsDAO->searchProducts($value);
-        $productbyCates = $productsDAO->getTotalProductbyCate();
-        $VIEW_NAME = 'view/shop/default.php';
-        include "layout.php";
-    } else {
-        $products = $productsDAO->getAllProducts();
-        $VIEW_NAME = 'view/home/default.php';
-        include "layout.php";
-    }}
+    $searchs = $productsDAO->searchProducts($value);
+    $productbyCates = $productsDAO->getTotalProductbyCate();
+    $VIEW_NAME = 'view/search/default.php';
+    include "../../layout.php";
+}
 ;

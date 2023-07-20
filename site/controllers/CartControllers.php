@@ -18,8 +18,20 @@ if (isset($_GET["action"]) == true) {
             require '../layout.php';
             break;
     }
+} else { if (isset($_POST['searchValue']) && $_POST['searchValue'] != "") {
+    $value = $_POST['searchValue'];
 } else {
+    $MESSAGE = "Không có sản phẩm nào";
+    $value = "";
+}
+
+if ($value != "") {
+    $searchs = $productsDAO->searchProducts($value);
+    $productbyCates = $productsDAO->getTotalProductbyCate();
+    $VIEW_NAME = 'view/shop/default.php';
+    include "layout.php";
+}else {
     $VIEW_NAME = 'view/cart/default.php';
     include "../../layout.php";
-}
+}}
 ;
