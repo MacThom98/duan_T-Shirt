@@ -9,7 +9,7 @@
       ?>
 <h2 class="mt-4">Thêm sản phẩm</h2>
 
-<form action="" method="POST" enctype="multipart/form-data">
+<form action="<?php $ADMIN_URL.'/view/product?action=btn_add'?>" method="POST" enctype="multipart/form-data">
   <div class="form-group">
     <label for="product_name">Tên sản phẩm:</label>
     <input type="text" class="form-control" name="product_name" id="product_name" required>
@@ -47,8 +47,8 @@
     </select>
   </div>
   <div class="form-group">
-    <label for="imageToUpload">Hình ảnh:</label>
-    <input type="file" class="form-control-file" name="imageToUpload" id="imageToUpload">
+    <label for="img">Hình ảnh:</label>
+    <input type="file" class="form-control-file" name="img" id="img">
   </div>
   <div class="form-group">
     <label for="category">Danh mục:</label>

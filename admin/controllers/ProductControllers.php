@@ -25,8 +25,17 @@ if(isset($_GET["action"])==true){
             // require '../../layout.php';
             if(exist_param("btn_add")){
                 $productName = convert_name($product_name);
-                $file_name = uploadImage("imageToUpload");
-                $img = $file_name ? $file_name : "";
+                // $file_name = uploadImage("imageToUpload");
+                $img_name = $_FILES['img']['name'];
+                $img_tmp = $_FILES['img']['tmp_name'];
+                $img_dir = $IMAGE_DIR . $img_name;
+                if($img_dir && move_uploaded_file($img_tmp,$img_dir)){
+                    move_uploaded_file($img_tmp,$img_dir);
+                    $MESSAGE = "Chuyển file thành công";
+                }else{
+                    echo $MESSAGE = "Không tồn tại thư mục đích";
+                }
+                $img = $img_name ? $img_name : "";
                 $categoryId = $_POST['category'];
                 try {
                     $ProductModel->addProduct($productName, $price, $description, $discount, $branch, $img, $categoryId,$stock);

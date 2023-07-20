@@ -29,7 +29,7 @@
         <tr>
             <td><?php echo $product['productId']; ?></td>
             <td><?php echo $product['productName']; ?></td>
-            <td><img src="<?php echo $product['image']; ?>" class="" width=100px;></img></td>
+            <td><img src="<?php echo $IMAGE_DIR.$product['image']; ?>" class="" width=100px;></img></td>
             <td><?php echo $product['categoryName']?></td>
             <td><?php echo $product['branchName']?></td>
             <td><?php echo $product['discountValue']?>%</td>
