@@ -7,8 +7,8 @@ class Branch {
     }
     
     public function getBranchById($branchId) {
-        $sql = "SELECT * FROM branch WHERE branchId = ?";
-        return pdo_query($sql, [$branchId]);
+        $sql = "SELECT * FROM branch WHERE branchId = $branchId";
+        return pdo_query_one($sql);
     }
     
     public function addBranch($branchName) {
