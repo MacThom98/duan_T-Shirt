@@ -261,7 +261,7 @@
                   </div>
 
                   <div class="form-group">
-                    <button class="btn btn-primary btn-lg py-3 btn-block" onclick="window.location='<?=$SITE_URL?>/view/thank'">Place Order</button>
+                    <button class="btn btn-primary btn-lg py-3 btn-block" onclick="window.location='<?=$SITE_URL?>/view/reviewOrder'">Place Order</button>
                   </div>
 
                 </div>
