@@ -12,8 +12,6 @@ $CategoryModel = new Category();
 $DiscountModel = new Discount();
 $BranchModel = new Branch();
 extract($_REQUEST); //Bắt buộc phải extract các dữ liệu trong form được POST lên để thực hiện CRUD
-
-// $productsDAO = new Product();
 if (isset($_GET['action']) == true) {
     $action = $_GET['action'];
     switch ($action) {
@@ -22,10 +20,8 @@ if (isset($_GET['action']) == true) {
             $listCategory = $CategoryModel->getAllCategories();
             $listDiscount = $DiscountModel->getAllDiscounts();
             $listBranch = $BranchModel->getAllBranches();
-            // require '../../layout.php';
             if (exist_param('btn_add')) {
                 $productName = convert_name($product_name);
-                // $file_name = uploadImage("imageToUpload");
                 $img_name = $_FILES['img']['name'];
                 $img_tmp = $_FILES['img']['tmp_name'];
                 $img_dir = $_SERVER['DOCUMENT_ROOT'] . $IMAGE_DIR . $img_name;
@@ -63,18 +59,13 @@ if (isset($_GET['action']) == true) {
                     $MESSAGE = 'Thêm mới thất bại!';
                 }
             }
-
-            // $VIEW_NAME= $ADMIN_URL.'/view/product/';
-            // require '../../layout.php';
             break;
         case 'edit':
             $VIEW_NAME = 'view/product/editProd.php';
             $productId = $_GET['id'];
-            // $products = $ProductModel->getAllProducts();
             $product = $ProductModel->getProductById($productId);
             if (exist_param('btn_update')) {
                 $productName = convert_name($product_name);
-                // $file_name = uploadImage("imageToUpload");
                 $img_existing = $product['image'];
                 $img_name = $_FILES['img']['name'];
                 $img_tmp = $_FILES['img']['tmp_name'];

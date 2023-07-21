@@ -10,15 +10,11 @@
     <div class="col-md-6 mb-4 mb-md-0"> <!-- Cột thứ nhất chiếm 100% chiều rộng trên màn hình nhỏ hơn (md) và 50% chiều rộng trên màn hình lớn hơn (lớn hơn md) -->
       <h2 class="mt-4 d-flex justify-content-center align-items-center">Thêm sản phẩm</h2>
 
-      <form action="<?php echo $ADMIN_URL.'/view/product?action=btn_add'?>" method="POST" enctype="multipart/form-data">
+      <form action="" method="POST" enctype="multipart/form-data">
         <div class="mb-3">
           <label for="product_name" class="form-label">Tên sản phẩm:</label>
           <input type="text" class="form-control" name="product_name" id="product_name" required>
         </div>
-
-        
-
-     
         <div class="mb-3">
           <label for="discount" class="form-label">Giảm giá:</label>
           <select class="form-control" name="discount" id="discount">
