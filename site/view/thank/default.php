@@ -5,8 +5,10 @@
         </div>
       </div>
     </div>  
+    <div class="container">
+<div class="row">
 
-    <div class="site-section">
+    <div class="site-section col-md-6">
       <div class="container">
         <div class="row">
           <div class="col-md-12 text-center">
@@ -18,3 +20,68 @@
         </div>
       </div>
     </div>
+
+    <div class="col-md-6">
+    <!-- Your Invoice HTML Code -->
+
+      <div class="col-md-12">
+
+        <div class="site-section">
+          <div class="row">
+            <div class="col-md-12 mb-5">
+              <h2 class="h3 mb-3 text-black">Your Order</h2>
+              <div class="p-3 p-lg-5 border">
+                <table class="table table-bordered">
+                  <thead>
+                    <tr>
+                      <th>Product</th>
+                      <th>Price</th>
+                      <th>Quantity</th>
+                      <th>Total</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>Top Up T-Shirt</td>
+                      <td>$250.00</td>
+                      <td>1</td>
+                      <td>$250.00</td>
+                    </tr>
+                    <tr>
+                      <td>Polo Shirt</td>
+                      <td>$100.00</td>
+                      <td>1</td>
+                      <td>$100.00</td>
+                    </tr>
+                  </tbody>
+                  <tfoot>
+                    <tr>
+                      <th colspan="3" class="text-right">Cart Subtotal</th>
+                      <td>$350.00</td>
+                    </tr>
+                    <tr>
+                      <th colspan="3" class="text-right">Order Total</th>
+                      <td>$350.00</td>
+                    </tr>
+                    <tr>
+                      <th colspan="3" class="text-right">Hình thức vận chuyển</th>
+                      <td>Giao hàng tiết kiệm</td>
+                    </tr>
+                    <tr>
+                      <th colspan="3" class="text-right">Payment Status</th>
+                      <td>Chưa thanh toán</td>
+                    </tr>
+                  </tfoot>
+                </table>
+              </div>
+            </div>
+          </div>
+            </div>
+          </div>
+ 
+   
+    </div>
+</div>
+  </div>
+</div>
+  </div>
