@@ -67,7 +67,7 @@
   </div>
 
 
-  <button name="btn_add" class="btn btn-primary">Thêm sản phẩm</button> 
+  <button type="submit" name="btn_add" class="btn btn-primary">Thêm sản phẩm</button> 
   
   <!-- giá trị name="btn_add" dùng để kiểm tra xem người dùng đã thực hiện thêm chưa. Sử dụng exist_param() để kiểm tra ở ControllerProduct -->
 </form>

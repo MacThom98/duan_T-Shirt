@@ -6,7 +6,7 @@
             <div class="intro-text text-center text-md-left">
               <p class="mb-4">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus at iaculis quam. Integer accumsan tincidunt fringilla. </p>
               <p>
-                <a href="#" class="btn btn-sm btn-primary">Mua Ngay</a>
+                <a href="<?=$SITE_URL?>/view/detailproduct?id=4" class="btn btn-sm btn-primary">Mua Ngay</a>
               </p>
             </div>
           </div>
@@ -107,7 +107,7 @@
                     <img src="<?=$IMAGE_DIR ?><?php echo $product['image']; ?>" alt="Image placeholder" class="img-fluid">
                   </figure>
                   <div class="block-4-text p-4">
-                    <h3><a href="#"><?php echo $product['productName']; ?></a></h3>                    
+                    <h3><a href="<?=$SITE_URL?>/view/detailproduct?id=<?=$product['productId']?>"><?php echo $product['productName']; ?></a></h3>                    
                     <p class="text-primary font-weight-bold">$<?php echo $product['price']; ?></p>
                   </div>
                 </div>
@@ -138,7 +138,7 @@
                     <img src="<?=$IMAGE_DIR ?><?php echo $product['image']; ?>" alt="Image placeholder" class="img-fluid">
                   </figure>
                   <div class="block-4-text p-4">
-                    <h3><a href="index.php?action=detailprod&id=<?php echo $product['productId']?>"><?php echo $product['productName']; ?></a></h3>                    
+                    <h3><a href="<?=$SITE_URL?>/view/detailproduct?id=<?=$product['productId']?>"><?php echo $product['productName']; ?></a></h3>                    
                     <p class="text-primary font-weight-bold">$<?php echo $product['price']; ?></p>
                   </div>
                 </div>

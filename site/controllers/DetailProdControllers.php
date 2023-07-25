@@ -39,9 +39,10 @@ if (isset($_GET["action"]) == true) {
         include "../../layout.php";
     }
     else {
-    $detail = $productsDAO-> getProductById($prodid);
-    $products = $productsDAO->getAllProducts();
-    $VIEW_NAME = 'view/detailproduct/default.php';
-    include "../../layout.php";
-}}
+        $detail = $productsDAO-> getProductById($prodid);
+        $products = $productsDAO->getAllProducts();
+        $VIEW_NAME = 'view/detailproduct/default.php';
+        include "../../layout.php";
+    }
+}
 ;

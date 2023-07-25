@@ -13,11 +13,12 @@
     <link rel="stylesheet" href="<?=$CONTENT_SITE_URL?>/css/jquery-ui.css">
     <link rel="stylesheet" href="<?=$CONTENT_SITE_URL?>/css/owl.carousel.min.css">
     <link rel="stylesheet" href="<?=$CONTENT_SITE_URL?>/css/owl.theme.default.min.css">
-
+  
 
     <link rel="stylesheet" href="<?=$CONTENT_SITE_URL?>/css/aos.css">
 
     <link rel="stylesheet" href="<?=$CONTENT_SITE_URL?>/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
   </head>
   <body>

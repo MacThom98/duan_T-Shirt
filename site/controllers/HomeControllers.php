@@ -15,7 +15,7 @@ if (isset($_GET["action"]) == true) {
             // Mặc định hiển thị danh sách sản phẩm
             // $products = $productsDAO->getAllProducts();
             // $VIEW_NAME = $ADMIN_URL.'/view/product/index2.php';
-            require '../layout.php';
+            require 'layout.php';
             break;
     }
 } else {
