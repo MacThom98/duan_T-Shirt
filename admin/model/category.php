@@ -9,11 +9,14 @@ class Category{
     }
 
     public function getCategoryById($categoryId) {
-        $sql = "SELECT * FROM Category WHERE id = ?";
+        $sql = "SELECT * FROM Category WHERE categoryid = ?";
         $category = pdo_query_one($sql, $categoryId);
         return $category;
     }
-
+    public function getListCategoryNotIn($categoryId) {
+        $sql = "SELECT * FROM Category WHERE categoryId NOT IN ($categoryId);";
+        return pdo_query($sql);
+    }
     public function addCategory($name, $description) {
         $sql = "INSERT INTO Category (name, description) VALUES (?, ?)";
         pdo_execute($sql, $name, $description);
@@ -25,7 +28,7 @@ class Category{
     }
 
     public function deleteCategory($categoryId) {
-        $sql = "DELETE FROM Category WHERE id = ?";
+        $sql = "DELETE FROM Category WHERE categoryid = ?";
         pdo_execute($sql, $categoryId);
     }
     public function searchCategories($keyword) {

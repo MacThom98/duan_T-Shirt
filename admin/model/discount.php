@@ -13,6 +13,10 @@
             $sql = "SELECT * FROM discount WHERE discountId = ?";
             return pdo_query($sql, [$discountId]);
         }
+        public function getListDiscountNotIn($discountId) {
+            $sql = "SELECT * FROM discount WHERE discountId NOT IN ($discountId);";
+            return pdo_query($sql);
+        }
         
         public function addDiscount($discountName, $discountValue, $discountFromDate, $discountToDate) {
             $sql = "INSERT INTO discount (discountName, discountValue, discountFromDate, discountToDate) VALUES (?, ?, ?, ?)";
