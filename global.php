@@ -7,7 +7,7 @@ $CONTENT_ADMIN_URL = "$ROOT_URL/public/admin"; //đường dẫn chứa tài ngu
 $CONTENT_SITE_URL = "$ROOT_URL/public/site"; //đường dẫn chứa tài nguyên tĩnh của site(img, css, js)
 $ADMIN_URL = "$ROOT_URL/admin"; //đường dẫn vào phần quản trị
 $SITE_URL = "$ROOT_URL/site"; //đường dẫn vào phần site
-$PER_PAGE = 10; //số lượng hàng hóa mỗi trang
+$PER_PAGE = 3; //số lượng hàng hóa mỗi trang
 
 // đường dẫn chứa hình khi upload
 

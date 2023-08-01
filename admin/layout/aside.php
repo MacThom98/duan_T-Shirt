@@ -32,7 +32,7 @@
 
             </li>
             <li class="menu-item">
-              <a href="<?=$ADMIN_URL?>/view/caterogy" class="menu-link">
+              <a href="<?=$ADMIN_URL?>/view/category" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-layout"></i>
                 <div data-i18n="Layouts">Quản lý loại hàng</div>
               </a>
