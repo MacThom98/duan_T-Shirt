@@ -1,23 +1,38 @@
-<?php
-
-// require_once 'core/Database.php';
+<?php // require_once 'core/Database.php';
 require_once '../../model/product.php';
 require_once '../../model/category.php';
 require_once '../../model/discount.php';
 require_once '../../model/branch.php';
 require_once '../../../global.php';
+if(isset($_GET['keyword_Search'])){
+    $keyword=$_GET['keyword_Search'];
+}else {
+    $keyword=null;
+}
 
 $ProductModel = new Product();
 $CategoryModel = new Category();
 $DiscountModel = new Discount();
 $BranchModel = new Branch();
+
+
 extract($_REQUEST); //Bắt buộc phải extract các dữ liệu trong form được POST lên để thực hiện CRUD
+
+if(isset($_GET['panigation'])){
+    // $VIEW_NAME = 'view/product/default.php';
+    $products = $ProductModel->getAllProducts($keyword);
+    // include '../../layout.php';
+}else{
+    $_SESSION['page_no'] = 0;
+    $products = $ProductModel->getAllProducts($keyword);
+}
+
 if (isset($_GET['action']) == true) {
     $action = $_GET['action'];
     switch ($action) {
         case 'add':
             $VIEW_NAME = 'view/product/addProd.php';
-            $listCategory = $CategoryModel->getAllCategories();
+            $listCategory = $CategoryModel->getAllCategories($keyword);
             $listDiscount = $DiscountModel->getAllDiscounts();
             $listBranch = $BranchModel->getAllBranches();
             if (exist_param('btn_add')) {
@@ -130,16 +145,15 @@ if (isset($_GET['action']) == true) {
         //Xóa sản phẩm theo ID truyền vào
             try{
             $ProductModel->deleteProduct($id);
-        
             // Cập nhật lại danh sách sản phẩm sau khi xóa thành công
-            $products = $ProductModel->getAllProducts();
+            $products = $ProductModel->getAllProducts($keyword);
             
             // Đặt VIEW_NAME và MESSAGE để hiển thị kết quả sau khi xóa
             $VIEW_NAME = 'view/product/default.php';
             $MESSAGE = "<h5 class='text-dark text-center bg-success pt-2 pb-2 my-2'>Xóa sản phẩm thành công</h5>";
             }catch(PDOException $e){
                     // Cập nhật lại danh sách sản phẩm sau khi xóa thành công
-                $products = $ProductModel->getAllProducts();
+                $products = $ProductModel->getAllProducts($keyword);
                 $VIEW_NAME = 'view/product/default.php';
                 $MESSAGE = "<h5 class='text-dark text-center bg-danger pt-2 pb-2 my-2'>Không thể xóa sản phẩm này vì các ràng buộc</h5>";
                 
@@ -158,14 +172,13 @@ if (isset($_GET['action']) == true) {
         default:
             // Mặc định hiển thị danh sách sản phẩm
             $VIEW_NAME = 'view/product/default.php';
-            $products = $ProductModel->getAllProducts();
-            $category = $CategoryModel->getAllCategories();
+            $products = $ProductModel->getAllProducts($keyword);
             include '../../layout.php';
             break;
     }
     require '../../layout.php';
 } else {
     $VIEW_NAME = 'view/product/default.php';
-    $products = $ProductModel->getAllProducts();
+    $products = $ProductModel->getAllProducts($keyword);
     include '../../layout.php';
 }
