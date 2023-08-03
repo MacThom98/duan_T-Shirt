@@ -20,6 +20,5 @@ if (isset($_GET["action"]) == true) {
     }
 } else {
     $VIEW_NAME = 'view/about/default.php';
-    include "../../layout.php";
-}
-;
+};
+include "../../layout.php";
