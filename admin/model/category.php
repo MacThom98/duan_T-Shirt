@@ -3,13 +3,16 @@
 require_once 'pdo.php';
 
 class Category{
-    public function getAllCategories() {
-        $sql = "SELECT * FROM category";
-        return pdo_query($sql);
+    public function getAllCategories($searchCat) {
+        $sql = "SELECT cat.categoryId, cat.categoryName, COUNT(prod.productId) as productCount 
+        FROM category cat
+        left JOIN product prod ON cat.categoryId = prod.categoryId 
+        where cat.categoryName like ?
+        GROUP BY cat.categoryId;";
+        return pdo_query($sql,"%".$searchCat."%");
     }
-
     public function getCategoryById($categoryId) {
-        $sql = "SELECT * FROM Category WHERE categoryid = ?";
+        $sql = "SELECT * FROM Category WHERE categoryId = ?";
         $category = pdo_query_one($sql, $categoryId);
         return $category;
     }
@@ -17,14 +20,14 @@ class Category{
         $sql = "SELECT * FROM Category WHERE categoryId NOT IN ($categoryId);";
         return pdo_query($sql);
     }
-    public function addCategory($name, $description) {
-        $sql = "INSERT INTO Category (name, description) VALUES (?, ?)";
-        pdo_execute($sql, $name, $description);
+    public function addCategory($name) {
+        $sql = "INSERT INTO category (categoryName) VALUES (?)";
+        pdo_execute($sql, $name);
     }
 
-    public function updateCategory($categoryId, $name, $description) {
-        $sql = "UPDATE Category SET name = ?, description = ? WHERE id = ?";
-        pdo_execute($sql, $name, $description, $categoryId);
+    public function updateCategory($categoryId, $categoryName) {
+        $sql = "UPDATE Category SET categoryName = ? WHERE categoryId = ?";
+        pdo_execute($sql, $categoryName, $categoryId);
     }
 
     public function deleteCategory($categoryId) {
@@ -37,4 +40,17 @@ class Category{
         return $categories;
     }
     
+    public function deleteCategoriesSelected($categoriesSelected){
+        if (empty($categoriesSelected)) {
+            return false; // Không có sản phẩm để xóa
+        }else{
+        if (is_array($categoriesSelected)) {
+            foreach ($categoriesSelected as $categoryId) {
+                $sql = "DELETE FROM category WHERE categoryId = $categoryId";
+                pdo_query($sql);
+            };
+            return true;
+        }
+        }
+    }
 }

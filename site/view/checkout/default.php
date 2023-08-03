@@ -6,6 +6,21 @@
       </div>
     </div>
 
+    <?php 
+    
+    var_dump($_SESSION['user']);
+    echo '</br>';
+    for($item = 0;$item< 2; $item++){
+      var_dump($_SESSION['cart'][$item][0]);
+      echo '</br>';
+      var_dump($_SESSION['cart'][$item][1]);
+      echo '</br>';
+      var_dump($_SESSION['cart'][$item][2]);
+      echo '</br>';
+      var_dump($_SESSION['cart'][$item][4]);
+    }
+    
+    ?>
     <div class="site-section">
       <div class="container">
         <div class="row mb-5">

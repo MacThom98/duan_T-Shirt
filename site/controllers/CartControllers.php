@@ -2,11 +2,14 @@
 
 // require_once 'core/Database.php';
 require_once '../../model/product.php';
+require_once '../../model/order.php';
 require_once '../../../global.php';
 // var_dump(array($_POST['quantity']));
 // unset($_SESSION['cart']);     
 
 $productsDAO = new Product();
+$OrderModel = new Order();
+
 if (isset($_GET["action"]) == true) {
     $action = $_GET["action"];
     switch ($action) {
@@ -61,6 +64,21 @@ if (isset($_GET["action"]) == true) {
             var_dump(($_SESSION['cart']));
             // unset($_SESSION['cart']);
             $VIEW_NAME = 'view/cart/default.php';
+            break;
+        case 'addOrder':
+            if(isset($_SESSION['user'])){
+                $VIEW_NAME ='view/checkout/default.php';
+                $userId = $_SESSION['user']['userId'];
+                $name = $_SESSION['user']['userFullname'];
+                $email = $_SESSION['user']['userEmail'];
+                $phone = $_SESSION['user']['phoneNumber'];
+                $address = $_SESSION['user']['address'];
+                $OrderModel->addOrder($userId,$name,$email,$phone,$address);
+            }
+            else{
+                $VIEW_NAME = 'view/login/default.php';
+            }
+            require '../../layout.php';
             break;
         case 'delCart':
             if (isset($_GET['i']) && isset($_SESSION['cart'])) {

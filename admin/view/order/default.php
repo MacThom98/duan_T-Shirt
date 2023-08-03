@@ -1,15 +1,12 @@
 <div class="container-xxl flex-grow-1 container-p-y">
     <!-- Hiển thị danh sách sản phẩm -->
 
-    <h1>Danh sách sản phẩm</h1>
+    <h1>Danh sách đơn hàng</h1>
 
     <form action="" method="post">
-        <a href="index.php?action=add" class="btn btn-primary">Thêm sản phẩm mới</a>
+        <a href="index.php?action=add" class="btn btn-primary">Tạo đơn hàng</a>
 
         <?php
-        // Thực hiện thêm dòng thông báo khi giá trị MESSAGE được gán thành công ở ControllerProduct, hiển thị ra màn hình.
-        // Thực hiện thêm dòng thông báo khi giá trị MESSAGE được gán thành công ở ControllerProduct, hiển thị ra màn hình.
-        
         if (strlen($MESSAGE)) {
         echo $MESSAGE;
         }
@@ -23,34 +20,45 @@
             <table class="table">
                 <tr>
                     <th>Chọn</th>
-                    <th>ID</th>
-                    <th>Tên sản phẩm</th>
-                    <th>Hình ảnh</th>
-                    <th>Loại</th>
-                    <th>Chi Nhánh</th>
-                    <th>Khuyến mãi</th>
-                    <th>Giá</th>
-                    <th>Mô tả</th>
-                    <th>Số lượng còn</th>
+                    <th>Mã đơn hàng</th>
+                    <th>Tên khách hàng</th>
+                    <th>Tổng thành tiền</th>
+                    <th>Hình thức thanh toán</th>
+                    <th>Trạng thái đơn hàng</th>
+                    <th>Ngày đặt</th>
+                    <th>Chi tiết</th>
                     <th>Hành động</th>
                 </tr>
 
-                <?php foreach ($products as $product) : ?>
+                <?php foreach ($orders as $order) : ?>
                     <tr>
-                        <td><input type="checkbox" name="productIds[]" value="<?php echo $product['productId']; ?>"></td>
-                        <td><?php echo $product['productId']; ?></td>
-                        <td><?php echo $product['productName']; ?></td>
-                        <td><img src="<?php echo $IMAGE_DIR .
-                                            $product['image']; ?>" class="" width=100px;></img></td>
-                        <td><?php echo $product['categoryName']; ?></td>
-                        <td><?php echo $product['branchName']; ?></td>
-                        <td><?php echo $product['discountValue']; ?>%</td>
-                        <td><?php echo $product['price']; ?></td>
-                        <td><?php echo $product['description']; ?></td>
-                        <td><?php echo $product['stock']; ?></td>
+                        <td><input type="checkbox" name="orderIds[]" value="<?php echo $order['orderId']; ?>"></td>
+                        <td><?php echo $order['orderId']; ?></td>
+                        <td><?php echo $order['userFullname']; ?></td>
+                        <td><?php echo $order['totalMoney']; ?></td>
+                        <td><?php echo $order['paymentName']; ?></td>
+                        <td><?php 
+                            if($order['deliveryId'] == 1){
+                                echo '<a class="btn btn-info" href="?confirm&id='. $order["orderId"]. '&statusId='.$order["deliveryId"].'">'. $order["deliveryName"]. '</a>';
+                            };
+                            if($order['deliveryId'] == 2){
+                                echo '<button class="btn btn-primary">'. $order["deliveryName"]. '</button>';
+                            };
+                            if($order['deliveryId'] == 4){
+                                echo '<button class="btn btn-success">'. $order["deliveryName"]. '</button>';
+                            };
+                        ?></td>
+                        <td><?php echo $order['orderDate']; ?></td>                        
                         <td>
-                            <a href="index.php?action=edit&id=<?php echo $product['productId']; ?>" class="btn btn-success mx-2 my-2">Sửa</a>
-                            <a href="index.php?action=delete&id=<?php echo $product['productId']; ?>" class="btn btn-danger mx-2 my-2">Xóa</a>
+                            <a href="index.php?action=view_detail&id=<?php echo $order['orderId'];?>" class="btn btn-primary mx-2 my-2">Xem</a>
+                        </td>
+                        <td>
+                            <?php if($order['deliveryId']==1){?>                            
+                                <a href="index.php?action=edit&id=<?php echo $order['orderId']; ?>" class="btn btn-success mx-2 my-2">Sửa</a>
+                                <a href="index.php?action=delete&id=<?php echo $order['orderId']; ?>" class="btn btn-danger mx-2 my-2">Xóa</a>
+                            <?php } else { ?>
+                                <a href="index.php?action=print&id=<?php echo $order['orderId'];?>" class="btn btn-primary mx-2 my-2">In</a>
+                            <?php }?>        
                         </td>
                     </tr>
                 <?php endforeach; ?>

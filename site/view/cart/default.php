@@ -82,7 +82,7 @@
               Cart</a>
           </div>
           <div class="col-md-6">
-            <button class="btn btn-outline-primary btn-sm btn-block ">Continue Shopping</button>
+            <a href="<?= $SITE_URL ?>/view/shop/" class="btn btn-outline-primary btn-sm btn-block ">Continue Shopping</a>
           </div>
         </div>
         <div class="row">
@@ -134,11 +134,10 @@
             <div class="row">
               <div class="col-md-12">
                 <?php if (isset($_SESSION['cart']) && count($_SESSION['cart']) > 0) { ?>
-                  <button class="btn btn-primary btn-lg py-3 btn-block"
-                    onclick="window.location='<?= $SITE_URL ?>/view/checkout'">Proceed To Checkout</button>
+                  <a href="?action=addOrder" class="btn btn-primary btn-lg py-3 btn-block">Proceed To Checkout</a>
                 <?php } else { ?>
-                  <button class="btn btn-primary btn-lg py-3 btn-block"
-                    onclick="alert('Vui lòng thêm sản phẩm trước khi thanh toán');">Proceed To Checkout</button>
+                  <a href="#" class="btn btn-primary btn-lg py-3 btn-block"
+                    onclick="alert('Vui lòng thêm sản phẩm trước khi thanh toán');">Proceed To Checkout</a>
                 <?php } ?>
               </div>
             </div>

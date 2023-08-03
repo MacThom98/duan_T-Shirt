@@ -72,15 +72,9 @@
   </div>
 
 
-  <button name="btn_update" class="btn btn-primary">Sửa sản phẩm</button> 
-  
+  <button name="btn_update" class="btn btn-primary mx-2 my-2">Lưu thay đổi</button> 
+  <a href="<?=$ADMIN_URL.'/view/product'?>" class="btn btn-info mx-2 my-2">Hủy</a>
   <!-- giá trị name="btn_add" dùng để kiểm tra xem người dùng đã thực hiện thêm chưa. Sử dụng exist_param() để kiểm tra ở ControllerProduct -->
 </form>
-<a href="<?=$ADMIN_URL.'/view/product'?>" class="btn btn-primary">Danh sách sản phẩm</a>
-  </div>
 
-  <?php 
-  
-  
-  
-  ?>
+  </div>

@@ -32,7 +32,7 @@
 
             </li>
             <li class="menu-item">
-              <a href="<?=$ADMIN_URL?>/view/caterogy" class="menu-link">
+              <a href="<?=$ADMIN_URL?>/view/category" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-layout"></i>
                 <div data-i18n="Layouts">Quản lý loại hàng</div>
               </a>
@@ -50,6 +50,13 @@
               <a href="<?=$ADMIN_URL?>/view/comment" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-layout"></i>
                 <div data-i18n="Layouts">Quản lý bình luận</div>
+              </a>
+
+            </li>
+            <li class="menu-item">
+              <a href="<?=$ADMIN_URL?>/view/order" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-layout"></i>
+                <div data-i18n="Layouts">Quản lý đơn hàng</div>
               </a>
 
             </li>
