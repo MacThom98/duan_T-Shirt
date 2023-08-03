@@ -1,6 +1,9 @@
 
 <?php // require "../../global.php"?>
 <!-- Ở đây không gọi global vì nó chỉ là một component được require đến trang layout, và trước khi gọi layout, chúng ta sẽ gọi global ra trước -->
+<!-- if(!isset($_SESSION['user']) && $_SESSION['user']['roleId'] == ?? ){
+  controller -> Trang login;
+} -->
 
 <!DOCTYPE html>
 <html
