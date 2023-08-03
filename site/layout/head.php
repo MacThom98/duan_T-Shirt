@@ -13,12 +13,14 @@
     <link rel="stylesheet" href="<?=$CONTENT_SITE_URL?>/css/jquery-ui.css">
     <link rel="stylesheet" href="<?=$CONTENT_SITE_URL?>/css/owl.carousel.min.css">
     <link rel="stylesheet" href="<?=$CONTENT_SITE_URL?>/css/owl.theme.default.min.css">
-
+    <script src="<?=$CONTENT_SITE_URL?>/js/jquery-3.3.1.min.js"></script>
+  
 
     <link rel="stylesheet" href="<?=$CONTENT_SITE_URL?>/css/aos.css">
 
     <link rel="stylesheet" href="<?=$CONTENT_SITE_URL?>/css/style.css">
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   </head>
   <body>
 
@@ -48,8 +50,8 @@
                   <li><a href="#"><span class="icon icon-heart-o"></span></a></li>
                   <li>
                     <a href="<?=$SITE_URL?>/view/cart" class="site-cart">
-                      <span class="icon icon-shopping_cart"></span>
-                      <span class="count">2</span>
+                      <span class="icon icon-shopping_cart"></span>                      
+                      <span class="count"><?php if(isset($_SESSION['cart']) && count($_SESSION['cart']) > 0) { echo (count($_SESSION['cart'])); }else { echo 0; } ?></span>
                     </a>
                   </li>
                   <li class="d-inline-block d-md-none ml-md-0"><a href="#" class="site-menu-toggle js-menu-toggle"><span class="icon-menu"></span></a></li>
