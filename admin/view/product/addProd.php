@@ -73,19 +73,6 @@
 </form>
 <a href="<?=$ADMIN_URL.'/view/product'?>" class="btn btn-primary">Danh sách sản phẩm</a>
   </div>
-
-  <?php 
-  
-  
-  
-=======
-  <!-- Thêm thông báo khi giá trị MESSAGE được gán thành công từ ControllerProduct và hiển thị ra màn hình. -->
-  <?php
-  if (strlen($MESSAGE)) {
-    echo '<div class="alert alert-success text-center">' . $MESSAGE . '</div>';
-  };
->>>>>>> 14037ecd78a19cccfb55085e8054242194777202
-  ?>
   
   <div class="row"> <!-- Dòng chứa hai cột -->
     <div class="col-md-6 mb-4 mb-md-0"> <!-- Cột thứ nhất chiếm 100% chiều rộng trên màn hình nhỏ hơn (md) và 50% chiều rộng trên màn hình lớn hơn (lớn hơn md) -->

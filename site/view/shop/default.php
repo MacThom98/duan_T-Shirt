@@ -49,7 +49,13 @@
 
           <?php foreach ($searchs as $search): ?>
             <div class="col-sm-6 col-lg-4 mb-4" data-aos="fade-up">
-              <div class="block-4 text-center border">
+            <form action="<?=$SITE_URL?>/view/cart/?action=addCart" method="post" name="add-to-cart-form" class ="add-to-cart-form">
+            
+            <input type="hidden" name="id" value="<?=$search['prodId']?>">
+              <input type="hidden" name="name" value="<?php echo $search['prodName']; ?>">
+              <input type="hidden" name="price" value="<?php echo $search['price']; ?>">
+              <input type="hidden" name="img" value="<?=$IMAGE_DIR?>/<?php echo $search['imageUrl']; ?>">  
+            <div class="block-4 text-center border">
                 <figure class="block-4-image">
                   <a href="<?=$SITE_URL?>/view/detailproduct?id=<?=$search['prodId']?>"><img
                       src="<?=$IMAGE_DIR?>/<?php echo $search['imageUrl']; ?>" alt="Image placeholder"
@@ -58,14 +64,16 @@
                 <div class="block-4-text p-4">
                   <h3><a href="<?=$SITE_URL?>/view/detailproduct?id=<?=$search['prodId']?>"><?php echo $search['prodName']; ?></a></h3>
                 </div>
-                <div class="block-4-text d-flex justify-content-center">
-                  <p class="text-primary font-weight-bold mr-3">
+                <div class="block-4-text d-flex justify-content-center align-items-center mb-3">
+                  <span class="text-primary font-weight-bold mr-3 ">
                     <?php echo $search['price']; ?>
-                  </p>
-                  <a  class="add-cart" style="cursor: pointer;" href= "#"><i class="fa-solid fa-cart-plus"></i></a>
+                  </span>
+                  <button name="addCart" class="addCart" type="submit" style="cursor: pointer; background-color: transparent; border: none !important; " ><i class="fa-solid fa-cart-plus"></i></button>
                 </div>
               </div>
             </div>
+
+            </form>
           <?php endforeach;?>
 
         </div>
@@ -195,3 +203,27 @@
 
   </div>
 </div>
+
+<script>
+$('.add-to-cart-form').submit(function (e) {
+    e.preventDefault();
+
+    $.ajax({
+        type: 'POST',
+        url: '<?=$SITE_URL?>/view/cart/?action=addCart',
+        data: $(this).serializeArray(),
+        success: function (response) {
+            response =JSON.parse(response);
+            if (response.status == 0) {
+              alert(response.message);
+            }else {
+              alert(response.message);      
+            }
+            // console.log(response);
+        },
+    });
+
+    return false;
+});
+
+</script>

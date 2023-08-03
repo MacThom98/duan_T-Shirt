@@ -210,26 +210,32 @@
                       <th>Product</th>
                       <th>Total</th>
                     </thead>
-                    <tbody>
+                    
+                <?php if (isset($_SESSION['cart']) && count($_SESSION['cart']) > 0) {
+                $i = 0;
+                $totals = 0;
+                foreach ($_SESSION['cart'] as $item):
+                  $total = $item[2] * strval($item[4]);
+                  ?>
+                    <tbody>                      
                       <tr>
-                        <td>Top Up T-Shirt <strong class="mx-2">x</strong> 1</td>
-                        <td>$250.00</td>
-                      </tr>
-                      <tr>
-                        <td>Polo Shirt <strong class="mx-2">x</strong>   1</td>
-                        <td>$100.00</td>
-                      </tr>
+                        <td><?= $item['1'] ?><strong class="mx-2">x</strong> <?= $item['4'] ?></td>
+                        <td>$<?=$total?></td>
+                      </tr> 
+                      <?php $totals += $total; ?>
+                  <?php $i++;
+                   endforeach;
+              }  ?>
                       <tr>
                         <td class="text-black font-weight-bold"><strong>Cart Subtotal</strong></td>
-                        <td class="text-black">$350.00</td>
+                        <td class="text-black">$<?=$totals?></td>
                       </tr>
                       <tr>
                         <td class="text-black font-weight-bold"><strong>Order Total</strong></td>
-                        <td class="text-black font-weight-bold"><strong>$350.00</strong></td>
+                        <td class="text-black font-weight-bold"><strong>$<?=$totals?></strong></td>
                       </tr>
                     </tbody>
                   </table>
-
                   <div class="border p-3 mb-3">
                     <h3 class="h6 mb-0"><a class="d-block" data-toggle="collapse" href="#collapsebank" role="button" aria-expanded="false" aria-controls="collapsebank">Direct Bank Transfer</a></h3>
 

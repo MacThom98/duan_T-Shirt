@@ -633,6 +633,14 @@ a {
   overflow: auto; }
   .site-blocks-table .product-thumbnail {
     width: 200px; }
+
+    .site-blocks-table .product-stt{
+      width: 100px !important;
+    }
+
+    .site-blocks-table .product-name{
+      width: 300px !important;
+    }
   .site-blocks-table thead th {
     padding: 30px;
     text-align: center;
@@ -751,3 +759,9 @@ a {
   width: 120px;
   border-radius: 50%;
   margin-bottom: 20px; }
+  
+  .addCart {
+    border: none !important;
+    background-color: transparent;
+    align-items: center;
+  }
