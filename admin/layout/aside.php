@@ -53,6 +53,13 @@
               </a>
 
             </li>
+            <li class="menu-item">
+              <a href="<?=$ADMIN_URL?>/view/order" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-layout"></i>
+                <div data-i18n="Layouts">Quản lý đơn hàng</div>
+              </a>
+
+            </li>
 
             <li class="menu-header small text-uppercase">
               <span class="menu-header-text">Pages</span>
