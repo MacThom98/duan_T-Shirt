@@ -39,15 +39,15 @@ class Product {
         return $result;
     }
 
-    // public function getProductbyCate($cateId) {
-    //     $sql = "SELECT prod.productId as prodId, prod.productName as prodName, 
-    //     prod.price as price, gallery.galleryURL as imageUrl
-    //     FROM gallery RIGHT JOIN product AS prod ON gallery.productId = prod.productId 
-    //     right join category as cat on cat.categoryId = prod.categoryId  
-    //     WHERE cat.categoryId =  $cateId";
-    //     $product = pdo_query_one($sql);
-    //     return $product;
-    // }
+    public function getProductbyCategory($cateId) {
+        $sql = "SELECT prod.productId as prodId, prod.productName as prodName, 
+        prod.price as price, gallery.galleryURL as imageUrl
+        FROM gallery RIGHT JOIN product AS prod ON gallery.productId = prod.productId 
+        right join category as cat on cat.categoryId = prod.categoryId  
+        WHERE cat.categoryId =  $cateId";
+        $product = pdo_query_one($sql);
+        return $product;
+    }
 
 
     public function addProduct($name, $price, $description) {
