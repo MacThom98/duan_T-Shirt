@@ -134,7 +134,7 @@
             <div class="row">
               <div class="col-md-12">
                 <?php if (isset($_SESSION['cart']) && count($_SESSION['cart']) > 0) { ?>
-                  <a href="?action=addOrder" class="btn btn-primary btn-lg py-3 btn-block">Proceed To Checkout</a>
+                  <a href="?action=proceed" class="btn btn-primary btn-lg py-3 btn-block">Proceed To Checkout</a>
                 <?php } else { ?>
                   <a href="#" class="btn btn-primary btn-lg py-3 btn-block"
                     onclick="alert('Vui lòng thêm sản phẩm trước khi thanh toán');">Proceed To Checkout</a>

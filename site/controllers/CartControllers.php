@@ -67,15 +67,15 @@ if (isset($_GET["action"]) == true) {
             // $VIEW_NAME = 'view/shop/default.php';
             // include '../layout.php';
             break;
-        case 'addOrder':
-            if(isset($_SESSION['user'])){
+        case 'checkout':
+            if(isset($_SESSION['user']) && isset($_SESSION['cart'])){
                 $VIEW_NAME ='view/checkout/default.php';
                 $userId = $_SESSION['user']['userId'];
                 $name = $_SESSION['user']['userFullname'];
                 $email = $_SESSION['user']['userEmail'];
                 $phone = $_SESSION['user']['phoneNumber'];
                 $address = $_SESSION['user']['address'];
-                $OrderModel->addOrder($userId,$name,$email,$phone,$address);
+                $orderId = $OrderModel->addOrder($userId,$name,$email,$phone,$address);
             }
             else{
                 $VIEW_NAME = 'view/login/default.php';
