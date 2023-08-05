@@ -271,11 +271,11 @@
                       </div>
                     </div>
                   </div>
-
+                <form action="">
                   <div class="form-group">
-                    <button class="btn btn-primary btn-lg py-3 btn-block" onclick="window.location='<?=$SITE_URL?>/view/thank'">Place Order</button>
+                    <a href="?action=checkout" class="btn btn-primary btn-lg py-3 btn-block">Place Order</a>
                   </div>
-
+                </form>
                 </div>
               </div>
             </div>

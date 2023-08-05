@@ -14,6 +14,7 @@ $ProductModel = new Product();
 $CategoryModel = new Category();
 $DiscountModel = new Discount();
 $BranchModel = new Branch();
+
 extract($_REQUEST); //Bắt buộc phải extract các dữ liệu trong form được POST lên để thực hiện CRUD
 
 $VIEW_NAME = 'view/category/default.php';
