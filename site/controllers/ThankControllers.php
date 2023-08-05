@@ -15,11 +15,12 @@ if (isset($_GET["action"]) == true) {
             // Mặc định hiển thị danh sách sản phẩm
             // $products = $productsDAO->getAllProducts();
             // $VIEW_NAME = $ADMIN_URL.'/view/product/index2.php';
-            require '../layout.php';
+            
             break;
     }
+    require '../layout.php';
 } else {
     $VIEW_NAME = 'view/thank/default.php';
     include "../../layout.php";
 }
-;
+require '../layout.php';

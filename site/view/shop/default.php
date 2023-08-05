@@ -68,7 +68,7 @@
                   <span class="text-primary font-weight-bold mr-3 ">
                     <?php echo $search['price']; ?>
                   </span>
-                  <button name="addCart" class="addCart" type="submit" style="cursor: pointer; background-color: transparent; border: none !important; " ><i class="fa-solid fa-cart-plus"></i></button>
+                  <button name="addCart" onclick="notify()" class="addCart" type="submit" style="cursor: pointer; background-color: transparent; border: none !important; " ><i class="fa-solid fa-cart-plus"></i></button>
                 </div>
               </div>
             </div>
