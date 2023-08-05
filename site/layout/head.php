@@ -49,7 +49,7 @@
                   <li><a href="#"><span class="icon icon-person"></span></a></li>
                   <li><a href="#"><span class="icon icon-heart-o"></span></a></li>
                   <li>
-                    <a href="<?=$SITE_URL?>/view/cart" class="site-cart">
+                    <a href="<?=$SITE_URL?>/view/cart/" class="site-cart">
                       <span class="icon icon-shopping_cart"></span>                      
                       <span class="count"><?php if(isset($_SESSION['cart']) && count($_SESSION['cart']) > 0) { echo (count($_SESSION['cart'])); }else { echo 0; } ?></span>
                     </a>

@@ -62,26 +62,24 @@ if (isset($_GET["action"]) == true) {
             var_dump(($_SESSION['cart']));
             // unset($_SESSION['cart']);
             $VIEW_NAME = 'view/cart/default.php';
-            require '../../layout.php';
-
+            require '../../layout.php'; 
+ 
             // $VIEW_NAME = 'view/shop/default.php';
             // include '../layout.php';
             break;
-        case 'checkout':
-            if(isset($_SESSION['user']) && isset($_SESSION['cart'])){
-                $VIEW_NAME ='view/checkout/default.php';
-                $userId = $_SESSION['user']['userId'];
-                $name = $_SESSION['user']['userFullname'];
-                $email = $_SESSION['user']['userEmail'];
-                $phone = $_SESSION['user']['phoneNumber'];
-                $address = $_SESSION['user']['address'];
-                $orderId = $OrderModel->addOrder($userId,$name,$email,$phone,$address);
-            }
-            else{
+   
+        case 'proceed':
+            if(isset($_SESSION['user']) && isset($_SESSION['cart']) && $_SESSION['cart'] != null){
+                $_SESSION['info'] = $_SESSION['user'];
+                $VIEW_NAME = 'view/checkout/default.php';
+                var_dump($_SESSION['info']);
+                require '../../layout.php';
+            }else{
                 $VIEW_NAME = 'view/login/default.php';
             }
-            require '../../layout.php';
+            
             break;
+        
         case 'delCart':
             if (isset($_GET['i']) && isset($_SESSION['cart'])) {
                 array_splice($_SESSION['cart'], $_GET['i'], 1);
@@ -106,7 +104,37 @@ if (isset($_GET["action"]) == true) {
             $VIEW_NAME = 'view/cart/default.php';
             require '../../layout.php';
             break;
+            case 'checkout':
+                
+                if (
+                    isset($_SESSION['info']) &&
+                    isset($_SESSION['cart']) &&
+                    count($_SESSION['cart'])> 0
+                ) {
+                   
+                    $userId = $_SESSION['info']['userId'];
+                    $name = $_SESSION['info']['userFullname'];
+                    $email = $_SESSION['info']['userEmail'];
+                    $phone = $_SESSION['info']['phoneNumber'];
+                    $address = $_SESSION['info']['address'];
+                    // $orderId = $OrderModel->addOrder(
+                    //     $userId,
+                    //     $name,
+                    //     $email,
+                    //     $phone,
+                    //     $address
+                    // );
+                     $VIEW_NAME = 'view/thank/default.php';
+                } 
+                else {
+                    echo "Something wrong";
+                    // $VIEW_NAME = 'view/login/default.php';
+                }
+                require '../../layout.php';
+                break;
         default:
+             $VIEW_NAME = 'view/cart/default.php';
+            require '../../layout.php';
             break;
     }
 } else {
@@ -122,7 +150,8 @@ if (isset($_GET["action"]) == true) {
         $productbyCates = $productsDAO->getTotalProductbyCate();
         $VIEW_NAME = 'view/shop/default.php';
         include "layout.php";
-    } else {
+    } 
+    else {
         $VIEW_NAME = 'view/cart/default.php';
         include "../../layout.php";
     }
