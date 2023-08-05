@@ -5,6 +5,8 @@ require_once '../../model/product.php';
 require_once '../../model/order.php';
 require_once '../../../global.php';
 // var_dump(array($_POST['quantity']));
+// unset($_SESSION['cart']);     
+
 $productsDAO = new Product();
 $OrderModel = new Order();
 
@@ -62,10 +64,8 @@ if (isset($_GET["action"]) == true) {
             var_dump(($_SESSION['cart']));
             // unset($_SESSION['cart']);
             $VIEW_NAME = 'view/cart/default.php';
-            require '../../layout.php'; 
- 
-            // $VIEW_NAME = 'view/shop/default.php';
-            // include '../layout.php';
+
+
             break;
    
         case 'proceed':
@@ -99,10 +99,7 @@ if (isset($_GET["action"]) == true) {
                     $_SESSION['cart'][4] = $_POST['quantity'];
                 }
             }}
-           
-            // var_dump(($_POST));
             $VIEW_NAME = 'view/cart/default.php';
-            require '../../layout.php';
             break;
             case 'checkout':
                 
@@ -137,6 +134,7 @@ if (isset($_GET["action"]) == true) {
             require '../../layout.php';
             break;
     }
+    require "../../layout.php";
 } else {
     if (isset($_POST['searchValue']) && $_POST['searchValue'] != "") {
         $value = $_POST['searchValue'];
@@ -149,11 +147,11 @@ if (isset($_GET["action"]) == true) {
         $searchs = $productsDAO->searchProducts($value);
         $productbyCates = $productsDAO->getTotalProductbyCate();
         $VIEW_NAME = 'view/shop/default.php';
-        include "layout.php";
-    } 
-    else {
+
+    } else {
+
         $VIEW_NAME = 'view/cart/default.php';
-        include "../../layout.php";
     }
 
 }
+require "../../layout.php";
