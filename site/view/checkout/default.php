@@ -8,17 +8,8 @@
 
     <?php 
     
-    var_dump($_SESSION['user']);
-    echo '</br>';
-    for($item = 0;$item< 2; $item++){
-      var_dump($_SESSION['cart'][$item][0]);
-      echo '</br>';
-      var_dump($_SESSION['cart'][$item][1]);
-      echo '</br>';
-      var_dump($_SESSION['cart'][$item][2]);
-      echo '</br>';
-      var_dump($_SESSION['cart'][$item][4]);
-    }
+  
+   
     
     ?>
     <div class="site-section">
@@ -134,10 +125,12 @@
                       </select>
                     </div>
 
-                  <div class="form-group">
-                    <button class="btn btn-primary btn-lg py-3 btn-block" onclick="window.location='<?=$SITE_URL?>/view/thank'">Place Order</button>
                   </div>
-
+                <form action="">
+                  <div class="form-group">
+                    <a href="?action=checkout" class="btn btn-primary btn-lg py-3 btn-block">Place Order</a>
+                  </div>
+                </form>
                 </div>
               </div>
             </div>
