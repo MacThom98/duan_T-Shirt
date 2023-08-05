@@ -64,14 +64,7 @@ if (isset($_GET["action"]) == true) {
             var_dump(($_SESSION['cart']));
             // unset($_SESSION['cart']);
             $VIEW_NAME = 'view/cart/default.php';
-
-            require '../../layout.php'; 
- 
-            // $VIEW_NAME = 'view/shop/default.php';
-            // include '../layout.php';
-
-            break;
-   
+            break;   
         case 'proceed':
             if(isset($_SESSION['user']) && isset($_SESSION['cart']) && $_SESSION['cart'] != null){
                 $_SESSION['info'] = $_SESSION['user'];
@@ -151,12 +144,8 @@ if (isset($_GET["action"]) == true) {
         $searchs = $productsDAO->searchProducts($value);
         $productbyCates = $productsDAO->getTotalProductbyCate();
         $VIEW_NAME = 'view/shop/default.php';
-
-        include "layout.php";
-    } 
-     else {
+    } else {
         $VIEW_NAME = 'view/cart/default.php';
     }
-
 }
 require "../../layout.php";

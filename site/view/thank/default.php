@@ -14,8 +14,8 @@
           <div class="col-md-12 text-center">
             <span class="icon-check_circle display-3 text-success"></span>
             <h2 class="display-3 text-black">Thank you!</h2>
-            <p class="lead mb-5">You order was successfuly completed.</p>
-            <p><a href="<?=$SITE_URL?>/view/shop" class="btn btn-sm btn-primary">Back to shop</a></p>
+            <p class="lead mb-5">Đơn hàng của bạn đã hoàn tất.</p>
+            <p><a href="<?=$SITE_URL?>/view/shop" class="btn btn-sm btn-primary">Quay lại mua sắm</a></p>
           </div>
         </div>
       </div>
@@ -30,14 +30,14 @@
           <div class="row">
             <div class="col-md-12 mb-5">
               <h2 class="h3 mb-3 text-black">Your Order</h2>
-              <div class="p-3 p-lg-5 border">
-                <table class="table table-bordered">
-                  <thead>
+              <div class="p-2 mb-2 p-3 p-lg-5 border rounded border-success">
+                <table class="table table-bordered border rounded border-success">
+                  <thead class="rounded">
                     <tr>
-                      <th>Product</th>
-                      <th>Price</th>
-                      <th>Quantity</th>
-                      <th>Total</th>
+                      <th>Sản phẩm</th>
+                      <th>Giá</th>
+                      <th>Số lượng</th>
+                      <th>Tổng</th>
                     </tr>
                   </thead>
                   <tbody>
