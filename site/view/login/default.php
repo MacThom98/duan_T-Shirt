@@ -15,7 +15,7 @@ if(strlen($MESSAGE)){
     <div class="row mb-5">
       <div class="col-md-12">
         <div class="border p-4 rounded" role="alert">
-          Returning customer? <a href="#">Click here</a> to login
+          Bạn đã có tài khoản? <a href="#">Click vào đây</a> để đăng nhập
         </div>
       </div>
     </div>

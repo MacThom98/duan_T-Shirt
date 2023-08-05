@@ -18,28 +18,16 @@
             <div class="float-md-left mb-4">
               <h2 class="text-black h5">Shop All</h2>
             </div>
-            <div class="d-flex">
-              <div class="dropdown mr-1 ml-md-auto">
-                <button type="button" class="btn btn-secondary btn-sm dropdown-toggle" id="dropdownMenuOffset"
-                  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  Latest
-                </button>
-                <div class="dropdown-menu" aria-labelledby="dropdownMenuOffset">
-                  <a class="dropdown-item" href="#">Men</a>
-                  <a class="dropdown-item" href="#">Women</a>
-                  <a class="dropdown-item" href="#">Children</a>
-                </div>
-              </div>
+            <div class="d-flex justify-content-end align-items-center">
               <div class="btn-group">
                 <button type="button" class="btn btn-secondary btn-sm dropdown-toggle" id="dropdownMenuReference"
-                  data-toggle="dropdown">Reference</button>
+                  data-toggle="dropdown">Lọc</button>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuReference">
-                  <a class="dropdown-item" href="#">Relevance</a>
-                  <a class="dropdown-item" href="#">Name, A to Z</a>
-                  <a class="dropdown-item" href="#">Name, Z to A</a>
+                  <a class="dropdown-item" href="#">Tên, A to Z</a>
+                  <a class="dropdown-item" href="#">Tên, Z to A</a>
                   <div class="dropdown-divider"></div>
-                  <a class="dropdown-item" href="#">Price, low to high</a>
-                  <a class="dropdown-item" href="#">Price, high to low</a>
+                  <a class="dropdown-item" href="#">Giá, Thấp tới Cao</a>
+                  <a class="dropdown-item" href="#">Giá, Cao tới Thấp</a>
                 </div>
               </div>
             </div>
@@ -96,7 +84,7 @@
 
       <div class="col-md-3 order-1 mb-5 mb-md-0">
         <div class="border p-4 rounded mb-4">
-          <h3 class="mb-3 h6 text-uppercase text-black d-block">Categories</h3>
+          <h3 class="mb-3 h6 text-uppercase text-black d-block">Loại</h3>
           <ul class="list-unstyled mb-0">
             <?php foreach ($productbyCates as $productbyCate): ?>
               <li class="mb-1"><a href="<?=$SITE_URL?>/view/category?id=<?=$productbyCate['cateId']?>"
@@ -111,7 +99,7 @@
 
         <div class="border p-4 rounded mb-4">
           <div class="mb-4">
-            <h3 class="mb-3 h6 text-uppercase text-black d-block">Filter by Price</h3>
+            <h3 class="mb-3 h6 text-uppercase text-black d-block">Lọc Theo Giá</h3>
             <div id="slider-range" class="border-primary"></div>
             <input type="text" name="text" id="amount" class="form-control border-0 pl-0 bg-white" disabled="" />
           </div>
@@ -130,7 +118,7 @@
           </div>
 
           <div class="mb-4">
-            <h3 class="mb-3 h6 text-uppercase text-black d-block">Color</h3>
+            <h3 class="mb-3 h6 text-uppercase text-black d-block">Màu </h3>
             <a href="#" class="d-flex color-item align-items-center">
               <span class="bg-danger color d-inline-block rounded-circle mr-2"></span> <span class="text-black">Red
                 (2,429)</span>
@@ -158,7 +146,7 @@
         <div class="site-section site-blocks-2">
           <div class="row justify-content-center text-center mb-5">
             <div class="col-md-7 site-section-heading pt-4">
-              <h2>Categories</h2>
+              <h2>Loại</h2>
             </div>
           </div>
           <div class="row">
@@ -168,7 +156,7 @@
                   <img src="<?=$IMAGE_DIR?>/women.jpg" alt="" class="img-fluid">
                 </figure>
                 <div class="text">
-                  <span class="text-uppercase">Collections</span>
+                  <span class="text-uppercase">Bộ Sưu Tập</span>
                   <h3>Women</h3>
                 </div>
               </a>
@@ -179,7 +167,7 @@
                   <img src="<?=$IMAGE_DIR?>/children.jpg" alt="" class="img-fluid">
                 </figure>
                 <div class="text">
-                  <span class="text-uppercase">Collections</span>
+                  <span class="text-uppercase">Bộ Sưu Tập</span>
                   <h3>Children</h3>
                 </div>
               </a>
@@ -190,7 +178,7 @@
                   <img src="<?=$IMAGE_DIR?>/men.jpg" alt="" class="img-fluid">
                 </figure>
                 <div class="text">
-                  <span class="text-uppercase">Collections</span>
+                  <span class="text-uppercase">Bộ Sưu Tập</span>
                   <h3>Men</h3>
                 </div>
               </a>
