@@ -76,7 +76,6 @@ if (isset($_GET["action"]) == true) {
             if(isset($_SESSION['user']) && isset($_SESSION['cart']) && $_SESSION['cart'] != null){
                 $_SESSION['info'] = $_SESSION['user'];
                 $VIEW_NAME = 'view/checkout/default.php';
-                var_dump($_SESSION['info']);
                 require '../../layout.php';
             }else{
                 $VIEW_NAME = 'view/login/default.php';
@@ -105,7 +104,8 @@ if (isset($_GET["action"]) == true) {
             }}
             $VIEW_NAME = 'view/cart/default.php';
             break;
-            case 'checkout':
+
+        case 'checkout':
                 
                 if (
                     isset($_SESSION['info']) &&

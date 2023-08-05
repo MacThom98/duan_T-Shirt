@@ -12,7 +12,7 @@ if(isset($_POST['dangnhap'])){
     foreach($users as $user){
         if($email==$user['userEmail'] && $pass == $user['password']){
             $_SESSION['user'] = $user;
-            $VIEW_NAME= 'view/checkout/default.php';
+            $VIEW_NAME= 'view/checkout/index.php';
             $MESSAGE = 'Đăng nhập thành công';
             break;
         }else{
