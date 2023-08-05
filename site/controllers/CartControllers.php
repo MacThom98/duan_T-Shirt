@@ -65,12 +65,17 @@ if (isset($_GET["action"]) == true) {
             // unset($_SESSION['cart']);
             $VIEW_NAME = 'view/cart/default.php';
 <<<<<<< HEAD
+<<<<<<< HEAD
             require '../../layout.php'; 
  
             // $VIEW_NAME = 'view/shop/default.php';
             // include '../layout.php';
 =======
 >>>>>>> 925662d685f42b438e4e73b2d92e1a743e707945
+=======
+
+
+>>>>>>> 2f8a1c6dd95e6d00d59f5399821df4966bf03742
             break;
    
         case 'proceed':
@@ -153,12 +158,18 @@ if (isset($_GET["action"]) == true) {
         $productbyCates = $productsDAO->getTotalProductbyCate();
         $VIEW_NAME = 'view/shop/default.php';
 <<<<<<< HEAD
+<<<<<<< HEAD
         include "layout.php";
     } 
     else {
 =======
     } else {
 >>>>>>> 925662d685f42b438e4e73b2d92e1a743e707945
+=======
+
+    } else {
+
+>>>>>>> 2f8a1c6dd95e6d00d59f5399821df4966bf03742
         $VIEW_NAME = 'view/cart/default.php';
     }
 
