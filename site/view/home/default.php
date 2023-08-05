@@ -94,7 +94,7 @@
       <div class="container">
         <div class="row justify-content-center">
           <div class="col-md-7 site-section-heading text-center pt-4">
-            <h2>Featured Products</h2>
+            <h2>SẢN PHẨM NỔI BẬT</h2>
           </div>
         </div>
         <div class="row">
@@ -125,7 +125,7 @@
       <div class="container">
         <div class="row justify-content-center">
           <div class="col-md-7 site-section-heading text-center pt-4">
-            <h2>New Products</h2>
+            <h2>SẢN PHẨM MỚI</h2>
           </div>
         </div>
         <div class="row">
@@ -162,10 +162,10 @@
             <a href="#"><img src="<?=$CONTENT_SITE_URL?>/images/blog_1.jpg" alt="Image placeholder" class="img-fluid rounded"></a>
           </div>
           <div class="col-md-12 col-lg-5 text-center pl-md-5">
-            <h2><a href="#">50% less in all items</a></h2>
-            <p class="post-meta mb-4">By <a href="#">Carl Smith</a> <span class="block-8-sep">&bullet;</span> September 3, 2018</p>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam iste dolor accusantium facere corporis ipsum animi deleniti fugiat. Ex, veniam?</p>
-            <p><a href="#" class="btn btn-primary btn-sm">Shop Now</a></p>
+            <h2><a href="<?=$SITE_URL?>/view/shop">Giảm 50% tất cả các sản phẩm</a></h2>
+            <p class="post-meta mb-4">By <a href="">Tiến Công</a> <span class="block-8-sep">&bullet;</span> 2 - 9 -2023</p>
+            <p>Mừng ngày Quốc Khánh 2-9, T-Shirt tặng hàng ngàn quà tăng cùng nhiều ưu đãi dành cho quý khách hàng</p>
+            <p><a href="#" class="btn btn-primary btn-sm">Mua Ngay</a></p>
           </div>
         </div>
       </div>

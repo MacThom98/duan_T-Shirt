@@ -18,12 +18,12 @@
             <thead>
               <tr>
                 <th class="product-stt">STT</th>
-                <th class="product-thumbnail">Image</th>
-                <th class="product-thumbnail">Product</th>
-                <th class="product-thumbnail">Price</th>
-                <th class="product-quantity">Quantity</th>
-                <th class="product-thumbnail">Total</th>
-                <th class="product-remove">Remove</th>
+                <th class="product-thumbnail">Ảnh</th>
+                <th class="product-thumbnail">Sản phẩm</th>
+                <th class="product-thumbnail">Giá</th>
+                <th class="product-thumbnail">Số lượng</th>
+                <th class="product-thumbnail">Tổng</th>
+                <th class="product-remove">Xóa</th>
               </tr>
             </thead>
             <tbody>
@@ -78,23 +78,22 @@
       <div class="col-md-6">
         <div class="row mb-5">
           <div class="col-md-6 mb-3 mb-md-0">
-            <a href="<?= $SITE_URL ?>/view/cart/?action=update" class="btn btn-primary btn-sm btn-block text-white">Update
-              Cart</a>
+            <a href="<?= $SITE_URL ?>/view/cart/?action=update" class="btn btn-primary btn-sm btn-block text-white fw-bold">Cập nhật giỏ hàng</a>
           </div>
           <div class="col-md-6">
-            <a href="<?= $SITE_URL ?>/view/shop/" class="btn btn-outline-primary btn-sm btn-block ">Continue Shopping</a>
+            <a href="<?= $SITE_URL ?>/view/shop/" class="btn btn-outline-primary btn-sm btn-block fw-bold">tiếp tục mua sắm</a>
           </div>
         </div>
         <div class="row">
           <div class="col-md-12">
-            <label class="text-black h4" for="coupon">Coupon</label>
-            <p>Enter your coupon code if you have one.</p>
+            <label class="text-black h4 fw-bold" for="coupon">Mã giảm giá</label>
+            <p>Nhập vào mã giảm giá bạn có.</p>
           </div>
           <div class="col-md-8 mb-3 mb-md-0">
             <input type="text" class="form-control py-3" id="coupon" placeholder="Coupon Code">
           </div>
           <div class="col-md-4">
-            <button class="btn btn-primary btn-sm">Apply Coupon</button>
+            <button class="btn btn-primary btn-sm">Áp mã</button>
           </div>
         </div>
       </div>
@@ -103,12 +102,12 @@
           <div class="col-md-7">
             <div class="row">
               <div class="col-md-12 text-right border-bottom mb-5">
-                <h3 class="text-black h4 text-uppercase">Cart Totals</h3>
+                <h3 class="text-black h4 text-uppercase">Giỏ hàng</h3>
               </div>
             </div>
             <div class="row mb-3">
               <div class="col-md-6">
-                <span class="text-black">Subtotal</span>
+                <span class="text-black">Tạm tính</span>
               </div>
               <div class="col-md-6 text-right">
                 <strong class="text-black">$
@@ -120,7 +119,7 @@
             </div>
             <div class="row mb-5">
               <div class="col-md-6">
-                <span class="text-black">Total</span>
+                <span class="text-black">Tổng</span>
               </div>
               <div class="col-md-6 text-right">
                 <strong class="text-black">$
@@ -134,10 +133,10 @@
             <div class="row">
               <div class="col-md-12">
                 <?php if (isset($_SESSION['cart']) && count($_SESSION['cart']) > 0) { ?>
-                  <a href="?action=addOrder" class="btn btn-primary btn-lg py-3 btn-block">Proceed To Checkout</a>
+                  <a href="?action=addOrder" class="btn btn-primary btn-lg py-3 btn-block">Tiến hành thành toán</a>
                 <?php } else { ?>
                   <a href="#" class="btn btn-primary btn-lg py-3 btn-block"
-                    onclick="alert('Vui lòng thêm sản phẩm trước khi thanh toán');">Proceed To Checkout</a>
+                    onclick="alert('Vui lòng thêm sản phẩm trước khi thanh toán');">Tiến hành thành toán</a>
                 <?php } ?>
               </div>
             </div>
