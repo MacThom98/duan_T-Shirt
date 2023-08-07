@@ -1,17 +1,14 @@
--- Cụm sản phẩm --
-
 -- Bảng Loại hàng (liên kết 1 - nhiều với bảng sản phẩm)
 CREATE TABLE category (
   categoryId INT AUTO_INCREMENT PRIMARY KEY,
-  categoryName VARCHAR(100) NOT NULL
+  categoryName VARCHAR(100) NOT NULL 
 );
 
 -- Bảng Chi nhánh
 CREATE TABLE branch (
   branchId INT AUTO_INCREMENT PRIMARY KEY,
-  branchName VARCHAR(50) NOT NULL
+  branchName VARCHAR(50) NOT NULL 
 );
-
 
 -- Bảng Khuyến mãi
 CREATE TABLE discount (
@@ -19,54 +16,61 @@ CREATE TABLE discount (
   discountName VARCHAR(50) NOT NULL,
   discountValue FLOAT NOT NULL,
   discountFromDate DATE NULL,
-  discountToDate DATE NULL
+  discountToDate DATE NULL,
+  discountCode VARCHAR(20) NOT NULL UNIQUE
 );
 
 
+-- Bảng Size sản phẩm
+CREATE TABLE size (
+  sizeId INT AUTO_INCREMENT PRIMARY KEY,
+  sizeName VARCHAR(20) NOT NULL 
+);
 
 -- Bảng Sản phẩm
 CREATE TABLE product (
   productId INT AUTO_INCREMENT PRIMARY KEY,
-  productName VARCHAR(250) NOT NULL,
+  productName VARCHAR(250) NOT NULL ,
   price INT NOT NULL,
-  description LONGTEXT,
-  image text,
+  description LONGTEXT ,
+  image TEXT ,
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   categoryId INT NOT NULL,
   discountId INT NOT NULL,
   branchId INT NOT NULL,
   stock INT,
+  sizeId INT NOT NULL,
   FOREIGN KEY (categoryId) REFERENCES category(categoryId),
   FOREIGN KEY (discountId) REFERENCES discount(discountId),
-  FOREIGN KEY (branchId) REFERENCES branch(branchId)
+  FOREIGN KEY (branchId) REFERENCES branch(branchId),
+  FOREIGN KEY (sizeId) REFERENCES size(sizeId)
 );
 
 -- Bảng Thư viện ảnh
 CREATE TABLE gallery (
   galleryId INT AUTO_INCREMENT PRIMARY KEY,
   productId INT NOT NULL,
-  galleryURL TEXT NOT NULL,
-  FOREIGN KEY (productId) REFERENCES product(productId) 
-  );
+  galleryURL TEXT NOT NULL ,
+  FOREIGN KEY (productId) REFERENCES product(productId)
+);
 
 -- Cụm quản lý khách hàng --
-
 
 -- Bảng Vai trò (Roles)
 CREATE TABLE role (
   roleId INT AUTO_INCREMENT PRIMARY KEY,
-  roleType ENUM('customer', 'admin') NOT NULL,
-  description VARCHAR(255)
+  roleType ENUM('customer', 'admin') NOT NULL ,
+  description VARCHAR(255) 
 );
 
 -- Bảng Người dùng (Users)
 CREATE TABLE user (
   userId INT AUTO_INCREMENT PRIMARY KEY,
-  userFullname VARCHAR(50) NOT NULL,
-  userEmail VARCHAR(150) NOT NULL,
+  userFullname VARCHAR(50) NOT NULL ,
+  userEmail VARCHAR(150) NOT NULL ,
   phoneNumber VARCHAR(20) NOT NULL,
-  address VARCHAR(200),
+  address VARCHAR(200) ,
   password VARCHAR(32) NOT NULL,
   roleId INT NOT NULL,
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
@@ -84,33 +88,32 @@ CREATE TABLE comment (
 -- Bảng Phương thức thanh toán
 CREATE TABLE payment (
   paymentId INT AUTO_INCREMENT PRIMARY KEY,
-  paymentName VARCHAR(50) NOT NULL,
+  paymentName VARCHAR(50) NOT NULL ,
   paymentStatus TINYINT NOT NULL
 );
 
 -- Bảng Địa chỉ giao hàng
-CREATE TABLE delivery (
-  deliveryId INT AUTO_INCREMENT PRIMARY KEY,
-  deliveryName VARCHAR(50) NOT NULL,
-  deliveryStatus TINYINT NOT NULL
+CREATE TABLE statusOrder (
+  statusId INT AUTO_INCREMENT PRIMARY KEY,
+  statusName VARCHAR(50) NOT NULL 
 );
 
 -- Bảng Đơn hàng
 CREATE TABLE orders (
   orderId INT AUTO_INCREMENT PRIMARY KEY,
   userId INT NOT NULL,
-  fullname VARCHAR(50) NOT NULL,
-  email VARCHAR(150) NOT NULL,
+  fullname VARCHAR(50) NOT NULL ,
+  email VARCHAR(150) NOT NULL ,
   phoneNumber VARCHAR(20) NOT NULL,
-  addressDelivery VARCHAR(200) NOT NULL,
-  note VARCHAR(1000),
+  addressDelivery VARCHAR(200) NOT NULL ,
+  note VARCHAR(1000) ,
   orderDate DATETIME DEFAULT CURRENT_TIMESTAMP,
   paymentId INT NOT NULL,
-  deliveryId INT NOT NULL,
+  statusId INT NOT NULL,
   totalMoney INT,
   FOREIGN KEY (userId) REFERENCES user(userId),
   FOREIGN KEY (paymentId) REFERENCES payment(paymentId),
-  FOREIGN KEY (deliveryId) REFERENCES delivery(deliveryId)
+  FOREIGN KEY (statusId) REFERENCES statusOrder(statusId)
 );
 
 -- Bảng Chi tiết đơn hàng
@@ -124,23 +127,6 @@ CREATE TABLE orderDetails (
   FOREIGN KEY (orderId) REFERENCES orders(orderId),
   FOREIGN KEY (productId) REFERENCES product(productId)
 );
-
--- Tạo trigger để đặt lại orderDetailId về 1 mỗi khi có orderId mới được tạo
--- DELIMITER //
-CREATE TRIGGER reset_orderdetailId
-AFTER INSERT ON orders -- Điều này giả sử bạn có một bảng có tên là 'orders' chứa trường orderId
-FOR EACH ROW
-BEGIN
-    IF NEW.orderId != OLD.orderId THEN
-        -- Đặt lại orderDetailId về 1 mỗi khi có orderId mới được tạo
-        UPDATE orderDetails
-        SET orderDetailId = 1
-        WHERE orderId = NEW.orderId;
-    END IF;
-END;
--- DELIMITER ;
-
--- Bảng Bình luận
 
 
 
@@ -163,27 +149,34 @@ VALUES
   ('Chi nhánh Nha Trang'),
   ('Chi nhánh Hải Phòng');
 
-
-
 -- Thêm dữ liệu vào bảng Khuyến mãi (discount)
-INSERT INTO discount (discountName, discountValue, discountFromDate, discountToDate)
+INSERT INTO discount (discountName, discountValue, discountFromDate, discountToDate, discountCode)
 VALUES
-  ('Giảm giá Mùa hè', 0.2, '2023-07-01', '2023-07-31'),
-  ('Khuyến mãi Đặc biệt', 0.15, '2023-08-15', '2023-08-16'),
-  ('Giảm giá Cuối mùa', 0.3, '2023-09-01', '2023-09-30'),
-  ('Khuyến mãi Lễ hội', 0.1, '2023-12-01', '2024-01-02'),
-  ('Giảm giá Sinh nhật', 0.25, '2023-07-01', '2023-07-31');
+  ('Giảm giá Mùa hè', 0.2, '2023-07-01', '2023-07-31', 'SUMMER2023'),
+  ('Khuyến mãi Đặc biệt', 0.15, '2023-08-15', '2023-08-16', 'SPECIAL15'),
+  ('Giảm giá Cuối mùa', 0.3, '2023-09-01', '2023-09-30', 'ENDOFSEPT'),
+  ('Khuyến mãi Lễ hội', 0.1, '2023-12-01', '2024-01-02', 'FESTIVE10'),
+  ('Giảm giá Sinh nhật', 0.25, '2023-07-01', '2023-07-31', 'BIRTHDAY25');
+
+-- Thêm dữ liệu vào bảng Size (size)
+INSERT INTO size (sizeName)
+VALUES
+  ('S'),
+  ('M'),
+  ('L'),
+  ('XL'),
+  ('XXL');
 
 -- Thêm dữ liệu vào bảng Sản phẩm (product)
-INSERT INTO product (productName, price, description, categoryId, discountId, branchId, stock,image)
+INSERT INTO product (productName, price, description, categoryId, discountId, branchId, stock, sizeId, image)
 VALUES
-('Áo thun nam 1', 200000, 'Áo thun nam phong cách trẻ trung và năng động', 1, 1, 1, 50,'/duan_T-Shirt/upload/images/cloth_1.jpg'),
-('Áo thun nữ 1', 250000, 'Áo thun nữ thoải mái và phong cách', 2, 2, 2, 30,'/duan_T-Shirt/upload/images/cloth_2.jpg'),
-('Áo thể thao', 300000, 'Áo thể thao chất liệu co dãn và thấm hút mồ hôi', 4, 3, 3, 20, '/duan_T-Shirt/upload/images/cloth_3.jpg'),
-('Áo thun trẻ em', 150000, 'Áo thun trẻ em dễ thương và màu sắc tươi sáng', 3, 4, 4, 10, '/duan_T-Shirt/upload/images/hero_1.jpg'),
-('Áo thun phụ kiện', 180000, 'Áo thun với thiết kế phụ kiện độc đáo', 5, 5, 5, 15, '/duan_T-Shirt/upload/images/person_1.jpg');
+  ('Áo thun nam 1', 200000, 'Áo thun nam phong cách trẻ trung và năng động', 1, 1, 1, 50, 1, '/duan_T-Shirt/upload/images/cloth_1.jpg'),
+  ('Áo thun nữ 1', 250000, 'Áo thun nữ thoải mái và phong cách', 2, 2, 2, 30, 2, '/duan_T-Shirt/upload/images/cloth_2.jpg'),
+  ('Áo thể thao', 300000, 'Áo thể thao chất liệu co dãn và thấm hút mồ hôi', 4, 3, 3, 20, 3, '/duan_T-Shirt/upload/images/cloth_3.jpg'),
+  ('Áo thun trẻ em', 150000, 'Áo thun trẻ em dễ thương và màu sắc tươi sáng', 3, 4, 4, 10, 4, '/duan_T-Shirt/upload/images/hero_1.jpg'),
+  ('Áo thun phụ kiện', 180000, 'Áo thun với thiết kế phụ kiện độc đáo', 5, 5, 5, 15, 5, '/duan_T-Shirt/upload/images/person_1.jpg');
 
-  -- Thêm dữ liệu vào bảng Thư viện ảnh (gallery)
+-- Thêm dữ liệu vào bảng Thư viện ảnh (gallery)
 INSERT INTO gallery (productId, galleryURL)
 VALUES
   (1, 'https://example.com/image1.jpg'),
@@ -219,38 +212,55 @@ VALUES
   ('Chuyển khoản ngân hàng', 1),
   ('Thanh toán qua điện thoại di động', 1);
 
--- Thêm dữ liệu vào bảng Địa chỉ giao hàng (delivery)
-INSERT INTO delivery (deliveryName, deliveryStatus)
+-- Thêm dữ liệu vào bảng trạng thái đơn hàng
+INSERT INTO statusOrder (statusName)
 VALUES
-  ('Giao hàng tiêu chuẩn',  1),
-  ('Giao hàng nhanh', 1),
-  ('Tự lấy hàng tại cửa hàng',  1),
-  ('Giao hàng trong ngày',  1),
-  ('Giao hàng quốc tế',  1);
+  ('Chờ xử lý'),
+  ('Đang giao'),
+  ('Đã nhận hàng'),
+  ('Hoàn Thành'),
+  ('Hủy đơn hàng'),
+  ('Bị Hủy');
 
 -- Thêm dữ liệu vào bảng Đơn hàng (orders)
-INSERT INTO orders (userId, fullname, email, phoneNumber, addressDelivery, note, orderDate, paymentId, deliveryId,totalMoney)
+INSERT INTO orders (userId, fullname, email, phoneNumber, addressDelivery, note, orderDate, paymentId, statusId,totalMoney)
 VALUES
   (1, 'Nguyễn Văn A', 'nguyenvana@example.com', '123456789', 'Số 1 Đường X, Quận Y, Thành phố Z', 'Vui lòng giao hàng trong ngày làm việc', '2023-07-15 10:00:00', 1, 1, 200000),
   (2, 'Trần Thị B', 'tranthib@example.com', '987654321', 'Số 2 Đường X, Quận Y, Thành phố Z', 'Không có yêu cầu đặc biệt', '2023-07-16 15:30:00', 2, 2, 150000),
   (3, 'Admin User', 'admin@example.com', '555555555', 'Số 3 Đường X, Quận Y, Thành phố Z', 'Yêu cầu giao hàng gấp', '2023-07-17 12:45:00', 3, 3, 300000),
   (4, 'Guest User', 'guest@example.com', '111111111', 'Số 4 Đường X, Quận Y, Thành phố Z', 'Giao hàng tại lễ tân', '2023-07-18 09:30:00', 4, 4, 500000),
-  (5, 'VIP User', 'vip@example.com', '999999999', 'Số 5 Đường X, Quận Y, Thành phố Z', 'Thời gian giao hàng 17h-19h', '2023-07-19 18:00:00', 5, 5, 250000);
+  (5, 'VIP User', 'vip@example.com', '999999999', 'Số 5 Đường X, Quận Y, Thành phố Z', 'Yêu cầu giao hàng sau giờ hành chính', '2023-07-19 18:00:00', 5, 5, 800000);
 
 -- Thêm dữ liệu vào bảng Chi tiết đơn hàng (orderDetails)
 INSERT INTO orderDetails (orderId, productId, price, quantity, totalMoney)
 VALUES
   (1, 1, 200000, 2, 400000),
-  (1, 2, 250000, 1, 250000),
-  (2, 3, 300000, 1, 300000),
-  (3, 4, 150000, 3, 450000),
-  (4, 5, 180000, 5, 900000);
+  (2, 2, 150000, 3, 450000),
+  (3, 3, 300000, 1, 300000),
+  (4, 4, 500000, 1, 500000),
+  (5, 5, 800000, 1, 800000);
 
--- Thêm dữ liệu vào bảng Bình luận (comment)
-INSERT INTO comment (userId, created_at)
-VALUES
-  (1, '2023-07-15 10:15:00'),
-  (2, '2023-07-16 16:00:00'),
-  (3, '2023-07-17 13:30:00'),
-  (4, '2023-07-18 10:00:00'),
-  (5, '2023-07-19 19:30:00');
+DELIMITER //
+CREATE TRIGGER reset_orderdetailId
+AFTER INSERT ON orders -- Giả sử bạn có một bảng có tên là 'orders' chứa trường orderId
+FOR EACH ROW
+BEGIN
+    DECLARE prevOrderId INT;
+    SET prevOrderId = 0;
+
+    -- Tìm orderId trước đó của bản ghi cuối cùng trong bảng orders
+    SELECT orderId INTO prevOrderId
+    FROM orders
+    ORDER BY orderId DESC
+    LIMIT 1;
+
+    IF NEW.orderId != prevOrderId THEN
+        -- Đặt lại orderDetailId về 1 mỗi khi có orderId mới được tạo
+        UPDATE orderDetails
+        SET orderDetailId = 1
+        WHERE orderId = NEW.orderId;
+    END IF;
+END;
+//
+DELIMITER ;
+
