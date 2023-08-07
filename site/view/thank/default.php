@@ -71,7 +71,7 @@
                     </tr>
                     <tr>
                       <th colspan="4" class="text-right">Trạng thái</th>
-                      <td><?php echo $getHD['deliveryId']?></td>
+                      <td><?php echo $getHD['statusId']?></td>
                     </tr>
                   </tfoot>
                 </table>

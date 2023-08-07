@@ -45,7 +45,7 @@ class Order
         $sql = "SELECT * FROM orders ord
         left join user u on ord.userId = u.userId
         left join payment pay on pay.paymentId = ord.paymentId
-        left join delivery deli on deli.deliveryId = ord.deliveryId
+        left join statusOrder status on status.statusId = ord.statusId
         WHERE ord.orderId like ?";
         $orders = pdo_query($sql,'%' .$search. '%');
         return $orders;
@@ -77,9 +77,9 @@ class Order
         pdo_execute($sql,$orderId,$productId,$price,$quantity,$totalMoney);
     }
 
-    public function updateOrderStatus($orderId, $deliveryId) {
-        $sql = "UPDATE orders SET deliveryId = ? + 1 WHERE orderId = $orderId";
-        pdo_execute($sql,$deliveryId);
+    public function updateOrderStatus($orderId, $statusId) {
+        $sql = "UPDATE orders SET statusId = ? + 1 WHERE orderId = $orderId";
+        pdo_execute($sql,$statusId);
     }
 
     
