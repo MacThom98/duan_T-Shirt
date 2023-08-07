@@ -23,7 +23,6 @@
 
     <div class="col-md-6">
     <!-- Your Invoice HTML Code -->
-
       <div class="col-md-12">
 
         <div class="site-section">
@@ -34,42 +33,45 @@
                 <table class="table table-bordered border rounded border-success">
                   <thead class="rounded">
                     <tr>
-                      <th>Sản phẩm</th>
+                      <th>STT</th>
+                      <th>Sản Phẩm</th>
                       <th>Giá</th>
                       <th>Số lượng</th>
                       <th>Tổng</th>
                     </tr>
                   </thead>
                   <tbody>
+                    <?php 
+                      $total = 0;
+                      foreach($orderDetails as $detail){
+                    ?>
                     <tr>
-                      <td>Top Up T-Shirt</td>
-                      <td>$250.00</td>
-                      <td>1</td>
-                      <td>$250.00</td>
+                      <td><?=$detail['orderDetailId']?></td>
+                      <td><?=$detail['productId']?></td>
+                      <td><?=$detail['price']?></td>
+                      <td><?=$detail['quantity']?></td>
+                      <td><?=$detail['totalMoney']?></td>
                     </tr>
-                    <tr>
-                      <td>Polo Shirt</td>
-                      <td>$100.00</td>
-                      <td>1</td>
-                      <td>$100.00</td>
-                    </tr>
+                      <?php $total += $detail['totalMoney'] ?>
+                    <?php } ?>
+                    
                   </tbody>
                   <tfoot>
                     <tr>
-                      <th colspan="3" class="text-right">Cart Subtotal</th>
-                      <td>$350.00</td>
+                      <th colspan="4" class="text-right">Cart Subtotal</th>
+                      <td><?=$total?></td>
                     </tr>
                     <tr>
-                      <th colspan="3" class="text-right">Order Total</th>
-                      <td>$350.00</td>
+                      <th colspan="4" class="text-right">Order Total</th>
+                      <td><?=$total?></td>
                     </tr>
                     <tr>
-                      <th colspan="3" class="text-right">Hình thức vận chuyển</th>
-                      <td>Giao hàng tiết kiệm</td>
+                      <th colspan="4" class="text-right">Hình thức thanh toán</th>
+                      <td><?php echo $getHD['paymentId']?></td>
                     </tr>
                     <tr>
-                      <th colspan="3" class="text-right">Payment Status</th>
-                      <td>Chưa thanh toán</td>
+                      <th colspan="4" class="text-right">Trạng thái</th>
+                      <td><?php echo $getHD['deliveryId']?></td>
                     </tr>
                   </tfoot>
                 </table>

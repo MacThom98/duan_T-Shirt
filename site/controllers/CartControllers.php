@@ -9,6 +9,31 @@ require_once '../../../global.php';
 
 $productsDAO = new Product();
 $OrderModel = new Order();
+if(isset($_POST['thanhtoan'])){
+    if (isset($_SESSION['user']) && isset($_SESSION['cart']) && count($_SESSION['cart'])> 0) {           
+                    $id = $_SESSION['user']['userId'];
+                    $name = $_POST['bill_fullname'];
+                    $address = $_POST['bill_address'];
+                    $email = $_POST['bill_email'];
+                    $phone = $_POST['bill_phone'];
+                    $newOrderId = $OrderModel->addOrder($id,$name,$email,$phone,$address);
+                    
+                    // var_dump($_SESSION['cart']);
+                    foreach($_SESSION['cart'] as $orderDetail){
+                        echo '</br>';
+                        $OrderModel->addOrderDetail($newOrderId,(int)$orderDetail['0'],(float)$orderDetail['2'],(int)$orderDetail['4'],(float)$orderDetail['2']*(int)$orderDetail['4']);
+                    }
+                    // $orderNew = $OrderModel->getOrderById($newOrderId);
+                    // $OrderModel->addOrderDetail($newOrderId,);
+                     $VIEW_NAME = 'view/thank/default.php';
+                } 
+                else {
+                    echo "Something wrong";
+                    // $VIEW_NAME = 'view/login/default.php';
+                }
+                require '../../layout.php';
+}
+
 
 if (isset($_GET["action"]) == true) {
     $action = $_GET["action"];
@@ -65,16 +90,15 @@ if (isset($_GET["action"]) == true) {
             // unset($_SESSION['cart']);
             $VIEW_NAME = 'view/cart/default.php';
             break;   
-        case 'proceed':
-            if(isset($_SESSION['user']) && isset($_SESSION['cart']) && $_SESSION['cart'] != null){
-                $_SESSION['info'] = $_SESSION['user'];
-                $VIEW_NAME = 'view/checkout/default.php';
-                require '../../layout.php';
-            }else{
-                $VIEW_NAME = 'view/login/default.php';
-            }
-            
-            break;
+        // case 'proceed':
+        //     if(isset($_SESSION['user']) && isset($_SESSION['cart']) && $_SESSION['cart'] != null){
+        //         $VIEW_NAME = 'view/checkout/default.php';
+        //         $payments = $OrderModel->getAllPayments();
+        //         require '../../layout.php';
+        //     }else{
+        //         $VIEW_NAME = 'view/user/login.php';
+        //     }
+        //     break;
         
         case 'delCart':
             if (isset($_GET['i']) && isset($_SESSION['cart'])) {
@@ -97,35 +121,8 @@ if (isset($_GET["action"]) == true) {
             }}
             $VIEW_NAME = 'view/cart/default.php';
             break;
-
-        case 'checkout':
-                
-                if (
-                    isset($_SESSION['info']) &&
-                    isset($_SESSION['cart']) &&
-                    count($_SESSION['cart'])> 0
-                ) {
-                   
-                    $userId = $_SESSION['info']['userId'];
-                    $name = $_SESSION['info']['userFullname'];
-                    $email = $_SESSION['info']['userEmail'];
-                    $phone = $_SESSION['info']['phoneNumber'];
-                    $address = $_SESSION['info']['address'];
-                    // $orderId = $OrderModel->addOrder(
-                    //     $userId,
-                    //     $name,
-                    //     $email,
-                    //     $phone,
-                    //     $address
-                    // );
-                     $VIEW_NAME = 'view/thank/default.php';
-                } 
-                else {
-                    echo "Something wrong";
-                    // $VIEW_NAME = 'view/login/default.php';
-                }
-                require '../../layout.php';
-                break;
+        
+        
         default:
              $VIEW_NAME = 'view/cart/default.php';
             require '../../layout.php';

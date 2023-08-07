@@ -25,7 +25,7 @@ if(strlen($MESSAGE)){
         <div class="row mb-5">
           <div class="col-md-12">
             <h2 class="h3 mb-3 text-black">Login</h2>
-            <form id="login-form" action="<?=$SITE_URL?>/controllers/LoginControllers.php" method="POST">
+            <form id="login-form" action="" method="POST">
               <div class="form-group">
                 <label for="username" class="text-black">Username</label>
                 <input type="text" class="form-control" id="username" name="username" required>

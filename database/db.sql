@@ -125,6 +125,21 @@ CREATE TABLE orderDetails (
   FOREIGN KEY (productId) REFERENCES product(productId)
 );
 
+-- Tạo trigger để đặt lại orderDetailId về 1 mỗi khi có orderId mới được tạo
+-- DELIMITER //
+CREATE TRIGGER reset_orderdetailId
+AFTER INSERT ON orders -- Điều này giả sử bạn có một bảng có tên là 'orders' chứa trường orderId
+FOR EACH ROW
+BEGIN
+    IF NEW.orderId != OLD.orderId THEN
+        -- Đặt lại orderDetailId về 1 mỗi khi có orderId mới được tạo
+        UPDATE orderDetails
+        SET orderDetailId = 1
+        WHERE orderId = NEW.orderId;
+    END IF;
+END;
+-- DELIMITER ;
+
 -- Bảng Bình luận
 
 

@@ -56,27 +56,23 @@ class Order
         $detail = pdo_query($sql);
         return $detail;
     }
-    public function getOrderById($OrderId)
+    public function getOrderById($orderId)
     {
-        $sql = "SELECT p.OrderId, p.OrderName, p.price, p.description, p.created_at, p.updated_at, p.categoryId, c.categoryName, p.discountId, p.branchId, p.stock, p.image, b.branchName, d.discountName, d.discountValue
-            FROM Order p  
-            LEFT JOIN branch b ON p.branchId = b.branchId
-            LEFT JOIN discount d ON p.discountId = d.discountId
-            LEFT JOIN category c ON p.categoryId = c.categoryId WHERE OrderId = $OrderId";
-        $Order = pdo_query_one($sql);
-        return $Order;
+        $sql = "SELECT * FROM orders WHERE orderId = $orderId";
+        $order = pdo_query_one($sql);
+        return $order;
     }
 
     public function addOrder($userId, $fullname,$email, $phone, $address) {
         $sql = 'INSERT INTO orders (userId, fullname, email, phoneNumber, addressDelivery) VALUES (?, ?, ?, ?, ?)';
         pdo_execute($sql, $userId,$fullname,$email,$phone, $address);
         $lastest_id = "SELECT orderId FROM orders order by orderId desc limit 1";
-        return $lastest_id;
+        return pdo_query_value($lastest_id);
     }
 
     public function addOrderDetail($orderId,$productId,$price,$quantity,$totalMoney){
-        $sql = 'INSERT INTO orderdetails(orderId,productId,price,quantity,totalMoney) VALUES (?,?,?,?,?,?)';
-        pdo_execute($sql,$orderId,$productId,$price,$quantity,$totalMoney);
+        $sql = 'INSERT INTO orderdetails(orderId,productId,price,quantity,totalMoney) VALUES (?,?,?,?,?)';
+        return pdo_execute($sql,$orderId,$productId,$price,$quantity,$totalMoney); 
     }
 
     public function updateOrderStatus($orderId, $deliveryId) {
@@ -104,6 +100,10 @@ class Order
         }
     }
 
+    public function getAllPayments(){
+        $sql = 'Select * from payment';
+        return pdo_query($sql);
+    }
     public function searchOrders($keyword)
     {
         $sql = 'SELECT * FROM Order WHERE name LIKE ?';

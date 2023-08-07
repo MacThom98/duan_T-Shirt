@@ -22,6 +22,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
+     <!-- Include Bootstrap CSS -->
+
   </head>
   <body>
 
@@ -47,15 +49,35 @@
             <div class="col-6 col-md-4 order-3 order-md-3 text-right">
               <div class="site-top-icons">
                 <ul>
-                  <li><a href="#"><span class="icon icon-person"></span></a></li>
-                  <li><a href="#"><span class="icon icon-heart-o"></span></a></li>
+                <li class="dropdown">
+      <a class="nav-link dropdown-toggle" href="#" id="user-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+        <i class="fa-solid fa-user"></i>
+      </a>
+      <ul class="dropdown-menu" aria-labelledby="user-toggle">
+        <li><a class="dropdown-item" href="#">Tài khoản</a></li>
+        <li><a class="dropdown-item" href="#">Lịch sử mua hàng</a></li>
+        <li><a class="dropdown-item" href="#">Đơn hàng của tôi</a></li>
+        <li><a class="dropdown-item" href="#">Đăng xuất</a></li>
+      </ul>
+    </li>
+
+                  <li><a href="#"><i class="fa-solid fa-heart"></i></a></li>
                   <li>
                     <a href="<?=$SITE_URL?>/view/cart/" class="site-cart">
-                      <span class="icon icon-shopping_cart"></span>                      
-                      <span class="count"><?php if(isset($_SESSION['cart']) && count($_SESSION['cart']) > 0) { echo (count($_SESSION['cart'])); }else { echo 0; } ?></span>
+                      <i class="fa-solid fa-shopping-cart"></i>               
+                      <span class="count">
+                        <?php 
+                          if(isset($_SESSION['cart']) && count($_SESSION['cart']) > 0){ 
+                            echo (count($_SESSION['cart'])); 
+                          }else {
+                            echo 0; 
+                          } 
+                        ?>
+                      </span>
+                     
                     </a>
                   </li>
-                  <li class="d-inline-block d-md-none ml-md-0"><a href="#" class="site-menu-toggle js-menu-toggle"><span class="icon-menu"></span></a></li>
+
                 </ul>
               </div>
             </div>

@@ -7,54 +7,38 @@
     </div>
 
     <?php 
-    
-  
-   
-    
     ?>
     <div class="site-section">
       <div class="container">
-        <div class="row mb-5">
-          <div class="col-md-12">
-            <div class="border p-4 rounded" role="alert">
-              Returning customer? <a href="#">Click here</a> to login
-            </div>
-          </div>
-        </div>
+        <form action="<?=$SITE_URL.'/view/checkout/index.php?action=thanhtoan'?>" method="post">
         <div class="row">
           <div class="col-md-6 mb-5 mb-md-0">
             <h2 class="h3 mb-3 text-black">Chi tiết Thanh toán</h2>
             <div class="p-3 p-lg-5 border">
-              <div class="form-group row">
-                <div class="col-md-6">
-                  <label for="c_fname" class="text-black">First Name <span class="text-danger">*</span></label>
-                  <input type="text" class="form-control" id="c_fname" name="c_fname">
-                </div>
-                <div class="col-md-6">
-                  <label for="c_lname" class="text-black">Last Name <span class="text-danger">*</span></label>
-                  <input type="text" class="form-control" id="c_lname" name="c_lname">
-                </div>
+              <div class="form-group">
+                <label for="bill_fullname" class="text-black">Họ và tên người nhận<span class="text-danger">*</span></label>
+                  <input type="text" class="form-control" id="bill_fullname" name="bill_fullname" placeholder="..." value="<?=$_SESSION['user']['userFullname']?>">
               </div>
-
               <div class="form-group row">
                 <div class="col-md-12">
-                  <label for="c_address" class="text-black">Địa chỉ <span class="text-danger">*</span></label>
-                  <input type="text" class="form-control" id="c_address" name="c_address" placeholder="Nhập địa chỉ ...">
+                  <label for="bill_address" class="text-black">Địa chỉ <span class="text-danger">*</span></label>
+                  <input type="text" class="form-control" id="bill_address" name="bill_address" placeholder="Nhập địa chỉ ..." value="<?=$_SESSION['user']['address']?>">
                 </div>
               </div>
               <div class="form-group">
-              <label for="c_email_address" class="text-black">Email <span class="text-danger">*</span></label>
-                  <input type="text" class="form-control" id="c_email_address" name="c_email_address" placeholder="Nhập email ...">
+              <label for="bill_email" class="text-black">Email <span class="text-danger">*</span></label>
+                  <input type="text" class="form-control" id="bill_email" name="bill_email" placeholder="Nhập email ..." value="<?=$_SESSION['user']['userEmail']?>">
               </div>
 
               <div class="form-group">
-                  <label for="c_phone" class="text-black">Số điện thoại <span class="text-danger">*</span></label>
-                  <input type="text" class="form-control" id="c_phone" name="c_phone" placeholder="Nhập số điện thoại ..." >
+                  <label for="bill_phone" class="text-black">Số điện thoại <span class="text-danger">*</span></label>
+                  <input type="text" class="form-control" id="bill_phone" name="bill_phone" placeholder="Nhập số điện thoại ..." value="<?=$_SESSION['user']['phoneNumber']?>">
               </div>
 
               <div class="form-group">
-                <label for="c_order_notes" class="text-black">Ghi chú</label>
-                <textarea name="c_order_notes" id="c_order_notes" cols="30" rows="5" class="form-control" placeholder="Viết ghi chú của bạn..."></textarea>
+                <label for="bill_notes" class="text-black">Ghi chú</label>
+                <textarea name="bill_notes" id="bill_notes" cols="30" rows="5" class="form-control" placeholder="Viết ghi chú của bạn...">
+                </textarea>
               </div>
 
             </div>
@@ -114,29 +98,25 @@
                     </tbody>
                   </table>
                   <div class="form-group">
-                      <label for="c_diff_country" class="text-black">Phương thức thanh toán <span class="text-danger">*</span></label>
+                      <label for="bill_payment" class="text-black">Phương thức thanh toán <span class="text-danger">*</span></label>
                       <select id="c_diff_country" class="form-control">
-                        <option value="1">Chọn phương thức thanh toán</option>    
-                        <option value="2">Thẻ tín dụng</option>    
-                        <option value="3">PayPal</option>    
-                        <option value="4">Tiền mặt khi nhận hàng</option>    
-                        <option value="5">Chuyển khoản ngân hàng</option>    
-                        <option value="6">Thanh toán qua điện thoại di động</option>    
+                        <option value="0">Chọn phương thức thanh toán</option>    
+                        <?php foreach($payments as $payment){?>
+                          <option name="bill_payment" value="<?=$payment['paymentId']?>"><?php echo $payment['paymentName'] ?></option>
+                        <?php }?>  
                       </select>
                     </div>
 
                   </div>
-                <form action="">
-                  <div class="form-group">
-                    <a href="?action=checkout" class="btn btn-primary btn-lg py-3 btn-block">Place Order</a>
-                  </div>
-                </form>
                 </div>
               </div>
             </div>
-
+            
           </div>
+          <div class="form-group">
+            <button type='submit' class="btn btn-primary btn-lg py-3 btn-block" name='thanhtoan'>Thanh Toán</button>
+          </div>
+        </form>
         </div>
-        <!-- </form> -->
       </div>
     </div>
