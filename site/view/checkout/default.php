@@ -100,7 +100,6 @@
                   <div class="form-group">
                       <label for="bill_payment" class="text-black">Phương thức thanh toán <span class="text-danger">*</span></label>
                       <select id="c_diff_country" class="form-control">
-                        <option value="0">Chọn phương thức thanh toán</option>    
                         <?php foreach($payments as $payment){?>
                           <option name="bill_payment" value="<?=$payment['paymentId']?>"><?php echo $payment['paymentName'] ?></option>
                         <?php }?>  
