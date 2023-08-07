@@ -63,9 +63,9 @@ class Order
         return $order;
     }
 
-    public function addOrder($userId, $fullname,$email, $phone, $address) {
+    public function addOrder($userId, $fullname, $email, $phone, $address) {
         $sql = 'INSERT INTO orders (userId, fullname, email, phoneNumber, addressDelivery) VALUES (?, ?, ?, ?, ?)';
-        pdo_execute($sql, $userId,$fullname,$email,$phone, $address);
+        pdo_execute($sql, $userId, $fullname, $email, $phone, $address);
         $lastest_id = "SELECT orderId FROM orders order by orderId desc limit 1";
         return pdo_query_value($lastest_id);
     }
