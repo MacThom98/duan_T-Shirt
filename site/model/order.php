@@ -62,6 +62,15 @@ class Order
         $order = pdo_query_one($sql);
         return $order;
     }
+    public function getOrderByUserId($userId)
+    {
+        $sql = "SELECT * FROM orders o 
+        join orderdetails od
+        ON o.orderId = od.orderId  WHERE userId = $userId
+        having statusId < 3";
+        $order = pdo_query($sql);
+        return $order;
+    }
 
     public function addOrder($userId, $fullname, $email, $phone, $address) {
         $sql = 'INSERT INTO orders (userId, fullname, email, phoneNumber, addressDelivery) VALUES (?, ?, ?, ?, ?)';
@@ -75,9 +84,9 @@ class Order
         return pdo_execute($sql,$orderId,$productId,$price,$quantity,$totalMoney); 
     }
 
-    public function updateOrderStatus($orderId, $deliveryId) {
-        $sql = "UPDATE orders SET deliveryId = ? + 1 WHERE orderId = $orderId";
-        pdo_execute($sql,$deliveryId);
+    public function updateOrderStatus($orderId, $statusId) {
+        $sql = "UPDATE orders SET statusId = ? + 1 WHERE orderId = $orderId";
+        pdo_execute($sql,$statusId);
     }
 
     

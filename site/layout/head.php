@@ -56,7 +56,7 @@
       <ul class="dropdown-menu" aria-labelledby="user-toggle">
         <li><a class="dropdown-item" href="#">Tài khoản</a></li>
         <li><a class="dropdown-item" href="#">Lịch sử mua hàng</a></li>
-        <li><a class="dropdown-item" href="#">Đơn hàng của tôi</a></li>
+        <li><a class="dropdown-item" href="<?=$SITE_URL?>/view/user/order.php">Đơn hàng của tôi</a></li>
         <li><a class="dropdown-item" href="#">Đăng xuất</a></li>
       </ul>
     </li>
