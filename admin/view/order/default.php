@@ -22,7 +22,6 @@
                     <th>Chọn</th>
                     <th>Mã đơn hàng</th>
                     <th>Tên khách hàng</th>
-                    <th>Tổng thành tiền</th>
                     <th>Hình thức thanh toán</th>
                     <th>Trạng thái đơn hàng</th>
                     <th>Ngày đặt</th>
@@ -35,7 +34,7 @@
                         <td><input type="checkbox" name="orderIds[]" value="<?php echo $order['orderId']; ?>"></td>
                         <td><?php echo $order['orderId']; ?></td>
                         <td><?php echo $order['userFullname']; ?></td>
-                        <td><?php echo $order['totalMoney']; ?></td>
+
                         <td><?php echo $order['paymentName']; ?></td>
                         <td><?php 
                             if($order['statusId'] == 1){
