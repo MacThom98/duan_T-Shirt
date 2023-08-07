@@ -38,14 +38,14 @@
                         <td><?php echo $order['totalMoney']; ?></td>
                         <td><?php echo $order['paymentName']; ?></td>
                         <td><?php 
-                            if($order['deliveryId'] == 1){
-                                echo '<a class="btn btn-info" href="?confirm&id='. $order["orderId"]. '&statusId='.$order["deliveryId"].'">'. $order["deliveryName"]. '</a>';
+                            if($order['statusId'] == 1){
+                                echo '<a class="btn btn-info" href="?confirm&id='. $order["orderId"]. '&statusId='.$order["statusId"].'">'. $order["statusName"]. '</a>';
                             };
-                            if($order['deliveryId'] == 2){
-                                echo '<button class="btn btn-primary">'. $order["deliveryName"]. '</button>';
+                            if($order['statusId'] == 2){
+                                echo '<button class="btn btn-primary">'. $order["statusName"]. '</button>';
                             };
-                            if($order['deliveryId'] == 4){
-                                echo '<button class="btn btn-success">'. $order["deliveryName"]. '</button>';
+                            if($order['statusId'] == 4){
+                                echo '<button class="btn btn-success">'. $order["statusName"]. '</button>';
                             };
                         ?></td>
                         <td><?php echo $order['orderDate']; ?></td>                        
@@ -53,7 +53,7 @@
                             <a href="index.php?action=view_detail&id=<?php echo $order['orderId'];?>" class="btn btn-primary mx-2 my-2">Xem</a>
                         </td>
                         <td>
-                            <?php if($order['deliveryId']==1){?>                            
+                            <?php if($order['statusId']==1){?>                            
                                 <a href="index.php?action=edit&id=<?php echo $order['orderId']; ?>" class="btn btn-success mx-2 my-2">Sửa</a>
                                 <a href="index.php?action=delete&id=<?php echo $order['orderId']; ?>" class="btn btn-danger mx-2 my-2">Xóa</a>
                             <?php } else { ?>

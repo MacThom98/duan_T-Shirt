@@ -1,16 +1,13 @@
--- Thiết lập cơ sở dữ liệu với mã ký tự Unicode (UTF-8)
-CREATE DATABASE your_database_name CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
-
 -- Bảng Loại hàng (liên kết 1 - nhiều với bảng sản phẩm)
 CREATE TABLE category (
   categoryId INT AUTO_INCREMENT PRIMARY KEY,
-  categoryName VARCHAR(100) NOT NULL CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci
+  categoryName VARCHAR(100) NOT NULL 
 );
 
 -- Bảng Chi nhánh
 CREATE TABLE branch (
   branchId INT AUTO_INCREMENT PRIMARY KEY,
-  branchName VARCHAR(50) NOT NULL CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci
+  branchName VARCHAR(50) NOT NULL 
 );
 
 -- Bảng Khuyến mãi
@@ -27,16 +24,16 @@ CREATE TABLE discount (
 -- Bảng Size sản phẩm
 CREATE TABLE size (
   sizeId INT AUTO_INCREMENT PRIMARY KEY,
-  sizeName VARCHAR(20) NOT NULL CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci
+  sizeName VARCHAR(20) NOT NULL 
 );
 
 -- Bảng Sản phẩm
 CREATE TABLE product (
   productId INT AUTO_INCREMENT PRIMARY KEY,
-  productName VARCHAR(250) NOT NULL CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  productName VARCHAR(250) NOT NULL ,
   price INT NOT NULL,
-  description LONGTEXT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
-  image TEXT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  description LONGTEXT ,
+  image TEXT ,
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   categoryId INT NOT NULL,
@@ -54,7 +51,7 @@ CREATE TABLE product (
 CREATE TABLE gallery (
   galleryId INT AUTO_INCREMENT PRIMARY KEY,
   productId INT NOT NULL,
-  galleryURL TEXT NOT NULL CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  galleryURL TEXT NOT NULL ,
   FOREIGN KEY (productId) REFERENCES product(productId)
 );
 
@@ -63,17 +60,17 @@ CREATE TABLE gallery (
 -- Bảng Vai trò (Roles)
 CREATE TABLE role (
   roleId INT AUTO_INCREMENT PRIMARY KEY,
-  roleType ENUM('customer', 'admin') NOT NULL CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
-  description VARCHAR(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci
+  roleType ENUM('customer', 'admin') NOT NULL ,
+  description VARCHAR(255) 
 );
 
 -- Bảng Người dùng (Users)
 CREATE TABLE user (
   userId INT AUTO_INCREMENT PRIMARY KEY,
-  userFullname VARCHAR(50) NOT NULL CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
-  userEmail VARCHAR(150) NOT NULL CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  userFullname VARCHAR(50) NOT NULL ,
+  userEmail VARCHAR(150) NOT NULL ,
   phoneNumber VARCHAR(20) NOT NULL,
-  address VARCHAR(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  address VARCHAR(200) ,
   password VARCHAR(32) NOT NULL,
   roleId INT NOT NULL,
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
@@ -91,25 +88,25 @@ CREATE TABLE comment (
 -- Bảng Phương thức thanh toán
 CREATE TABLE payment (
   paymentId INT AUTO_INCREMENT PRIMARY KEY,
-  paymentName VARCHAR(50) NOT NULL CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  paymentName VARCHAR(50) NOT NULL ,
   paymentStatus TINYINT NOT NULL
 );
 
 -- Bảng Địa chỉ giao hàng
 CREATE TABLE statusOrder (
   statusId INT AUTO_INCREMENT PRIMARY KEY,
-  statusName VARCHAR(50) NOT NULL CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  statusName VARCHAR(50) NOT NULL 
 );
 
 -- Bảng Đơn hàng
 CREATE TABLE orders (
   orderId INT AUTO_INCREMENT PRIMARY KEY,
   userId INT NOT NULL,
-  fullname VARCHAR(50) NOT NULL CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
-  email VARCHAR(150) NOT NULL CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  fullname VARCHAR(50) NOT NULL ,
+  email VARCHAR(150) NOT NULL ,
   phoneNumber VARCHAR(20) NOT NULL,
-  addressDelivery VARCHAR(200) NOT NULL CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
-  note VARCHAR(1000) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  addressDelivery VARCHAR(200) NOT NULL ,
+  note VARCHAR(1000) ,
   orderDate DATETIME DEFAULT CURRENT_TIMESTAMP,
   paymentId INT NOT NULL,
   statusId INT NOT NULL,
@@ -131,20 +128,7 @@ CREATE TABLE orderDetails (
   FOREIGN KEY (productId) REFERENCES product(productId)
 );
 
--- Tạo trigger để đặt lại orderDetailId về 1 mỗi khi có orderId mới được tạo
--- DELIMITER //
-CREATE TRIGGER reset_orderdetailId
-AFTER INSERT ON orders -- Điều này giả sử bạn có một bảng có tên là 'orders' chứa trường orderId
-FOR EACH ROW
-BEGIN
-    IF NEW.orderId != OLD.orderId THEN
-        -- Đặt lại orderDetailId về 1 mỗi khi có orderId mới được tạo
-        UPDATE orderDetails
-        SET orderDetailId = 1
-        WHERE orderId = NEW.orderId;
-    END IF;
-END;
--- DELIMITER ;
+
 
 -- Thêm dữ liệu
 -- Thêm dữ liệu vào bảng Loại hàng (category)
@@ -228,8 +212,8 @@ VALUES
   ('Chuyển khoản ngân hàng', 1),
   ('Thanh toán qua điện thoại di động', 1);
 
--- Thêm dữ liệu vào bảng Địa chỉ giao hàng (delivery)
-INSERT INTO delivery (deliveryName)
+-- Thêm dữ liệu vào bảng trạng thái đơn hàng
+INSERT INTO statusOrder (statusName)
 VALUES
   ('Chờ xử lý'),
   ('Đang giao'),
@@ -239,7 +223,7 @@ VALUES
   ('Bị Hủy');
 
 -- Thêm dữ liệu vào bảng Đơn hàng (orders)
-INSERT INTO orders (userId, fullname, email, phoneNumber, addressDelivery, note, orderDate, paymentId, deliveryId,totalMoney)
+INSERT INTO orders (userId, fullname, email, phoneNumber, addressDelivery, note, orderDate, paymentId, statusId,totalMoney)
 VALUES
   (1, 'Nguyễn Văn A', 'nguyenvana@example.com', '123456789', 'Số 1 Đường X, Quận Y, Thành phố Z', 'Vui lòng giao hàng trong ngày làm việc', '2023-07-15 10:00:00', 1, 1, 200000),
   (2, 'Trần Thị B', 'tranthib@example.com', '987654321', 'Số 2 Đường X, Quận Y, Thành phố Z', 'Không có yêu cầu đặc biệt', '2023-07-16 15:30:00', 2, 2, 150000),
@@ -255,3 +239,28 @@ VALUES
   (3, 3, 300000, 1, 300000),
   (4, 4, 500000, 1, 500000),
   (5, 5, 800000, 1, 800000);
+
+DELIMITER //
+CREATE TRIGGER reset_orderdetailId
+AFTER INSERT ON orders -- Giả sử bạn có một bảng có tên là 'orders' chứa trường orderId
+FOR EACH ROW
+BEGIN
+    DECLARE prevOrderId INT;
+    SET prevOrderId = 0;
+
+    -- Tìm orderId trước đó của bản ghi cuối cùng trong bảng orders
+    SELECT orderId INTO prevOrderId
+    FROM orders
+    ORDER BY orderId DESC
+    LIMIT 1;
+
+    IF NEW.orderId != prevOrderId THEN
+        -- Đặt lại orderDetailId về 1 mỗi khi có orderId mới được tạo
+        UPDATE orderDetails
+        SET orderDetailId = 1
+        WHERE orderId = NEW.orderId;
+    END IF;
+END;
+//
+DELIMITER ;
+
