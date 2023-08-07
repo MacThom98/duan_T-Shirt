@@ -8,8 +8,7 @@
 
             <table class="table">
                 <tr>
-                    <!-- <th>Chọn</th> -->
-                    <th>Thứ tự</th>
+
                     <th>Mã sản phẩm</th>
                     <th>Giá</th>
                     <th>Số lượng</th>
@@ -20,7 +19,6 @@
 
                 <?php foreach ($details as $detail) : ?>
                     <tr>
-                        <td><?php echo $detail['orderDetailId']; ?></td>
                         <td><?php echo $detail['productId']; ?></td>
                         <td><?php echo $detail['price']; ?></td>
                         <td><?php echo $detail['quantity']; ?></td>

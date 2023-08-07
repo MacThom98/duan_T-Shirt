@@ -33,7 +33,6 @@
                 <table class="table table-bordered border rounded border-success">
                   <thead class="rounded">
                     <tr>
-                      <th>STT</th>
                       <th>Sản Phẩm</th>
                       <th>Giá</th>
                       <th>Số lượng</th>
@@ -46,7 +45,6 @@
                       foreach($orderDetails as $detail){
                     ?>
                     <tr>
-                      <td><?=$detail['orderDetailId']?></td>
                       <td><?=$detail['productId']?></td>
                       <td><?=$detail['price']?></td>
                       <td><?=$detail['quantity']?></td>
