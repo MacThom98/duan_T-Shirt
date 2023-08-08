@@ -61,6 +61,16 @@
     </select>
   </div>
   <div class="form-group">
+    <label for="size">Size:</label>
+    <select class="form-control" name="size" id="size">
+      <?php
+      foreach($listSize as $size){
+        echo "<option value='{$size['sizeId']}'>{$size['sizeName']}</option>" ;
+      }
+      ?>    
+    </select>
+  </div>
+  <div class="form-group">
     <label for="stock">Số lượng</label>
     <input type="number" class="form-control" name="stock" id="stock" required>
   </div>

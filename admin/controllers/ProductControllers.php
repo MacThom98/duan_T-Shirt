@@ -3,17 +3,19 @@ require_once '../../model/product.php';
 require_once '../../model/category.php';
 require_once '../../model/discount.php';
 require_once '../../model/branch.php';
+require_once '../../model/size.php';
 require_once '../../../global.php';
 if(isset($_GET['keyword_Search'])){
     $keyword=$_GET['keyword_Search'];
 }else {
-    $keyword=null;
+    $keyword="";
 }
 
 $ProductModel = new Product();
 $CategoryModel = new Category();
 $DiscountModel = new Discount();
 $BranchModel = new Branch();
+$SizeModel = new Size();
 
 
 extract($_REQUEST); //Bắt buộc phải extract các dữ liệu trong form được POST lên để thực hiện CRUD
@@ -35,11 +37,12 @@ if (isset($_GET['action']) == true) {
             $listCategory = $CategoryModel->getAllCategories($keyword);
             $listDiscount = $DiscountModel->getAllDiscounts();
             $listBranch = $BranchModel->getAllBranches();
+            $listSize = $SizeModel->getAllSizes();
             if (exist_param('btn_add')) {
                 $productName = convert_name($product_name);
                 $img_name = $_FILES['img']['name'];
                 $img_tmp = $_FILES['img']['tmp_name'];
-                $img_dir = $_SERVER['DOCUMENT_ROOT'].$IMAGE_DIR . $img_name;
+                $img_dir = $_SERVER['DOCUMENT_ROOT']. $IMAGE_DIR . $img_name;
                 if($img_dir && move_uploaded_file($img_tmp,$img_dir)){
                     move_uploaded_file($img_tmp,$img_dir);
                     $MESSAGE = "Chuyển file thành công";
@@ -47,7 +50,9 @@ if (isset($_GET['action']) == true) {
                     echo $MESSAGE = "Không tồn tại thư mục đích";
                 }
                 $img = $img_name ? $img_name : '';
+
                 $categoryId = $_POST['category'];
+                $sizeId = $_POST['size'];
                 try {
                     $ProductModel->addProduct(
                         $productName,
@@ -57,17 +62,18 @@ if (isset($_GET['action']) == true) {
                         $branch,
                         $img,
                         $categoryId,
-                        $stock
+                        $stock,
+                        $sizeId
                     );
-                    unset(
-                        $productName,
+                    unset($productName,
                         $price,
                         $description,
                         $discount,
                         $branch,
                         $img,
                         $categoryId,
-                        $stock
+                        $stock,
+                        $sizeId
                     );
                     $MESSAGE = 'Thêm mới thành công!';
                 } catch (Exception $exc) {

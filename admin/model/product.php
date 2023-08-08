@@ -10,11 +10,12 @@ class Product
         global $PER_PAGE;
 
         $row_count = pdo_query_value("SELECT count(*) FROM (SELECT p.productId, p.productName, p.price, p.description, p.created_at, p.updated_at, p.categoryId,
-        c.categoryName, p.discountId, p.branchId, p.stock, p.image, b.branchName, d.discountName, d.discountValue
+        c.categoryName, p.discountId, p.branchId, p.stock, p.image, b.branchName, d.discountName, d.discountValue, s.sizeName
        FROM product p  
        LEFT JOIN branch b ON p.branchId = b.branchId
        LEFT JOIN discount d ON p.discountId = d.discountId
        LEFT JOIN category c ON p.categoryId = c.categoryId
+       LEFT JOIN size s ON p.sizeId = s.sizeId
        where p.productName LIKE '%$search%') as record");
         $_SESSION['page_count'] = ceil(($row_count / $PER_PAGE) * 1.0);
         if (!isset($_SESSION['page_no'])) {
@@ -30,11 +31,12 @@ class Product
         }
         $start = $PER_PAGE * $_SESSION['page_no'];
         $sql = "SELECT p.productId, p.productName, p.price, p.description, p.created_at, p.updated_at, p.categoryId,
-             c.categoryName, p.discountId, p.branchId, p.stock, p.image, b.branchName, d.discountName, d.discountValue
+             c.categoryName, p.discountId, p.branchId, p.stock, p.image, b.branchName, d.discountName, d.discountValue, s.sizeName
             FROM product p  
             LEFT JOIN branch b ON p.branchId = b.branchId
             LEFT JOIN discount d ON p.discountId = d.discountId
             LEFT JOIN category c ON p.categoryId = c.categoryId
+            LEFT JOIN size s ON p.sizeId = s.sizeId
             where p.productName LIKE ? 
             ORDER BY p.productId LIMIT $start,$PER_PAGE";
         $products = pdo_query($sql, '%' . $search . '%');
@@ -43,12 +45,15 @@ class Product
 
     public function getProductById($productId)
     {
-        $sql = "SELECT p.productId, p.productName, p.price, p.description, p.created_at, p.updated_at, p.categoryId, c.categoryName, p.discountId, p.branchId, p.stock, p.image, b.branchName, d.discountName, d.discountValue
+        $sql = "SELECT p.productId, p.productName, p.price, p.description, p.created_at, p.updated_at, p.categoryId, 
+            c.categoryName, p.discountId, p.branchId, p.stock, p.image, b.branchName, d.discountName, d.discountValue, s.sizeName
             FROM product p  
             LEFT JOIN branch b ON p.branchId = b.branchId
             LEFT JOIN discount d ON p.discountId = d.discountId
-            LEFT JOIN category c ON p.categoryId = c.categoryId WHERE productId = $productId";
-        $product = pdo_query_one($sql);
+            LEFT JOIN category c ON p.categoryId = c.categoryId 
+            LEFT JOIN size s ON p.sizeId = s.sizeId
+            WHERE productId = $productId";
+$product = pdo_query_one($sql);
         return $product;
     }
 
@@ -60,10 +65,11 @@ class Product
         $branch,
         $img,
         $categoryId,
-        $stock
+        $stock, 
+        $sizeId
     ) {
         $sql =
-            'INSERT INTO product (productName, price, description, discountId, branchId, image, categoryId,stock) VALUES (?, ?, ?, ?, ?, ?, ?,?)';
+            'INSERT INTO product (productName, price, description, discountId, branchId, image, categoryId,stock,sizeId) VALUES (?, ?, ?, ?, ?, ?, ?,?,?)';
         pdo_execute(
             $sql,
             $name,
@@ -73,7 +79,8 @@ class Product
             $branch,
             $img,
             $categoryId,
-            $stock
+            $stock,
+            $sizeId
         );
     }
 
@@ -87,7 +94,9 @@ class Product
         $categoryId,
         $stock
     ) {
-        $sql = "UPDATE product SET productName = ?, price = ?, description = ?, discountId = ?, image = ?, categoryId = ?, stock = ? WHERE productId = $productId";
+        $sql = "UPDATE product 
+                SET productName = ?, price = ?, description = ?, discountId = ?, image = ?, categoryId = ?, stock = ? 
+                WHERE productId = $productId";
         pdo_execute(
             $sql,
             $name,
