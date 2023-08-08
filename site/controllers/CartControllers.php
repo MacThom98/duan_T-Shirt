@@ -9,30 +9,6 @@ require_once '../../../global.php';
 
 $productsDAO = new Product();
 $OrderModel = new Order();
-if(isset($_POST['thanhtoan'])){
-    if (isset($_SESSION['user']) && isset($_SESSION['cart']) && count($_SESSION['cart'])> 0) {           
-                    $id = $_SESSION['user']['userId'];
-                    $name = $_POST['bill_fullname'];
-                    $address = $_POST['bill_address'];
-                    $email = $_POST['bill_email'];
-                    $phone = $_POST['bill_phone'];
-                    $newOrderId = $OrderModel->addOrder($id,$name,$email,$phone,$address);
-                    
-                    // var_dump($_SESSION['cart']);
-                    foreach($_SESSION['cart'] as $orderDetail){
-                        echo '</br>';
-                        $OrderModel->addOrderDetail($newOrderId,(int)$orderDetail['0'],(float)$orderDetail['2'],(int)$orderDetail['4'],(float)$orderDetail['2']*(int)$orderDetail['4']);
-                    }
-                    // $orderNew = $OrderModel->getOrderById($newOrderId);
-                    // $OrderModel->addOrderDetail($newOrderId,);
-                     $VIEW_NAME = 'view/thank/default.php';
-                } 
-                else {
-                    echo "Something wrong";
-                    // $VIEW_NAME = 'view/login/default.php';
-                }
-                require '../../layout.php';
-}
 
 
 if (isset($_GET["action"]) == true) {

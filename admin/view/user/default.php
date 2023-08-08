@@ -1,14 +1,13 @@
 <div class="container-xxl flex-grow-1 container-p-y">
     <!-- Hiển thị danh sách sản phẩm -->
 
-    <h1>Danh sách sản phẩm</h1>
+    <h1>Danh sách khách hàng</h1>
 
     <form action="" method="post">
-        <a href="index.php?action=add" class="btn btn-primary">Thêm sản phẩm mới</a>
+        <a href="index.php?action=add" class="btn btn-primary">Thêm khách hàng</a>
 
         <?php
-        // Thực hiện thêm dòng thông báo khi giá trị MESSAGE được gán thành công ở ControllerProduct, hiển thị ra màn hình.
-        // Thực hiện thêm dòng thông báo khi giá trị MESSAGE được gán thành công ở ControllerProduct, hiển thị ra màn hình.
+
         
         if (strlen($MESSAGE)) {
         echo $MESSAGE;
@@ -24,35 +23,27 @@
                 <tr>
                     <th>Chọn</th>
                     <th>ID</th>
-                    <th>Tên sản phẩm</th>
-                    <th>Hình ảnh</th>
-                    <th>Loại</th>
-                    <th>Chi Nhánh</th>
-                    <th>Khuyến mãi</th>
-                    <th>Giá</th>
-                    <th>Mô tả</th>
-                    <th>Kích cỡ</th>
-                    <th>Số lượng còn</th>
+                    <th>Tên khách hàng</th>
+                    <th>Email</th>
+                    <th>Số điện thoại</th>
+                    <th>Địa chỉ</th>
+                    <th>Quyền hạn</th>
                     <th>Hành động</th>
                 </tr>
 
-                <?php foreach ($products as $product) : ?>
+                <?php foreach ($users as $user) : ?>
                     <tr>
-                        <td><input type="checkbox" name="productIds[]" value="<?php echo $product['productId']; ?>"></td>
-                        <td><?php echo $product['productId']; ?></td>
-                        <td><?php echo $product['productName']; ?></td>
-                        <td><img src="<?php echo $IMAGE_DIR .
-                                            $product['image']; ?>" class="" width=100px;></img></td>
-                        <td><?php echo $product['categoryName']; ?></td>
-                        <td><?php echo $product['branchName']; ?></td>
-                        <td><?php echo $product['discountValue']; ?>%</td>
-                        <td><?php echo $product['price']; ?></td>
-                        <td><?php echo $product['description']; ?></td>
-                        <td><?php echo $product['sizeName']; ?></td>
-                        <td><?php echo $product['stock']; ?></td>
+                        <td><input type="checkbox" name="userIds[]" value="<?php echo $user['userId']; ?>"></td>
+                        <td><?php echo $user['userId']; ?></td>
+                        <td><?php echo $user['userFullname']; ?></td>
+                        <td><?php echo $user['userEmail']; ?></td>
+                        <td><?php echo $user['phoneNumber']; ?></td>
+                        <td><?php echo $user['address']; ?></td>
+                        <td><?php echo $user['password']; ?></td>
+                        <td><?php echo $user['roleType']; ?></td>
                         <td>
-                            <a href="index.php?action=edit&id=<?php echo $product['productId']; ?>" class="btn btn-success mx-2 my-2">Sửa</a>
-                            <a href="index.php?action=delete&id=<?php echo $product['productId']; ?>" class="btn btn-danger mx-2 my-2">Xóa</a>
+                            <a href="index.php?action=edit&id=<?php echo $user['userId']; ?>" class="btn btn-success mx-2 my-2">Sửa</a>
+                            <a href="index.php?action=delete&id=<?php echo $user['userId']; ?>" class="btn btn-danger mx-2 my-2">Xóa</a>
                         </td>
                     </tr>
                 <?php endforeach; ?>

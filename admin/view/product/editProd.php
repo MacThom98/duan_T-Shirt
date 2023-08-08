@@ -67,6 +67,12 @@
     </select>
   </div>
   <div class="form-group">
+  <label for="size">Size</label>
+  <select class="form-control" name="size" id="size" disabled>
+      <option value='<?php echo $product['sizeId']?>'><?php echo $product['sizeName'] ?></option>   
+    </select>
+  </div>
+  <div class="form-group">
     <label for="stock">Số lượng</label>
     <input type="number" class="form-control" name="stock" id="stock" value="<?=$product['stock'] ?>" required>
   </div>
