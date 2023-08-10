@@ -1,16 +1,3 @@
-<?php
-
-
-// $OrderModel = new Order();
-// $orders = $OrderModel->getOrderByUserId($_SESSION['user']['userId']);
-// if(isset($_GET['confirm'])){
-//     $orderId = $_GET['id'];
-//     $statusId = $_GET['statusId'];
-//     $OrderModel->updateOrderStatus($orderId,$statusId);
-//     $orders = $OrderModel->getOrderByUserId($_SESSION['user']['userId']);
-// }
-
-?>
 
 <div class="container flex-grow-1 container-p-y">
     <!-- Hiển thị danh sách sản phẩm -->
@@ -53,9 +40,9 @@
                                 echo '<button class="btn btn-primary">Đang giao</button>';
                                 echo '<a class="btn btn-info" href="?confirm&id=' . $order["orderId"] . '&statusId=3">Đã nhận hàng</a>';
                                 break;
-                            case '3':
-                                echo '<button class="btn btn-primary">Hoàn thành</button>';
-                                break;
+                            // case '3':
+                            //     echo '<button class="btn btn-primary">Hoàn thành</button>';
+                            //     break;
                             default:
                                 # code...
                                 break;
@@ -90,7 +77,3 @@
     </form>
 
 </div>
-<?php
-
-
-?>

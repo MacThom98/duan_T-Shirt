@@ -45,14 +45,10 @@
                         ?></td>
                         <td><?php echo $order['orderDate']; ?></td>                        
                         <td>
-                            <a href="index.php?action=view_detail&id=<?php echo $order['orderId'];?>" class="btn btn-primary mx-2 my-2">Xem</a>
+                        <a href="index.php?action=view_detail&id=<?php echo $order['orderId'];?>" class="btn btn-primary mx-2 my-2" data-bs-toggle="modal" data-bs-target="#Modal">Xem</a>
                         </td>
                         <td>
-                                                     
-                                <a href="index.php?action=delete&id=<?php echo $order['orderId']; ?>" class="btn btn-danger mx-2 my-2">Xóa</a>
-                       
                                 <a href="index.php?action=print&id=<?php echo $order['orderId'];?>" class="btn btn-primary mx-2 my-2">In</a>
-        
                         </td>
                     </tr>
                 <?php endforeach; ?>
@@ -61,6 +57,28 @@
             <button id="clear-all" type="button" class="btn btn-primary">Bỏ chọn tất cả</button>
             <button type="submit" id="btn_delete_selected" name="btn_delete_selected" class="btn btn-danger">Xóa các mục chọn</button>
     </form>
-  
-</div>
 
+    <!-- Button trigger modal -->
+
+
+
+</div>
+<!-- Modal -->
+<div class="modal fade" id="Modal" tabindex="-1" aria-labelledby="ModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="ModalLabel">Chi tiết</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+
+      </div>
+    </div>
+  </div>
+</div>
+  <!-- Modal -->

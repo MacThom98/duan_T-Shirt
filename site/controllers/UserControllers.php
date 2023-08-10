@@ -40,6 +40,11 @@ if (isset($_SESSION['user'])) {
             case 'signup':
                 $VIEW_NAME = 'view/user/signup.php';
                 break;
+            case 'view_detail':
+                $orders = $OrderModel->getOrderHistoryByUserId($_SESSION['user']['userId']);
+                $modal = true;
+                $VIEW_NAME = 'view/user/history.php';
+                break;    
             case 'logout':
                 unset($_SESSION['user']);
                 header('location: ../../');
