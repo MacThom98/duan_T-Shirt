@@ -20,7 +20,7 @@ if(isset($_POST['dangnhap'])){
             // require '../../layout.php';
             break;
         }
-    }require '../../layout.php';
+    }
 }
-
+require '../../layout.php';
 ?>

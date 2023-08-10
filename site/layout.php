@@ -1,4 +1,4 @@
-
+<? require '../global.php'?>
 <?php require "layout/head.php"?>
         
         <!-- Menu -->

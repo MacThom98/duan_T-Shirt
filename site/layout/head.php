@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -53,10 +55,15 @@
         <i class="fa-solid fa-user"></i>
       </a>
       <ul class="dropdown-menu" aria-labelledby="user-toggle">
-        <li><a class="dropdown-item" href="#">Tài khoản</a></li>
-        <li><a class="dropdown-item" href="#">Lịch sử mua hàng</a></li>
-        <li><a class="dropdown-item" href="<?=$SITE_URL?>/view/user/order.php">Đơn hàng của tôi</a></li>
-        <li><a class="dropdown-item" href="#">Đăng xuất</a></li>
+        <?php if(isset($_SESSION['user'])){?>
+          <li><a class="dropdown-item" href="<?=$SITE_URL?>/view/user/index.php?action=account">Tài khoản</a></li>
+          <li><a class="dropdown-item" href="<?=$SITE_URL?>/view/user/index.php?action=history">Lịch sử mua hàng</a></li>
+          <li><a class="dropdown-item" href="<?=$SITE_URL?>/view/user/index.php?action=order">Đơn hàng của tôi</a></li>
+          <li><a class="dropdown-item" href="<?=$SITE_URL?>/view/user/index.php?action=logout">Đăng xuất</a></li>
+          <?php }else{ ?>
+            <li><a class="dropdown-item" href="<?=$SITE_URL?>/view/user/index.php?action=login">Đăng nhập</a></li>
+            <li><a class="dropdown-item" href="<?=$SITE_URL?>/view/user/index.php?action=signup">Đăng ký</a></li>
+        <?php } ?>
       </ul>
     </li>
 

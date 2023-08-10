@@ -73,6 +73,15 @@ class Order
         $order = pdo_query($sql);
         return $order;
     }
+    public function getOrderHistoryByUserId($userId)
+    {
+        $sql = "SELECT * FROM orders o 
+        join orderdetails od
+        ON o.orderId = od.orderId  WHERE userId = $userId
+        having statusId > 2";
+        $order = pdo_query($sql);
+        return $order;
+    }
 
     public function addOrder($userId, $fullname, $email, $phone, $address) {
         $sql = 'INSERT INTO orders (userId, fullname, email, phoneNumber, addressDelivery) VALUES (?, ?, ?, ?, ?)';

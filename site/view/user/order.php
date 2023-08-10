@@ -1,21 +1,18 @@
 <?php
 
-require_once '../../model/order.php';
-require_once '../../model/user.php';
-require_once '../../../global.php';
-require '../../layout/head.php';
 
-$OrderModel = new Order();
-$orders = $OrderModel->getOrderByUserId($_SESSION['user']['userId']);
-if (isset($_GET['confirm'])) {
-    $orderId = $_GET['id'];
-    $statusId = $_GET['statusId'];
-    $OrderModel->updateOrderStatus($orderId, $statusId);
-    $orders = $OrderModel->getOrderByUserId($_SESSION['user']['userId']);
-}
+// $OrderModel = new Order();
+// $orders = $OrderModel->getOrderByUserId($_SESSION['user']['userId']);
+// if(isset($_GET['confirm'])){
+//     $orderId = $_GET['id'];
+//     $statusId = $_GET['statusId'];
+//     $OrderModel->updateOrderStatus($orderId,$statusId);
+//     $orders = $OrderModel->getOrderByUserId($_SESSION['user']['userId']);
+// }
+
 ?>
 
-<div class="container-xxl flex-grow-1 container-p-y">
+<div class="container flex-grow-1 container-p-y">
     <!-- Hiển thị danh sách sản phẩm -->
 
     <h1>Danh sách đơn hàng</h1>
@@ -95,6 +92,5 @@ if (isset($_GET['confirm'])) {
 </div>
 <?php
 
-require '../../layout/foot.php';
 
 ?>
