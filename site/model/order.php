@@ -52,7 +52,7 @@ class Order
     }
 
     public function getOrderDetail($orderId){
-        $sql = "SELECT * FROM orderdetails WHERE orderId = $orderId";
+        $sql = "SELECT *, orderdetails.sizeId AS sizeID  FROM orderdetails join product on orderdetails.productId = product.productId  WHERE orderId = $orderId";
         $detail = pdo_query($sql);
         return $detail;
     }
@@ -64,10 +64,12 @@ class Order
     }
     public function getOrderByUserId($userId)
     {
-        $sql = "SELECT * FROM orders o 
-        join orderdetails od
-        ON o.orderId = od.orderId  WHERE userId = $userId
-        having statusId < 3";
+        $sql = "SELECT * FROM orderdetails od
+        join orders o  
+        ON o.orderId = od.orderId
+		JOIN payment pay 
+        ON o.paymentId = pay.paymentId
+  		WHERE userId = $userId having statusId < 3";
         $order = pdo_query($sql);
         return $order;
     }
@@ -79,9 +81,9 @@ class Order
         return pdo_query_value($lastest_id);
     }
 
-    public function addOrderDetail($orderId,$productId,$price,$quantity,$totalMoney){
-        $sql = 'INSERT INTO orderdetails(orderId,productId,price,quantity,totalMoney) VALUES (?,?,?,?,?)';
-        return pdo_execute($sql,$orderId,$productId,$price,$quantity,$totalMoney); 
+    public function addOrderDetail($orderId,$productId,$price,$quantity,$totalMoney, $sizeId){
+        $sql = 'INSERT INTO orderdetails(orderId,productId,price,quantity,totalMoney, sizeID) VALUES (?,?,?,?,?,?)';
+        return pdo_execute($sql,$orderId,$productId,$price,$quantity,$totalMoney, $sizeId); 
     }
 
     public function updateOrderStatus($orderId, $statusId) {
