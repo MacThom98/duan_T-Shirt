@@ -12,7 +12,7 @@
     <div class="row mb-5">
 
       <div class="site-blocks-table">
-        <form class="col-md-12" action="<?=$SITE_URL?>/view/cart/?action=update" id="formCart" name="formCart"
+        <form class="col-md-12" action="<?= $SITE_URL ?>/view/cart/?action=update" id="formCart" name="formCart"
           method="post">
           <table class="table table-bordered">
             <thead>
@@ -21,6 +21,7 @@
                 <th class="product-thumbnail">Ảnh</th>
                 <th class="product-thumbnail">Sản phẩm</th>
                 <th class="product-thumbnail">Giá</th>
+                <th class="product-thumbnail">Size</th>
                 <th class="product-thumbnail">Số lượng</th>
                 <th class="product-thumbnail">Tổng</th>
                 <th class="product-remove">Xóa</th>
@@ -49,6 +50,28 @@
                       <?= $item['2'] ?>
                     </td>
                     <td>
+                      <?php switch ($item['5']) {
+                        case 1:
+                          echo "S";
+                          break;
+                        case 2:
+                          echo "M";
+                          break;
+                        case 3:
+                          echo "L";
+                          break;
+                        case 4:
+                          echo "XL";
+                          break;
+                        case 5:
+                          echo "XXL";
+                          break;
+                        default:
+                          echo "S";
+                          break;
+                      } ?>
+                    </td>
+                    <td>
                       <div class="input-group mb-3" style="max-width: 120px;">
                         <input type="text" class="form-control text-center" value="<?= strval($item[4]) ?>"
                           oninput="javascript:getQuantity(event);" placeholder="" name="quantity"
@@ -64,9 +87,9 @@
                   $totals += $total;
                 endforeach;
               } else { ?>
-              <td colspan="7" class=" text-primary">
-                <h2 class="fs-1 fw-bold">Bạn chưa thêm sản phẩm nào</h2>
-              </td>
+                <td colspan="7" class=" text-primary">
+                  <h2 class="fs-1 fw-bold">Bạn chưa thêm sản phẩm nào</h2>
+                </td>
               <?php } ?>
             </tbody>
           </table>
@@ -78,10 +101,12 @@
       <div class="col-md-6">
         <div class="row mb-5">
           <div class="col-md-6 mb-3 mb-md-0">
-            <a href="<?= $SITE_URL ?>/view/cart/?action=update" class="btn btn-primary btn-sm btn-block text-white fw-bold">Cập nhật giỏ hàng</a>
+            <a href="<?= $SITE_URL ?>/view/cart/?action=update"
+              class="btn btn-primary btn-sm btn-block text-white fw-bold">Cập nhật giỏ hàng</a>
           </div>
           <div class="col-md-6">
-            <a href="<?= $SITE_URL ?>/view/shop/" class="btn btn-outline-primary btn-sm btn-block fw-bold">tiếp tục mua sắm</a>
+            <a href="<?= $SITE_URL ?>/view/shop/" class="btn btn-outline-primary btn-sm btn-block fw-bold">tiếp tục mua
+              sắm</a>
           </div>
         </div>
         <div class="row">
@@ -113,7 +138,9 @@
                 <strong class="text-black">$
                   <?php if (isset($_SESSION['cart']) && count($_SESSION['cart']) > 0) {
                     echo $totals;
-                  }else { echo "0";} ?>
+                  } else {
+                    echo "0";
+                  } ?>
                 </strong>
               </div>
             </div>
@@ -123,9 +150,11 @@
               </div>
               <div class="col-md-6 text-right">
                 <strong class="text-black">$
-                <?php if (isset($_SESSION['cart']) && count($_SESSION['cart']) > 0) {
+                  <?php if (isset($_SESSION['cart']) && count($_SESSION['cart']) > 0) {
                     echo $totals;
-                  }else { echo "0";} ?>
+                  } else {
+                    echo "0";
+                  } ?>
                 </strong>
               </div>
             </div>
@@ -133,7 +162,8 @@
             <div class="row">
               <div class="col-md-12">
                 <?php if (isset($_SESSION['cart']) && count($_SESSION['cart']) > 0) { ?>
-                  <a href="<?=$SITE_URL?>/view/checkout/?action=proceed" class="btn btn-primary btn-lg py-3 btn-block">Tiến hành thành toán</a>
+                  <a href="<?= $SITE_URL ?>/view/checkout/?action=proceed"
+                    class="btn btn-primary btn-lg py-3 btn-block">Tiến hành thành toán</a>
                 <?php } else { ?>
                   <a href="#" class="btn btn-primary btn-lg py-3 btn-block"
                     onclick="alert('Vui lòng thêm sản phẩm trước khi thanh toán');">Tiến hành thành toán</a>
@@ -152,24 +182,24 @@
     var value = event.target.value;
     updateCart(value);
   }
-  
-  function updateCart(value){    
+
+  function updateCart(value) {
     if (value != "") {
       console.log("quantity :", value);
       $.ajax({
         type: 'POST',
-        url: '<?=$SITE_URL?>/view/cart/?action=update"',
+        url: '<?= $SITE_URL ?>/view/cart/?action=update"',
         data: $('#formCart').serializeArray(),
         success: function (response) {
-            response =JSON.parse(response);
-            if (response.status == 0) {
-              alert(response.message);
-            }else {
-              alert(response.message);      
-            }
-            console.log(response);
+          response = JSON.parse(response);
+          if (response.status == 0) {
+            alert(response.message);
+          } else {
+            alert(response.message);
+          }
+          console.log(response);
         },
-    });
+      });
     }
   }
 </script>

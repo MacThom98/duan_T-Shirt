@@ -36,6 +36,7 @@
                       <th>Sản Phẩm</th>
                       <th>Giá</th>
                       <th>Số lượng</th>
+                      <th>Size</th>
                       <th>Tổng</th>
                     </tr>
                   </thead>
@@ -45,9 +46,26 @@
                       foreach($orderDetails as $detail){
                     ?>
                     <tr>
-                      <td><?=$detail['productId']?></td>
+                      <td><?=$detail['productName']?></td>
                       <td><?=$detail['price']?></td>
                       <td><?=$detail['quantity']?></td>
+                      <td><?php switch ($detail['sizeID']) {
+                        case 1:
+                          echo "S";
+                          break;
+                        case 2:
+                          echo "M";
+                          break;
+                        case 3:
+                          echo "L";
+                          break;
+                        case 4:
+                          echo "XL";
+                          break;
+                        case 5:
+                          echo "XXL";
+                          break;
+                      } ?></td>
                       <td><?=$detail['totalMoney']?></td>
                     </tr>
                       <?php $total += $detail['totalMoney'] ?>

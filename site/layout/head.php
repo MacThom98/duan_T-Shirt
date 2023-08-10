@@ -17,11 +17,10 @@
   
 
     <link rel="stylesheet" href="<?=$CONTENT_SITE_URL?>/css/aos.css">
-
-    <link rel="stylesheet" href="<?=$CONTENT_SITE_URL?>/css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
+    <link rel="stylesheet" href="<?=$CONTENT_SITE_URL?>/css/style.css">
      <!-- Include Bootstrap CSS -->
 
   </head>
@@ -42,7 +41,7 @@
             </div>
             <div class="col-12 mb-3 mb-md-0 col-md-4 order-1 order-md-2 text-center">
               <div class="site-logo">
-                <a href="<?=$SITE_URL?>/" class="js-logo-clone">Shoppers</a>
+                <a href="<?=$SITE_URL?>/" class="js-logo-clone">4GANG</a>
               </div>
             </div>
 
@@ -65,7 +64,7 @@
                   <li>
                     <a href="<?=$SITE_URL?>/view/cart/" class="site-cart">
                       <i class="fa-solid fa-shopping-cart"></i>               
-                      <span class="count">
+                      <span class="count" id = "count">
                         <?php 
                           if(isset($_SESSION['cart']) && count($_SESSION['cart']) > 0){ 
                             echo (count($_SESSION['cart'])); 

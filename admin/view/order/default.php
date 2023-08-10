@@ -39,12 +39,22 @@
                         <td><?php 
                             if($order['statusId'] == 1){
                                 echo '<a class="btn btn-info" href="?confirm&id='. $order["orderId"]. '&statusId='.$order["statusId"].'">'. $order["statusName"]. '</a>';
+                                echo '<a class="btn btn-danger" href="?confirm&id='. $order["orderId"]. '&statusId=5">Hủy đơn hàng</a>';
                             };
                             if($order['statusId'] == 2){
                                 echo '<button class="btn btn-primary">'. $order["statusName"]. '</button>';
                             };
                             if($order['statusId'] == 3){
                                 echo '<button class="btn btn-success">'. $order["statusName"]. '</button>';
+                            };
+                            if($order['statusId'] == 4){
+                                echo '<button class="btn btn-success">'. $order["statusName"]. '</button>';
+                            };
+                            if($order['statusId'] == 5){
+                                echo '<button class="btn btn-success">'. $order["statusName"]. '</button>';
+                            };
+                            if($order['statusId'] == 6){
+                                echo '<button class="btn btn-danger">'. $order["statusName"]. '</button>';
                             };
                         ?></td>
                         <td><?php echo $order['orderDate']; ?></td>                        

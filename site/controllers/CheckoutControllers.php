@@ -22,7 +22,7 @@ if(isset($_POST['thanhtoan'])){
                     // var_dump($_SESSION['cart']);
                     foreach($_SESSION['cart'] as $orderDetail){
                         echo '</br>';
-                        $OrderModel->addOrderDetail($newOrderId,(int)$orderDetail['0'],(float)$orderDetail['2'],(int)$orderDetail['4'],(float)$orderDetail['2']*(int)$orderDetail['4']);
+                        $OrderModel->addOrderDetail($newOrderId,(int)$orderDetail['0'],(float)$orderDetail['2'],(int)$orderDetail['4'],(float)$orderDetail['2']*(int)$orderDetail['4'], $orderDetail['5']);
                     }
                     // $OrderModel->addOrderDetail($newOrderId,);
                     $VIEW_NAME = 'view/thank/default.php';

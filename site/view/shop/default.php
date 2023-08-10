@@ -38,8 +38,7 @@
           <?php foreach ($searchs as $search): ?>
             <div class="col-sm-6 col-lg-4 mb-4" data-aos="fade-up">
             <form action="<?=$SITE_URL?>/view/cart/?action=addCart" method="post" name="add-to-cart-form" class ="add-to-cart-form">
-            
-            <input type="hidden" name="id" value="<?=$search['prodId']?>">
+              <input type="hidden" name="id" value="<?=$search['prodId']?>">
               <input type="hidden" name="name" value="<?php echo $search['prodName']; ?>">
               <input type="hidden" name="price" value="<?php echo $search['price']; ?>">
               <input type="hidden" name="img" value="<?=$IMAGE_DIR?>/<?php echo $search['imageUrl']; ?>">  
@@ -56,7 +55,7 @@
                   <span class="text-primary font-weight-bold mr-3 ">
                     <?php echo $search['price']; ?>
                   </span>
-                  <button name="addCart" onclick="notify()" class="addCart" type="submit" style="cursor: pointer; background-color: transparent; border: none !important; " ><i class="fa-solid fa-cart-plus"></i></button>
+                  <!-- <button name="addCart" onclick="notify()" class="addCart" type="submit" style="cursor: pointer; background-color: transparent; border: none !important; " ><i class="fa-solid fa-cart-plus"></i></button> -->
                 </div>
               </div>
             </div>
@@ -205,9 +204,11 @@ $('.add-to-cart-form').submit(function (e) {
             if (response.status == 0) {
               alert(response.message);
             }else {
-              alert(response.message);      
+              alert(response.message);  
+              var countElement = $('#count');
+                var currentCount = parseInt(countElement.text());
+                countElement.text(currentCount + 1);    
             }
-            // console.log(response);
         },
     });
 

@@ -35,6 +35,7 @@
       href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap"
       rel="stylesheet"
     />
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.css">
 
     <!-- Icons. Uncomment required icon fonts -->
     <link rel="stylesheet" href="<?=$CONTENT_ADMIN_URL?>/assets/vendor/fonts/boxicons.css" />
@@ -60,6 +61,10 @@
     <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
     <script src="<?=$CONTENT_ADMIN_URL?>/assets/js/config.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script>
   </head>
 
   <body>
