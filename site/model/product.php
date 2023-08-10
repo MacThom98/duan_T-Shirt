@@ -76,6 +76,12 @@ class Product {
     }
 
 
+    public function getAllSize() {
+        $sql = "SELECT * FROM size";
+        $products = pdo_query($sql);
+        return $products;
+    }
+
     
 }
 

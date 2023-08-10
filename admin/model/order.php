@@ -3,7 +3,7 @@
 require_once 'pdo.php';
 
 class Order
-    {
+{
     // public function getAllOrder($search)
     // {
 
@@ -41,17 +41,19 @@ class Order
     //     return $products;
     // }
 
-    public function getAllOrders($search){
+    public function getAllOrders($search)
+    {
         $sql = "SELECT * FROM orders ord
         left join user u on ord.userId = u.userId
         left join payment pay on pay.paymentId = ord.paymentId
         left join statusOrder status on status.statusId = ord.statusId
         WHERE ord.orderId like ?";
-        $orders = pdo_query($sql,'%' .$search. '%');
+        $orders = pdo_query($sql, '%' . $search . '%');
         return $orders;
     }
 
-    public function getOrderDetail($orderId){
+    public function getOrderDetail($orderId)
+    {
         $sql = "SELECT * FROM orderdetails WHERE orderId = $orderId";
         $detail = pdo_query($sql);
         return $detail;
@@ -67,22 +69,25 @@ class Order
         return $Order;
     }
 
-    public function addOrder($userId,$fullname,$email,$phone, $address, $note, $paymentId) {
+    public function addOrder($userId, $fullname, $email, $phone, $address, $note, $paymentId)
+    {
         $sql = 'INSERT INTO orders (userId, fullname, email, phoneNumber, addressDelivery, note, paymentId) VALUES (?, ?, ?, ?, ?, ?, ?)';
-        pdo_execute($sql, $userId,$fullname,$email,$phone, $address, $note, $paymentId);
+        pdo_execute($sql, $userId, $fullname, $email, $phone, $address, $note, $paymentId);
     }
 
-    public function addOrderDetail($orderId,$productId,$price,$quantity,$totalMoney){
+    public function addOrderDetail($orderId, $productId, $price, $quantity, $totalMoney)
+    {
         $sql = 'INSERT INTO orderdetails(orderId,productId,price,quantity,totalMoney) VALUES (?,?,?,?,?,?)';
-        pdo_execute($sql,$orderId,$productId,$price,$quantity,$totalMoney);
+        pdo_execute($sql, $orderId, $productId, $price, $quantity, $totalMoney);
     }
 
-    public function updateOrderStatus($orderId, $statusId) {
+    public function updateOrderStatus($orderId, $statusId)
+    {
         $sql = "UPDATE orders SET statusId = ? + 1 WHERE orderId = $orderId";
-        pdo_execute($sql,$statusId);
+        pdo_execute($sql, $statusId);
     }
 
-    
+
     public function deleteOrder($orderId)
     {
         $sql = 'DELETE FROM orders WHERE orderId = ?';
@@ -108,7 +113,82 @@ class Order
         $Orders = pdo_query($sql, '%' . $keyword . '%');
         return $Orders;
     }
+
+
+    public function getTotalOder()
+    {
+        $sql = "SELECT COUNT(DISTINCT orders.orderId) AS TotalDistinctCount, SUM(orderdetails.totalMoney) AS TotalMoney
+        FROM orders
+        JOIN orderdetails ON orders.orderId = orderdetails.orderId
+        WHERE statusId = 3;";
+        $categories = pdo_query_one($sql);
+        return $categories;
+    }
+
+    public function getTotalSaleSucess()
+    {
+        $sql = "SELECT orderdetails.orderId as cateId, SUM(orderdetails.quantity) AS TotalQuantity, sum(orderdetails.totalMoney) as totalMoney FROM orders JOIN orderdetails on orders.orderId = orderdetails.orderId JOIN product on orderdetails.productId = product.productId JOIN category on category.categoryId = product.categoryId where statusId =3 GROUP BY orderdetails.orderId";
+        $categories = pdo_query($sql);
+        return $categories;
+    }
+    public function getTotalSaleUnsuccess()
+    {
+        $sql = "SELECT COUNT(orderdetails.orderId) as total, orderdetails.orderId as cateId, SUM(orderdetails.quantity) AS TotalQuantity, sum(orderdetails.totalMoney) as totalMoney FROM orders JOIN orderdetails on orders.orderId = orderdetails.orderId JOIN product on orderdetails.productId = product.productId JOIN category on category.categoryId = product.categoryId where orders.statusId = 6 GROUP BY orderdetails.orderId";
+        $categories = pdo_query($sql);
+        return $categories;
+    }
+
+    public function getTopSale()
+    {
+        $sql = "SELECT product.productName, SUM(orderdetails.quantity) AS TotalSold, SUM(orderdetails.totalMoney) AS Revenue FROM orderdetails JOIN product on orderdetails.productId = product.productId GROUP BY product.productName ORDER BY `TotalSold` DESC";
+        $categories = pdo_query($sql);
+        return $categories;
+    }
+
+    public function getTottalByDay()
+    {
+        $sql = "SELECT DATE(orders.orderDate) AS Date, SUM(orderdetails.totalMoney) AS Revenue, SUM(orderdetails.quantity) AS TotalProductsSold
+        FROM orders
+        JOIN orderdetails ON orders.orderId = orderdetails.orderId
+        WHERE orders.statusId = 3
+        GROUP BY DATE(orders.orderDate);";
+        $categories = pdo_query($sql);
+        return $categories;
+    }
+
+    public function getTottalByWeek()
+    {
+        $sql = "SELECT YEAR(orders.orderDate) AS Year,
+         WEEK(orders.orderDate) AS Week, 
+         SUM(orderdetails.totalMoney) AS Revenue, 
+         SUM(orderdetails.quantity) AS TotalProductsSold
+        FROM orders
+        JOIN orderdetails ON orders.orderId = orderdetails.orderId
+        WHERE orders.statusId = 3
+        GROUP BY YEAR(orders.orderDate), WEEK(orders.orderDate);";
+        $categories = pdo_query($sql);
+        return $categories;
+    }
+
+    public function getTottalByMonth()
+    {
+        $sql = "SELECT YEAR(orders.orderDate) AS Year,
+        MONTH(orders.orderDate) AS Month,
+        SUM(orderdetails.totalMoney) AS Revenue,
+        SUM(orderdetails.quantity) AS TotalProductsSold
+ FROM orders
+ JOIN orderdetails ON orders.orderId = orderdetails.orderId
+ WHERE orders.statusId = 3
+ GROUP BY YEAR(orders.orderDate), MONTH(orders.orderDate);";
+        $categories = pdo_query($sql);
+        return $categories;
+    }
+
+
+
+
 }
+
 
 
 ?>
