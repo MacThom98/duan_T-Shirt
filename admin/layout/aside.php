@@ -17,7 +17,7 @@
           <ul class="menu-inner py-1">
             <!-- Dashboard -->
             <li class="menu-item">
-              <a href="<?=$ADMIN_URL?>" class="menu-link">
+              <a href="<?=$ADMIN_URL?>/view/overview" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-home-circle"></i>
                 <div data-i18n="Analytics">Tổng quan</div>
               </a>
